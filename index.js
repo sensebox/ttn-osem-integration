@@ -1,7 +1,7 @@
 const express = require('express'),
   bodyParser  = require('body-parser'),
   server      = express(),
-  cfg      = require('./config'),
+  cfg         = require('./config'),
   v11Router   = require('./lib/routes/v1.1');
 
 server.use((req, res, next) => {

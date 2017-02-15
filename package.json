@@ -1,7 +1,7 @@
 {
   "name": "ttn-osem-application",
   "version": "1.0.0",
-  "description": " adapter for thethingsnetwork.org measurements to opensensemap.org ",
+  "description": "adapter for thethingsnetwork.org measurements to opensensemap.org ",
   "main": "index.js",
   "scripts": {
     "watch": "node-dev --respawn index.js",

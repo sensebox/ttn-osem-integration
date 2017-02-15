@@ -7,5 +7,5 @@ with <opensensemap.org> for LoRa-WAN devices.
 The current approach is to proxy the oSeM-API with a custom data-decoder.
 
 Future plans include direct operation on the oSeM database. This requires
-some separation of the openSenseMap API code though, to reuse existsing
+some separation of the openSenseMap API code though, to reuse existing
 database insertion logic.
