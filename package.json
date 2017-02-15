@@ -1,0 +1,40 @@
+{
+  "name": "ttn-osem-application",
+  "version": "1.0.0",
+  "description": " adapter for thethingsnetwork.org measurements to opensensemap.org ",
+  "main": "index.js",
+  "scripts": {
+    "watch": "node-dev --respawn index.js",
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sensebox/ttn-osem-application.git"
+  },
+  "keywords": [
+    "TTN",
+    "osem",
+    "openSenseMap",
+    "LoRa",
+    "lorawan",
+    "sensorweb",
+    "open",
+    "data"
+  ],
+  "author": "github.com/noerw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sensebox/ttn-osem-application/issues"
+  },
+  "homepage": "https://github.com/sensebox/ttn-osem-application#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "prequest": "^1.0.0"
+  },
+  "devDependencies": {
+    "chakram": "^1.5.0",
+    "mocha": "^3.2.0",
+    "node-dev": "^3.1.3"
+  }
+}

@@ -1,2 +1,11 @@
 # ttn-osem-application
-adapter for thethingsnetwork.org measurements to opensensemap.org
+Application for <thethingsnetwork.org>, which provides direct integration
+with <opensensemap.org> for LoRa-WAN devices.
+
+> under development.
+
+The current approach is to proxy the oSeM-API with a custom data-decoder.
+
+Future plans include direct operation on the oSeM database. This requires
+some separation of the openSenseMap API code though, to reuse existsing
+database insertion logic.
