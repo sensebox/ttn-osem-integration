@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "watch": "node-dev --respawn index.js",
-    "test": "mocha test"
+    "test": "mocha test",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
   },
   "devDependencies": {
     "chakram": "^1.5.0",
+    "eslint": "^3.15.0",
     "mocha": "^3.2.0",
     "node-dev": "^3.1.3"
   }
