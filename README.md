@@ -1,6 +1,6 @@
 # ttn-osem-application
-Application for <thethingsnetwork.org>, which provides direct integration
-with <opensensemap.org> for LoRa-WAN devices.
+Application for thethingsnetwork.org, which provides direct integration
+with opensensemap.org for LoRa-WAN devices.
 
 > under development.
 
