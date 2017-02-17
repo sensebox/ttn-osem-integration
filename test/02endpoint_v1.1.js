@@ -31,6 +31,14 @@ describe('endpoint v1.1', () => {
       return expect(res).to.have.status(422);
     });
 
+    it('should respond 422 for wrong app_id', () => {
+      const payload = JSON.parse(JSON.stringify(TTNpayload_v1_valid));
+      payload.app_id = `${payload.app_id} :^)`;
+      const res = chakram.post(URL, payload);
+
+      return expect(res).to.have.status(422);
+    });
+
     it('should respond 404 for nonexistent boxes', () => {
       // FIXME: ensure box with this ID does not exist
       const res = chakram.post(URL, TTNpayload_v1_valid);
