@@ -4,6 +4,7 @@
   "description": "adapter for thethingsnetwork.org measurements to opensensemap.org ",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "watch": "node-dev --respawn index.js",
     "test": "mocha test",
     "lint": "eslint ."
@@ -23,7 +24,7 @@
     "data"
   ],
   "author": "github.com/noerw",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/sensebox/ttn-osem-application/issues"
   },
