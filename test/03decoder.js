@@ -2,7 +2,9 @@
 
 /* eslint-env mocha */
 
-const assert = require('chai').assert;
+const chai = require('chai'),
+  expect = chai.expect,
+  assert = chai.assert;
 
 const decoder = require('../lib/decoder'),
   referenceImpl = require('./data/decoderReferenceImplementation');
@@ -10,6 +12,7 @@ const decoder = require('../lib/decoder'),
 // test data
 const rawPayload_base64 = 'bm8gZXhhbXBsZSBhdmFpbGFibGU=', // FIXME
   rawPayload_bytes = Buffer.from('93322B218CE53B2700320100', 'hex'),
+  rawPayload_bytes_invalid = Buffer.from('93322B218CE53B0100', 'hex'),
   sensorMap = {
     temperature: 'temp',
     pressure: 'press',
@@ -19,7 +22,23 @@ const rawPayload_base64 = 'bm8gZXhhbXBsZSBhdmFpbGFibGU=', // FIXME
   };
 
 describe('decoder vX.1', () => {
-  const referenceResult = referenceImpl(rawPayload_bytes, sensorMap);
+  let referenceResult;
+
+  before(() => {
+    referenceResult = referenceImpl(rawPayload_bytes, sensorMap);
+  });
+
+  it('should return error for missing sensorIds', () => {
+    const result = decoder.bytesToMeasurement(rawPayload_bytes, {});
+
+    return expect(result).to.be.a('string');
+  });
+
+  it('should return error for to few/many bytes', () => {
+    const result = decoder.bytesToMeasurement(rawPayload_bytes_invalid, sensorMap);
+
+    return expect(result).to.be.a('string');
+  });
 
   it('should return same results as reference implementation (input: bytes)', () => {
     const result = decoder.bytesToMeasurement(rawPayload_bytes, sensorMap);
