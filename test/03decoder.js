@@ -2,8 +2,7 @@
 
 /* eslint-env mocha */
 
-const chakram = require('chakram'),
-  expect = chakram.expect;
+const assert = require('chai').assert;
 
 const decoder = require('../lib/decoder'),
   referenceImpl = require('./data/decoderReferenceImplementation');
@@ -20,17 +19,18 @@ const rawPayload_base64 = 'bm8gZXhhbXBsZSBhdmFpbGFibGU=', // FIXME
   };
 
 describe('decoder vX.1', () => {
+  const referenceResult = referenceImpl(rawPayload_bytes, sensorMap);
 
-  it('should decode byte array to measurements', () => {
+  it('should return same results as reference implementation (input: bytes)', () => {
     const result = decoder.bytesToMeasurement(rawPayload_bytes, sensorMap);
+
+    return assert.deepEqual(referenceResult, result);
   });
 
-  it('should decode base64 to measurements', () => {
+  /*it('should decode base64 to measurements with same result', () => {
     const result = decoder.base64ToMeasurement(rawPayload_base64, sensorMap);
-  });
 
-  /*it('should return same results as reference implementation'), () => {
-
+    return assert.deepEqual(referenceResult, result);
   });*/
 
 });

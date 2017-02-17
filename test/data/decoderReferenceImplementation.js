@@ -1,11 +1,6 @@
 'use strict';
 
-// TODO: pass them into function!
-var TEMPSENSOR_ID = '',
-  HUMISENSOR_ID = '',
-  PRESSURESENSOR_ID = '',
-  LUXSENSOR_ID = '',
-  UVSENSOR_ID = '';
+/* eslint-disable */
 
 var bytesToInt = function (bytes) {
   var i = 0;
@@ -64,8 +59,13 @@ var decode = function (bytes, mask, names) {
 };
 
 // bytes is of type Buffer.
-var bytesToSenseBoxJson = function (bytes) {
-  var json;
+var bytesToSenseBoxJson = function (bytes, sensorMap) {
+  var json,
+    TEMPSENSOR_ID = sensorMap.temperature,
+    HUMISENSOR_ID = sensorMap.humidity,
+    PRESSURESENSOR_ID = sensorMap.pressure,
+    LUXSENSOR_ID = sensorMap.lightIntensity,
+    UVSENSOR_ID = sensorMap.uvLight;
 
   try {
     json = decode(bytes,
