@@ -41,6 +41,7 @@ describe('endpoint v1.1', () => {
 
     it('should respond 404 for nonexistent boxes', () => {
       // FIXME: ensure box with this ID does not exist
+      // TODO: also check for app_id
       const res = chakram.post(URL, TTNpayload_v1_valid);
 
       return expect(res).to.have.status(404);
