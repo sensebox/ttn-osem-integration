@@ -10,7 +10,7 @@ const decoder = require('../lib/decoder'),
   referenceImpl = require('./data/decoderReferenceImplementation');
 
 // test data
-const rawPayload_base64 = 'bm8gZXhhbXBsZSBhdmFpbGFibGU=', // FIXME
+const rawPayload_base64 = 'kzIrIYzlOycAMgEA',
   rawPayload_bytes = Buffer.from('93322B218CE53B2700320100', 'hex'),
   rawPayload_bytes_invalid = Buffer.from('93322B218CE53B0100', 'hex'),
   sensorMap = {
@@ -46,10 +46,10 @@ describe('decoder vX.1', () => {
     return assert.deepEqual(referenceResult, result);
   });
 
-  /*it('should decode base64 to measurements with same result', () => {
+  it('should decode base64 to measurements with same result', () => {
     const result = decoder.base64ToMeasurement(rawPayload_base64, sensorMap);
 
     return assert.deepEqual(referenceResult, result);
-  });*/
+  });
 
 });

@@ -3,7 +3,7 @@
 const express = require('express'),
   bodyParser = require('body-parser'),
   server = express(),
-  mongoConnect = require('openSenseMapAPI/lib/utils').connectWithRetry,
+  { connectWithRetry } = require('openSenseMapAPI/lib/utils'),
   cfg = require('./config'),
   v11Router = require('./lib/routes/v1.1');
 
@@ -18,7 +18,8 @@ server.use(bodyParser.json());
 // minor version: version of this API
 server.use('/v1.1', v11Router);
 
-mongoConnect(() => {
+// launch server once connected to DB
+connectWithRetry(() => {
   server.listen(cfg.port, (err) => {
     if (!err) {
       console.log('server listening on :3000');

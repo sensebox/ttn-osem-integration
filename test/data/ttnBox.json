@@ -1,0 +1,63 @@
+{
+  "boxType" : "fixed",
+  "exposure" : "outdoor",
+  "grouptag" : "MakeLight",
+  "integrations" : {
+    "ttn" : {
+      "app_id": "sensebox-ifgi",
+      "dev_id": "my-dev-id",
+      "messageFormat" : "bytes",
+      "decodeOptions" : {
+        "profile" : "sensebox/home"
+      }
+    }
+  },
+  "loc" : [
+    {
+      "geometry" : {
+        "coordinates" : [
+          11.5315890312195,
+          48.0965407089428
+        ],
+        "type" : "Point"
+      },
+      "type" : "feature"
+    }
+  ],
+  "name" : "Munich Maker Lab senseBox",
+  "sensors" : [
+    {
+      "lastMeasurement" : "58aef78fddf8404203cda0eb",
+      "sensorType" : "VEML6070",
+      "title" : "UV-Intensität",
+      "unit" : "μW/cm²"
+    },
+    {
+      "lastMeasurement" : "58aef78fddf8404203cda0ea",
+      "sensorType" : "TSL45315",
+      "title" : "Beleuchtungsstärke",
+      "unit" : "lx"
+    },
+    {
+      "lastMeasurement" : "58aef78fddf8404203cda0e9",
+      "sensorType" : "BMP280",
+      "title" : "Luftdruck",
+      "unit" : "hPa"
+    },
+    {
+      "lastMeasurement" : "58aef78fddf8404203cda0e8",
+      "sensorType" : "HDC1008",
+      "title" : "rel. Luftfeuchte",
+      "unit" : "%"
+    },
+    {
+      "lastMeasurement" : "58aef78fddf8404203cda0e7",
+      "sensorType" : "HDC1008",
+      "title" : "Temperatur",
+      "unit" : "°C"
+    }
+  ],
+  "description" : "Box ist an einem inaktiven Lüftungsschacht montiert, Licht- und UV-Werte daher eher niedriger, der Rest sollte aber ganz gut passen.",
+  "weblink" : "http://log.munichmakerlab.de/day/2016/03/12",
+  "image" : "56cb84812cb6e1e41061bc99.jpg?1469139871228"
+}
