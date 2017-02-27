@@ -90,7 +90,6 @@ describe('endpoint v1.1', () => {
     it('should respond 201 for valid request payloads', () => {
       // FIXME: ensure box with this ID exists
       return chakram.post(URL, TTNpayload_v1_valid).then(res => {
-        console.log(res.body);
         expect(res).to.have.status(201);
 
         return chakram.wait();

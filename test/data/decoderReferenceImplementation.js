@@ -64,8 +64,8 @@ var bytesToSenseBoxJson = function (bytes, sensorMap) {
     TEMPSENSOR_ID = sensorMap.temperature,
     HUMISENSOR_ID = sensorMap.humidity,
     PRESSURESENSOR_ID = sensorMap.pressure,
-    LUXSENSOR_ID = sensorMap.lightIntensity,
-    UVSENSOR_ID = sensorMap.uvLight;
+    LUXSENSOR_ID = sensorMap.lightintensity,
+    UVSENSOR_ID = sensorMap.uvlight;
 
   try {
     json = decode(bytes,

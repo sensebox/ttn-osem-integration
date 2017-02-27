@@ -17,8 +17,8 @@ const rawPayload_base64 = 'kzIrIYzlOycAMgEA',
     temperature: 'temp',
     pressure: 'press',
     humidity: 'humid',
-    uvLight: 'uv',
-    lightIntensity: 'light'
+    uvlight: 'uv',
+    lightintensity: 'light'
   };
 
 describe('decoder vX.1', () => {
