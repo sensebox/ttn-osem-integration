@@ -61,6 +61,7 @@ var decode = function (bytes, mask, names) {
 // bytes is of type Buffer.
 var bytesToSenseBoxJson = function (bytes, sensorMap) {
   var json,
+    measurements = [],
     TEMPSENSOR_ID = sensorMap.temperature,
     HUMISENSOR_ID = sensorMap.humidity,
     PRESSURESENSOR_ID = sensorMap.pressure,
@@ -89,32 +90,41 @@ var bytesToSenseBoxJson = function (bytes, sensorMap) {
       ]);
 
     //temp
-    json[TEMPSENSOR_ID] = parseFloat(((json[TEMPSENSOR_ID] / 771) - 18).toFixed(1));
+    measurements.push({
+      sensor_id: TEMPSENSOR_ID,
+      value: parseFloat(((json[TEMPSENSOR_ID] / 771) - 18).toFixed(1))
+    });
 
     //hum
-    json[HUMISENSOR_ID] = parseFloat(json[HUMISENSOR_ID].toFixed(1));
+    measurements.push({
+      sensor_id: HUMISENSOR_ID,
+      value: parseFloat(json[HUMISENSOR_ID].toFixed(1))
+    });
 
     // pressure
     if (json[PRESSURESENSOR_ID] !== '0') {
-      json[PRESSURESENSOR_ID] = parseFloat(((json[PRESSURESENSOR_ID] / 81.9187) + 300).toFixed(1));
-    } else {
-      delete json[PRESSURESENSOR_ID];
+      measurements.push({
+        sensor_id: PRESSURESENSOR_ID,
+        value: parseFloat(((json[PRESSURESENSOR_ID] / 81.9187) + 300).toFixed(1))
+      });
     }
 
     // lux
-    json[LUXSENSOR_ID] = (json[LUXSENSOR_ID + '_times'] * 255) + json[LUXSENSOR_ID + '_mod'];
-    delete json[LUXSENSOR_ID + '_times'];
-    delete json[LUXSENSOR_ID + '_mod'];
+    measurements.push({
+      sensor_id: LUXSENSOR_ID,
+      value: (json[LUXSENSOR_ID + '_times'] * 255) + json[LUXSENSOR_ID + '_mod']
+    });
 
     // uv
-    json[UVSENSOR_ID] = (json[UVSENSOR_ID + '_times'] * 255) + json[UVSENSOR_ID + '_mod'];
-    delete json[UVSENSOR_ID + '_times'];
-    delete json[UVSENSOR_ID + '_mod'];
+    measurements.push({
+      sensor_id: UVSENSOR_ID,
+      value: (json[UVSENSOR_ID + '_times'] * 255) + json[UVSENSOR_ID + '_mod']
+    });
   } catch (e) {
     json = { payload: bytes };
   }
 
-  return json;
+  return measurements;
 };
 
 module.exports = bytesToSenseBoxJson;

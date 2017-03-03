@@ -27,31 +27,26 @@
   "name" : "Munich Maker Lab senseBox",
   "sensors" : [
     {
-      "lastMeasurement" : "58aef78fddf8404203cda0eb",
       "sensorType" : "VEML6070",
       "title" : "UV-Intensität",
       "unit" : "μW/cm²"
     },
     {
-      "lastMeasurement" : "58aef78fddf8404203cda0ea",
       "sensorType" : "TSL45315",
       "title" : "Beleuchtungsstärke",
       "unit" : "lx"
     },
     {
-      "lastMeasurement" : "58aef78fddf8404203cda0e9",
       "sensorType" : "BMP280",
       "title" : "Luftdruck",
       "unit" : "hPa"
     },
     {
-      "lastMeasurement" : "58aef78fddf8404203cda0e8",
       "sensorType" : "HDC1008",
       "title" : "rel. Luftfeuchte",
       "unit" : "%"
     },
     {
-      "lastMeasurement" : "58aef78fddf8404203cda0e7",
       "sensorType" : "HDC1008",
       "title" : "Temperatur",
       "unit" : "°C"

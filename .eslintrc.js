@@ -29,7 +29,7 @@ module.exports = {
       'always'
     ],
     'guard-for-in': [
-      'error'
+      'warn'
     ],
     'no-multi-spaces': [
       'error'
