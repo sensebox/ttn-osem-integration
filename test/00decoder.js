@@ -12,9 +12,12 @@ chai.use(require('chai-as-promised'));
 
 const decoder = require('../lib/decoding'),
   transformAndValidateArray = require('openSenseMapAPI/lib/decoding/transformAndValidateArray'),
-  referenceImpl = require('./data/decoderReferenceImplementation');
+  referenceImpl = require('./data/decoderReferenceImplementation'),
 
-const box_sbhome = JSON.parse(JSON.stringify(require('./data/ttnBox.json')));
+  box_sbhome = JSON.parse(JSON.stringify(require('./data/ttnBox_sbhome.json'))),
+  box_custom = JSON.parse(JSON.stringify(require('./data/ttnBox_custom.json'))),
+  payload_sbhome = require('./data/TTNpayload_sbhome_valid.json'),
+  payload_custom = require('./data/TTNpayload_custom_valid.json');
 
 describe('decoder', () => {
 
@@ -31,15 +34,55 @@ describe('decoder', () => {
 
 
   describe('profile: custom', () => {
-    // TODO
+
+    before(function() {
+      box_custom.sensors.map(s => {
+        s._id = s.title;
+
+        return s;
+      });
+    });
+
+    it('should return a valid measurement array', () => {
+      return expect(decoder.decodeBuffer(Buffer.from(payload_custom.payload_raw, 'base64'), box_custom))
+        .to.eventually.be.an('array').with.lengthOf(3)
+        .to.eventually.all.have.property('sensor_id')
+        .to.eventually.all.have.property('value')
+        //.to.deep.equal
+    });
+
+    it('should return the same for base64 input', () => {
+      decoder.decodeBase64(payload_custom.payload_raw, box_custom).then(console.log);
+
+      return expect(decoder.decodeBase64(payload_custom.payload_raw, box_custom))
+        .to.eventually.be.an('array').with.lengthOf(3)
+        .to.eventually.all.have.property('sensor_id')
+        .to.eventually.all.have.property('value')
+    });
+
+    it('should reject a box too long byteMask', () => {
+      box_custom.sensors.pop();
+      box_custom.sensors.pop();
+
+      return expect(decoder.decodeBase64(payload_custom.payload_raw, {
+        sensors: [{}, {}],
+        integrations: { ttn: { decodeOptions: { profile: 'custom', byteMask: [1,2,3,4] } } }
+      })).to.be.rejectedWith('box requires at least 4 sensors');
+    });
+
+    it('should reject a box with missing byteMask', () => {
+      delete box_custom.integrations.ttn.decodeOptions.byteMask;
+
+      return expect(decoder.decodeBase64(payload_custom.payload_raw, box_custom))
+        .to.be.rejectedWith('profile \'custom\' requires a valid byteMask');
+    });
+
   });
 
 
   describe('profile: sensebox/home', () => {
 
-    const rawPayload_base64 = 'kzIrIYzlOycAMgEA',
-      rawPayload_bytes = Buffer.from('93322B218CE53B2700320100', 'hex'),
-      rawPayload_bytes_invalid = Buffer.from('93322B218CE53B0100', 'hex');
+    const rawPayload_bytes = Buffer.from(payload_sbhome.payload_raw, 'base64');
 
     let referenceResult, decoderResultBytes, decoderResultBase64;
 
@@ -61,7 +104,7 @@ describe('decoder', () => {
           uvlight: 'UV-Intensität'
         })),
         decoder.decodeBuffer(rawPayload_bytes, box_sbhome),
-        decoder.decodeBase64(rawPayload_base64, box_sbhome)
+        decoder.decodeBase64(payload_sbhome.payload_raw, box_sbhome)
       ])
       .then(results => {
         // clean up result invariants
@@ -85,12 +128,14 @@ describe('decoder', () => {
       expect(decoderResultBytes).to.deep.equal(referenceResult);
     });
 
+    // TODO: actually valid for any decoding profile
     it('should decode base64 to measurements with same result', () => {
       expect(decoderResultBase64).to.deep.equal(decoderResultBytes);
     });
 
-    it('should return error for too few/many bytes', () => {
-      return expect(decoder.decodeBuffer(rawPayload_bytes_invalid, box_sbhome))
+    // TODO: actually valid for any decoding profile
+    it('should return error for too few bytes', () => {
+      return expect(decoder.decodeBuffer(Buffer.from('asdf', 'hex'), box_sbhome))
         .to.be.rejectedWith('incorrect amount of bytes, should be 12');
     });
 

@@ -11,13 +11,12 @@ const cfg = require('../config'),
 
 // test data
 const BASE_URL = `http://localhost:${cfg.port}`,
-  boxData = require('./data/ttnBox.json'),
-  TTNpayload_v1_valid = require('./data/TTNpayload_v1_valid.json'),
-  TTNpayload_v1_invalid = JSON.parse(JSON.stringify(TTNpayload_v1_valid)),
-  TTNpayload_v1_nonexistent = JSON.parse(JSON.stringify(TTNpayload_v1_valid));
-
-TTNpayload_v1_invalid.payload_raw = 'asdf';
-TTNpayload_v1_nonexistent.app_id = 'asdfasdf i do not exist';
+  box_sbhome = require('./data/ttnBox_sbhome.json'),
+  box_custom = require('./data/ttnBox_sbhome.json'),
+  box_json = require('./data/ttnBox_json.json'),
+  TTNpayload_sbhome_valid = require('./data/TTNpayload_sbhome_valid.json'),
+  TTNpayload_sbhome_nonexistent = require('./data/TTNpayload_sbhome_nonexistent.json'),
+  TTNpayload_json_valid = require('./data/TTNpayload_json_valid.json');
 
 describe('endpoint v1.1', () => {
 
@@ -26,14 +25,16 @@ describe('endpoint v1.1', () => {
     let measurementCountBefore;
 
     before(function (done) {
+      // FIXME: upsert does not work
+      // TODO: also do so for json box box
       this.timeout(10000);
 
       // wait for DB connection
       connectWithRetry(() => {})
         // ensure nonexistent box does not exist
         .then(() => Box.findOne({
-          'integrations.ttn.app_id': TTNpayload_v1_nonexistent.app_id,
-          'integrations.ttn.dev_id': TTNpayload_v1_nonexistent.dev_id
+          'integrations.ttn.app_id': TTNpayload_sbhome_nonexistent.app_id,
+          'integrations.ttn.dev_id': TTNpayload_sbhome_nonexistent.dev_id
         }))
         .then(box => {
           if (box) {
@@ -43,7 +44,8 @@ describe('endpoint v1.1', () => {
           return Promise.resolve();
         })
         // ensure existent box does exist
-        .then(() => Box.findOneAndUpdate(boxData, boxData, { upsert: true }))
+        .then(() => Box.findOneAndUpdate(box_sbhome, box_sbhome, { upsert: true }))
+        .then(() => Box.findOneAndUpdate(box_json, box_json, { upsert: true }))
         .then(() => Measurement.count({}))
         // get initial count of measurements
         .then(count => {
@@ -70,27 +72,43 @@ describe('endpoint v1.1', () => {
     });
 
     it('should respond 404 for nonexistent boxes', () => {
-      // FIXME: ensure box with this ID does not exist
-      return chakram.post(URL, TTNpayload_v1_nonexistent).then(res => {
+      return chakram.post(URL, TTNpayload_sbhome_nonexistent).then(res => {
         expect(res).to.have.status(404);
 
         return chakram.wait();
       });
     });
 
-    it('should respond 422 for invalid request payloads', () => {
-      // FIXME: ensure box with this ID exists
-      return chakram.post(URL, TTNpayload_v1_invalid).then(res => {
+    it('should respond 201 for valid request payload_raw', () => {
+      return chakram.post(URL, TTNpayload_sbhome_valid).then(res => {
+        expect(res).to.have.status(201);
+
+        return chakram.wait();
+      });
+    });
+
+    it('should respond 422 for invalid request payload_raw', () => {
+      TTNpayload_sbhome_valid.payload_raw = 'asdf';
+      return chakram.post(URL, TTNpayload_sbhome_valid).then(res => {
         expect(res).to.have.status(422);
 
         return chakram.wait();
       });
     });
 
-    it('should respond 201 for valid request payloads', () => {
-      // FIXME: ensure box with this ID exists
-      return chakram.post(URL, TTNpayload_v1_valid).then(res => {
+    // FIXME: get sensorId in payload
+    it('should respond 201 for valid JSON payload', () => {
+      return chakram.post(URL, TTNpayload_json_valid).then(res => {
         expect(res).to.have.status(201);
+
+        return chakram.wait();
+      });
+    });
+
+    it('should respond 422 for invalid JSON payload', () => {
+      delete TTNpayload_json_valid.payload_fields;
+      return chakram.post(URL, TTNpayload_json_valid).then(res => {
+        expect(res).to.have.status(422);
 
         return chakram.wait();
       });
@@ -98,7 +116,7 @@ describe('endpoint v1.1', () => {
 
     it('should add measurements to the database', () => {
       return Measurement.count({}).then(countAfter => {
-        expect(countAfter).to.equal(measurementCountBefore + 5);
+        expect(countAfter).to.equal(measurementCountBefore + 6); // 5 sbhome + 1 json
 
         return chakram.wait();
       });
