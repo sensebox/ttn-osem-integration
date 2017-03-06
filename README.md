@@ -33,4 +33,4 @@ OSEM_dbconnectionstring=mongodb://localhost/OSeM-api
 ```
 
 ## license
-GPL-3, see [`LICENSE`](LICENSE)
+MIT, see [`LICENSE`](LICENSE)
