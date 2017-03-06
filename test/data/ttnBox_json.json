@@ -21,7 +21,7 @@
       "type" : "feature"
     }
   ],
-  "name" : "Munich Maker Lab senseBox",
+  "name" : "testbox - ttn json",
   "sensors" : [
     {
       "_id": "588876b67dd004f79259bd8a",

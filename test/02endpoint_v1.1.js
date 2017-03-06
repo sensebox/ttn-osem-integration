@@ -12,7 +12,6 @@ const cfg = require('../config'),
 // test data
 const BASE_URL = `http://localhost:${cfg.port}`,
   box_sbhome = require('./data/ttnBox_sbhome.json'),
-  box_custom = require('./data/ttnBox_sbhome.json'),
   box_json = require('./data/ttnBox_json.json'),
   TTNpayload_sbhome_valid = require('./data/TTNpayload_sbhome_valid.json'),
   TTNpayload_sbhome_nonexistent = require('./data/TTNpayload_sbhome_nonexistent.json'),
@@ -44,8 +43,12 @@ describe('endpoint v1.1', () => {
           return Promise.resolve();
         })
         // ensure existent box does exist
-        .then(() => Box.findOneAndUpdate(box_sbhome, box_sbhome, { upsert: true }))
-        .then(() => Box.findOneAndUpdate(box_json, box_json, { upsert: true }))
+        .then(() => Box.update({
+          'integrations.ttn.dev_id': box_sbhome.integrations.ttn.dev_id
+        }, box_sbhome, { upsert: true, new: false }))
+        .then(() => Box.update({
+          'integrations.ttn.dev_id': box_json.integrations.ttn.dev_id
+        }, box_json, { upsert: true, new: false }))
         .then(() => Measurement.count({}))
         // get initial count of measurements
         .then(count => {
@@ -89,6 +92,7 @@ describe('endpoint v1.1', () => {
 
     it('should respond 422 for invalid request payload_raw', () => {
       TTNpayload_sbhome_valid.payload_raw = 'asdf';
+
       return chakram.post(URL, TTNpayload_sbhome_valid).then(res => {
         expect(res).to.have.status(422);
 
@@ -107,6 +111,7 @@ describe('endpoint v1.1', () => {
 
     it('should respond 422 for invalid JSON payload', () => {
       delete TTNpayload_json_valid.payload_fields;
+
       return chakram.post(URL, TTNpayload_json_valid).then(res => {
         expect(res).to.have.status(422);
 
