@@ -24,8 +24,6 @@ describe('endpoint v1.1', () => {
     let measurementCountBefore;
 
     before(function (done) {
-      // FIXME: upsert does not work
-      // TODO: also do so for json box box
       this.timeout(10000);
 
       // wait for DB connection

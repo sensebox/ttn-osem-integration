@@ -7,7 +7,8 @@
     "start": "node index.js",
     "watch": "node-dev --respawn index.js",
     "test": "mocha test",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "docs": "jsdoc -p README.md *.js lib/** -d docs"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "chai-things": "^0.2.0",
     "chakram": "^1.5.0",
     "eslint": "^3.15.0",
+    "jsdoc": "^3.4.3",
     "mocha": "^3.2.0",
     "node-dev": "^3.1.3"
   }

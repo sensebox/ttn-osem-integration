@@ -11,6 +11,9 @@ the database.
 There are multiple decoding options provided via `profiles`, which may be
 easily extended to support other sensor configurations or value transformations.
 
+## docs
+See `./docs/` or [sensebox.github.io/ttn-osem-application](https://sensebox.github.io/ttn-osem-application).
+
 ## dependencies
 - `node.js >= 6.x`
 - `yarn`
