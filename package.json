@@ -7,7 +7,7 @@
     "start": "node index.js",
     "watch": "node-dev --respawn index.js",
     "test": "mocha test",
-    "lint": "eslint .",
+    "lint": "eslint *.js lib test",
     "docs": "jsdoc -p README.md *.js lib/** -d docs"
   },
   "repository": {

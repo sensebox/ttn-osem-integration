@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: decoding/custom</title>
+    <title>JSDoc: Module: routes/v1_1</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: decoding/custom</h1>
+    <h1 class="page-title">Module: routes/v1_1</h1>
 
     
 
@@ -38,11 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">This decoding profile is meant as a general starting point for profiles.
-It decodes the buffer according to a custom byteMask, and transforms the
-data to integer values.
-The byteMask defines the amount of bytes to consume for each measurement.
-It is applied to the sensors in the order they are defined.</div>
+            <div class="description">Router for TTN HTTP integrations API v1 and this API v1</div>
         
 
         
@@ -94,7 +90,7 @@ It is applied to the sensors in the order they are defined.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="decoding_custom.js.html">decoding/custom.js</a>, <a href="decoding_custom.js.html#line3">line 3</a>
+        <a href="routes_v1.1.js.html">routes/v1.1.js</a>, <a href="routes_v1.1.js.html#line3">line 3</a>
     </li></ul></dd>
     
 
@@ -135,80 +131,22 @@ It is applied to the sensors in the order they are defined.</div>
     
 
     
-
-    
-        <h3 class="subsection-title">Methods</h3>
+        <h3 class="subsection-title">Members</h3>
 
         
             
+<h4 class="name" id="~'POST/v1.1/measurement'"><span class="type-signature">(inner) </span>'POST /v1.1/measurement'<span class="type-signature"></span></h4>
 
-    
-
-    <h4 class="name" id="~createBufferTransformer"><span class="type-signature">(inner) </span>createBufferTransformer<span class="signature">(box)</span><span class="type-signature"> &rarr; {Array}</span></h4>
-
-    
 
 
 
 <div class="description">
-    returns a bufferTransfomer for transformation of a buffer to measurements.
+    Accepts a POST request from the TTN HTTP integrations uplink API, version 1
+as specified <a href="https://www.thethingsnetwork.org/docs/applications/http/">here</a>,
+and decodes it's payload to store a set of measurements for a box.
+The box is identified by it's registered values app_id and dev_id.
 </div>
 
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>box</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Box</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The box to retrieve byteMask and sensorIds from</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -244,20 +182,13 @@ It is applied to the sensors in the order they are defined.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="decoding_custom.js.html">decoding/custom.js</a>, <a href="decoding_custom.js.html#line22">line 22</a>
+        <a href="routes_v1.1.js.html">routes/v1.1.js</a>, <a href="routes_v1.1.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
     
 
     
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="module-decoding.html#~bufferToMeasurements">module:decoding~bufferToMeasurements</a></li>
-        </ul>
-    </dd>
-    
 
     
 </dl>
@@ -266,40 +197,17 @@ It is applied to the sensors in the order they are defined.</div>
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>curl -X POST -d \
+  '{ "app_id": "asdf", "dev_id": "qwerty", "payload_raw": "kzIrIYzlOycAMgEA" }' \
+  localhost:3000/v1.1/measurement</code></pre>
 
 
-
-
-
-
-
-
-<h5>Returns:</h5>
 
         
-<div class="param-desc">
-    A bufferTransformer for the box
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
-
-
-    </dd>
-</dl>
-
     
 
-
-
-        
     
 
     
