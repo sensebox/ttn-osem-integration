@@ -9,7 +9,9 @@ const express = require('express'),
 
 server.use((req, res, next) => {
   req.time = new Date();
-  console.log(`${req.time.toISOString()}  ${req.ip}\t[${req.method}] ${req.url}`);
+  if (cfg.loglevel === 'info') {
+    console.log(`${req.time.toISOString()}  ${req.ip}\t[${req.method}] ${req.url}`);
+  }
   next();
 });
 
