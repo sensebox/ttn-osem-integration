@@ -202,6 +202,15 @@ describe('decoder', () => {
       expect(p.results.base64).to.deep.equal(p.results.buffer);
     });
 
+    it('should reject a box with invalid transformers', () => {
+      p.box.integrations.ttn.decodeOptions.byteMask.push({
+        sensor_id: p.box.sensors[2]._id.toString(), decoder: 'decode'
+      });
+
+      return expect(decoder.decodeBase64(p.payloads.base64, p.box))
+        .to.be.rejectedWith('\'decode\' is not a supported transformer');
+    });
+
     it('should return error for incomplete sensors', () => {
       p.box.sensors.pop();
 
