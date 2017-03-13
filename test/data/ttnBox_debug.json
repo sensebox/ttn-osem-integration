@@ -5,10 +5,10 @@
   "integrations" : {
     "ttn" : {
       "app_id": "sensebox-ifgi",
-      "dev_id": "customttnbox",
+      "dev_id": "debugttnbox",
       "messageFormat" : "bytes",
       "decodeOptions" : {
-        "profile" : "custom",
+        "profile" : "debug",
         "byteMask" : [1, 2, 1]
       }
     }
@@ -25,7 +25,7 @@
       "type" : "feature"
     }
   ],
-  "name" : "testbox - ttn custom",
+  "name" : "testbox - ttn debug",
   "sensors" : [
     {
       "_id": "588876b67dd004f79259bd8a",

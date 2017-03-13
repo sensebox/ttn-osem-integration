@@ -15,19 +15,19 @@ const decoder = require('../lib/decoding'),
   referenceImpl = require('./data/decoderReferenceImplementation'),
 
   // test data
-  payloadCustom = require('./data/TTNpayload_custom_valid.json'),
+  payloadDebug = require('./data/TTNpayload_debug_valid.json'),
   payloadSbhome = require('./data/TTNpayload_sbhome_valid.json'),
-  payloadLoraserialization = require('./data/TTNpayload_lora-serialization_valid.json'),
-  boxCustom = require('./data/ttnBox_custom.json'),
+  payloadLoraserialization = require('./data/TTNpayload_loraserialization_valid.json'),
+  boxDebug = require('./data/ttnBox_debug.json'),
   boxSbhome = require('./data/ttnBox_sbhome.json'),
-  boxLoraserialization = require('./data/ttnBox_lora-serialization.json'),
+  boxLoraserialization = require('./data/ttnBox_loraserialization.json'),
 
   profiles = {
-    custom: {
-      box: JSON.parse(JSON.stringify(boxCustom)),
+    debug: {
+      box: JSON.parse(JSON.stringify(boxDebug)),
       payloads: {
-        buffer: Buffer.from(payloadCustom.payload_raw, 'base64'),
-        base64: payloadCustom.payload_raw
+        buffer: Buffer.from(payloadDebug.payload_raw, 'base64'),
+        base64: payloadDebug.payload_raw
       },
       results: { buffer: null, base64: null }
     },
@@ -56,9 +56,9 @@ describe('decoder', () => {
   before(() => {
     // run all the decodings once
     return Promise.all([
-      // profile custom
-      decoder.decodeBuffer(profiles.custom.payloads.buffer, profiles.custom.box),
-      decoder.decodeBase64(profiles.custom.payloads.base64, profiles.custom.box),
+      // profile debug
+      decoder.decodeBuffer(profiles.debug.payloads.buffer, profiles.debug.box),
+      decoder.decodeBase64(profiles.debug.payloads.base64, profiles.debug.box),
       // profile sbhome
       decoder.decodeBuffer(profiles.sbhome.payloads.buffer, profiles.sbhome.box),
       decoder.decodeBase64(profiles.sbhome.payloads.base64, profiles.sbhome.box),
@@ -79,8 +79,8 @@ describe('decoder', () => {
         delete m._id; delete m.createdAt;
       }));
 
-      profiles.custom.results.buffer = decodings[0];
-      profiles.custom.results.base64 = decodings[1];
+      profiles.debug.results.buffer = decodings[0];
+      profiles.debug.results.base64 = decodings[1];
       profiles.sbhome.results.buffer = decodings[2];
       profiles.sbhome.results.base64 = decodings[3];
       profiles.sbhome.results.reference = decodings[4];
@@ -101,7 +101,7 @@ describe('decoder', () => {
   });
 
   it('set createdAt if timestamp is provided', () => {
-    const p = profiles.custom,
+    const p = profiles.debug,
       time = new Date('2017-01-01T02:03:04').toISOString();
 
     return decoder.decodeBase64(p.payloads.base64, p.box, time)
@@ -113,9 +113,9 @@ describe('decoder', () => {
   });
 
 
-  describe('profile: custom', () => {
+  describe('profile: debug', () => {
 
-    const p = profiles.custom;
+    const p = profiles.debug;
 
     it('should return a valid measurement array', () => {
       expect(p.results.buffer)
@@ -144,7 +144,7 @@ describe('decoder', () => {
       delete p.box.integrations.ttn.decodeOptions.byteMask;
 
       return expect(decoder.decodeBase64(p.payloads.base64, p.box))
-        .to.be.rejectedWith('profile \'custom\' requires a valid byteMask');
+        .to.be.rejectedWith('profile \'debug\' requires a valid byteMask');
     });
 
   });
