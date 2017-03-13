@@ -19,8 +19,8 @@ const BASE_URL = `http://localhost:${cfg.port}`,
 
 describe('endpoint v1.1', () => {
 
-  describe('POST /measurement', () => {
-    const URL = `${BASE_URL}/v1.1/measurement`;
+  describe('POST /', () => {
+    const URL = `${BASE_URL}/v1.1`;
     let measurementCountBefore;
 
     before(function (done) {
@@ -98,7 +98,7 @@ describe('endpoint v1.1', () => {
       });
     });
 
-    it('should respond 201 for valid JSON payload', () => {
+    it('should respond 201 for valid request payload_fields', () => {
       return chakram.post(URL, TTNpayload_json_valid).then(res => {
         expect(res).to.have.status(201);
 

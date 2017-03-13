@@ -40,8 +40,9 @@
         
             <div class="description">Provides a generic decoding interface into which multiple decoding profiles
 may be hooked. Implemented profiles are
-<a href="module-decoding_custom.html">custom</a>,
-<a href="module-decoding_sensebox_home.html">sensebox/home</a></div>
+<a href="module-decoding_lora-serialization.html">lora-serialization</a>,
+<a href="module-decoding_sensebox_home.html">sensebox/home</a>,
+<a href="module-decoding_debug.html">debug</a></div>
         
 
         
@@ -267,7 +268,7 @@ may be hooked. Implemented profiles are
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="decoding_index.js.html">decoding/index.js</a>, <a href="decoding_index.js.html#line36">line 36</a>
+        <a href="decoding_index.js.html">decoding/index.js</a>, <a href="decoding_index.js.html#line39">line 39</a>
     </li></ul></dd>
     
 
@@ -332,7 +333,7 @@ may be hooked. Implemented profiles are
 
     
 
-    <h4 class="name" id="~decodeBase64"><span class="type-signature">(inner) </span>decodeBase64<span class="signature">(base64String, box)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id="~decodeBase64"><span class="type-signature">(inner) </span>decodeBase64<span class="signature">(base64String, box, timestamp<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -363,7 +364,11 @@ may be hooked. Implemented profiles are
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -388,7 +393,19 @@ may be hooked. Implemented profiles are
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"></td>
@@ -411,7 +428,58 @@ may be hooked. Implemented profiles are
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>timestamp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    new Date()
+                
+                </td>
             
 
             <td class="description last"></td>
@@ -455,7 +523,7 @@ may be hooked. Implemented profiles are
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="decoding_index.js.html">decoding/index.js</a>, <a href="decoding_index.js.html#line104">line 104</a>
+        <a href="decoding_index.js.html">decoding/index.js</a>, <a href="decoding_index.js.html#line118">line 118</a>
     </li></ul></dd>
     
 
@@ -516,7 +584,7 @@ may be hooked. Implemented profiles are
 
     
 
-    <h4 class="name" id="~decodeBuffer"><span class="type-signature">(inner) </span>decodeBuffer<span class="signature">(buffer, box)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id="~decodeBuffer"><span class="type-signature">(inner) </span>decodeBuffer<span class="signature">(buffer, box, timestamp<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -548,7 +616,11 @@ TTN configuration.
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -573,7 +645,19 @@ TTN configuration.
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last">The data to be decoded</td>
@@ -596,10 +680,61 @@ TTN configuration.
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last">A box from the DB for lookup of TTN config & sensors</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>timestamp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    new Date()
+                
+                </td>
+            
+
+            <td class="description last">Timestamp to attach to the measurements.</td>
         </tr>
 
     
@@ -640,7 +775,7 @@ TTN configuration.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="decoding_index.js.html">decoding/index.js</a>, <a href="decoding_index.js.html#line72">line 72</a>
+        <a href="decoding_index.js.html">decoding/index.js</a>, <a href="decoding_index.js.html#line76">line 76</a>
     </li></ul></dd>
     
 
@@ -705,13 +840,13 @@ TTN configuration.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-decoding.html">decoding</a></li><li><a href="module-decoding_custom.html">decoding/custom</a></li><li><a href="module-decoding_helpers.html">decoding/helpers</a></li><li><a href="module-decoding_sensebox_home.html">decoding/sensebox_home</a></li><li><a href="module-routes_v1_1.html">routes/v1_1</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-decoding.html">decoding</a></li><li><a href="module-decoding_debug.html">decoding/debug</a></li><li><a href="module-decoding_helpers.html">decoding/helpers</a></li><li><a href="module-decoding_lora-serialization.html">decoding/lora-serialization</a></li><li><a href="module-decoding_sensebox_home.html">decoding/sensebox_home</a></li><li><a href="module-routes_v1_1.html">routes/v1_1</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon Mar 06 2017 16:03:47 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon Mar 13 2017 13:34:25 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -6,11 +6,8 @@
     "ttn" : {
       "app_id": "sensebox-ifgi",
       "dev_id": "debugttnbox",
-      "messageFormat" : "bytes",
-      "decodeOptions" : {
-        "profile" : "debug",
-        "byteMask" : [1, 2, 1]
-      }
+      "profile" : "debug",
+      "decodeOptions" : [1, 2, 1]
     }
   },
   "loc" : [

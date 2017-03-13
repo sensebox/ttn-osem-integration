@@ -6,10 +6,7 @@
     "ttn" : {
       "app_id": "sensebox-ifgi",
       "dev_id": "my-dev-id",
-      "messageFormat" : "bytes",
-      "decodeOptions" : {
-        "profile" : "sensebox/home"
-      }
+      "profile" : "sensebox/home"
     }
   },
   "loc" : [

@@ -96,8 +96,8 @@ describe('decoder', () => {
 
   it('should reject unknown profiles', () => {
     return expect(decoder.decodeBuffer(Buffer.from('asdf', 'hex'), {
-      integrations: { ttn: { decodeOptions: { profile: ':^)' } } }
-    })).to.be.rejectedWith('profile :^) is not supported');
+      integrations: { ttn: { profile: ':^)' } }
+    })).to.be.rejectedWith('profile \':^)\' is not supported');
   });
 
   it('set createdAt if timestamp is provided', () => {
@@ -141,7 +141,7 @@ describe('decoder', () => {
     });
 
     it('should reject a box with missing byteMask', () => {
-      delete p.box.integrations.ttn.decodeOptions.byteMask;
+      delete p.box.integrations.ttn.decodeOptions;
 
       return expect(decoder.decodeBase64(p.payloads.base64, p.box))
         .to.be.rejectedWith('profile \'debug\' requires a valid byteMask');
@@ -203,7 +203,7 @@ describe('decoder', () => {
     });
 
     it('should reject a box with invalid transformers', () => {
-      p.box.integrations.ttn.decodeOptions.byteMask.push({
+      p.box.integrations.ttn.decodeOptions.push({
         sensor_id: p.box.sensors[2]._id.toString(), decoder: 'decode'
       });
 
@@ -219,10 +219,10 @@ describe('decoder', () => {
     });
 
     it('should reject a box with missing byteMask', () => {
-      delete p.box.integrations.ttn.decodeOptions.byteMask;
+      delete p.box.integrations.ttn.decodeOptions;
 
       return expect(decoder.decodeBase64(p.payloads.base64, p.box))
-        .to.be.rejectedWith('profile \'lora-serialization\' requires a valid byteMask');
+        .to.be.rejectedWith('profile \'lora-serialization\' requires valid decodeOptions');
     });
 
   });

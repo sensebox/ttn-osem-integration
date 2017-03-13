@@ -6,7 +6,7 @@
     "ttn" : {
       "app_id": "sensebox-ifgi",
       "dev_id": "jsonttnbox",
-      "messageFormat" : "json"
+      "profile": "json"
     }
   },
   "loc" : [

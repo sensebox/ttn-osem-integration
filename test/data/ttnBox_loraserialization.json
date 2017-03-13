@@ -6,20 +6,17 @@
     "ttn" : {
       "app_id": "sensebox-ifgi",
       "dev_id": "loraserializationbox",
-      "messageFormat" : "bytes",
-      "decodeOptions" : {
-        "profile" : "lora-serialization",
-        "byteMask" : [{
-          "sensor_id": "588876b67dd004f79259bd8e",
-          "decoder": "temperature"
-        }, {
-          "sensor_id": "588876b67dd004f79259bd8d",
-          "decoder": "humidity"
-        }, {
-          "sensor_id": "588876b67dd004f79259bd8a",
-          "decoder": "uint16"
-        }]
-      }
+      "profile" : "lora-serialization",
+      "decodeOptions" : [{
+        "sensor_id": "588876b67dd004f79259bd8e",
+        "decoder": "temperature"
+      }, {
+        "sensor_id": "588876b67dd004f79259bd8d",
+        "decoder": "humidity"
+      }, {
+        "sensor_id": "588876b67dd004f79259bd8a",
+        "decoder": "uint16"
+      }]
     }
   },
   "loc" : [
