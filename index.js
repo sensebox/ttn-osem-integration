@@ -8,7 +8,8 @@ const express = require('express'),
   v11Router = require('./lib/routes/v1.1');
 
 server.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} [${req.method}] ${req.url}`);
+  req.time = new Date();
+  console.log(`${req.time.toISOString()}  ${req.ip}\t[${req.method}] ${req.url}`);
   next();
 });
 
