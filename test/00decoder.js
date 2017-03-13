@@ -17,8 +17,10 @@ const decoder = require('../lib/decoding'),
   // test data
   payloadCustom = require('./data/TTNpayload_custom_valid.json'),
   payloadSbhome = require('./data/TTNpayload_sbhome_valid.json'),
+  payloadLoraserialization = require('./data/TTNpayload_lora-serialization_valid.json'),
   boxCustom = require('./data/ttnBox_custom.json'),
   boxSbhome = require('./data/ttnBox_sbhome.json'),
+  boxLoraserialization = require('./data/ttnBox_lora-serialization.json'),
 
   profiles = {
     custom: {
@@ -37,6 +39,15 @@ const decoder = require('../lib/decoding'),
         base64: payloadSbhome.payload_raw
       },
       results: { buffer: null, base64: null, reference: null }
+    },
+
+    loraserialization: {
+      box: JSON.parse(JSON.stringify(boxLoraserialization)),
+      payloads: {
+        buffer: Buffer.from(payloadLoraserialization.payload_raw, 'base64'),
+        base64: payloadLoraserialization.payload_raw
+      },
+      results: { buffer: null, base64: null }
     }
   };
 
@@ -57,7 +68,10 @@ describe('decoder', () => {
         pressure: profiles.sbhome.box.sensors[2]._id,
         lightintensity: profiles.sbhome.box.sensors[1]._id,
         uvlight: profiles.sbhome.box.sensors[0]._id
-      }))
+      })),
+      // profile loraserialization
+      decoder.decodeBuffer(profiles.loraserialization.payloads.buffer, profiles.loraserialization.box),
+      decoder.decodeBase64(profiles.loraserialization.payloads.base64, profiles.loraserialization.box),
     ])
     .then(decodings => {
       // clean up result invariants
@@ -70,6 +84,8 @@ describe('decoder', () => {
       profiles.sbhome.results.buffer = decodings[2];
       profiles.sbhome.results.base64 = decodings[3];
       profiles.sbhome.results.reference = decodings[4];
+      profiles.loraserialization.results.buffer = decodings[5];
+      profiles.loraserialization.results.base64 = decodings[6];
     });
   });
 
@@ -162,6 +178,42 @@ describe('decoder', () => {
 
       return expect(decoder.decodeBuffer(p.payloads.buffer, p.box))
         .to.be.rejectedWith('box does not contain valid sensors for this profile');
+    });
+
+  });
+
+
+  describe('profile: lora-serialization', () => {
+
+    const p = profiles.loraserialization;
+
+    it('should return a valid measurement array', () => {
+      expect(p.results.buffer)
+        .to.be.an('array').with.lengthOf(3)
+        .with.all.have.property('sensor_id')
+        .with.all.have.property('value')
+        // actually -5.3, see https://github.com/thesolarnomad/lora-serialization/issues/9
+        .and.contains.one.with.property('value', '5.3')
+        .and.contains.one.with.property('value', '78.7')
+        .and.contains.one.with.property('value', '666');
+    });
+
+    it('should return the same for base64 input', () => {
+      expect(p.results.base64).to.deep.equal(p.results.buffer);
+    });
+
+    it('should return error for incomplete sensors', () => {
+      p.box.sensors.pop();
+
+      return expect(decoder.decodeBuffer(p.payloads.buffer, p.box))
+        .to.be.rejectedWith('box does not contain sensors mentioned in byteMask');
+    });
+
+    it('should reject a box with missing byteMask', () => {
+      delete p.box.integrations.ttn.decodeOptions.byteMask;
+
+      return expect(decoder.decodeBase64(p.payloads.base64, p.box))
+        .to.be.rejectedWith('profile \'lora-serialization\' requires a valid byteMask');
     });
 
   });

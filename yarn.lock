@@ -1937,6 +1937,10 @@ lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
+lora-serialization@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/lora-serialization/-/lora-serialization-2.3.0.tgz#823d43d1dd8de8a8725b6e743453fefc78fa955b"
+
 loud-rejection@^1.0.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/loud-rejection/-/loud-rejection-1.6.0.tgz#5b46f80147edee578870f086d04821cf998e551f"
