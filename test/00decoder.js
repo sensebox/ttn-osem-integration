@@ -84,6 +84,18 @@ describe('decoder', () => {
     })).to.be.rejectedWith('profile :^) is not supported');
   });
 
+  it('set createdAt if timestamp is provided', () => {
+    const p = profiles.custom,
+      time = new Date('2017-01-01T02:03:04').toISOString();
+
+    return decoder.decodeBase64(p.payloads.base64, p.box, time)
+      .then(measurements => {
+        for (const m of measurements) {
+          expect(m.createdAt.getTime()).to.equal(new Date(time).getTime());
+        }
+      });
+  });
+
 
   describe('profile: custom', () => {
 

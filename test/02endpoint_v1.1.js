@@ -98,7 +98,6 @@ describe('endpoint v1.1', () => {
       });
     });
 
-    // FIXME: get sensorId in payload
     it('should respond 201 for valid JSON payload', () => {
       return chakram.post(URL, TTNpayload_json_valid).then(res => {
         expect(res).to.have.status(201);
