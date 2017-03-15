@@ -2211,9 +2211,9 @@ loose-envify@^1.0.0:
   dependencies:
     js-tokens "^3.0.0"
 
-lora-serialization@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/lora-serialization/-/lora-serialization-2.3.0.tgz#823d43d1dd8de8a8725b6e743453fefc78fa955b"
+lora-serialization@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/lora-serialization/-/lora-serialization-3.0.0.tgz#6b64b22bd025ab9eb09f9346e4979b61b913cf76"
 
 loud-rejection@^1.0.0:
   version "1.6.0"
@@ -2658,9 +2658,9 @@ onetime@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
 
-"openSenseMapAPI@git://github.com/sensebox/openSenseMap-API.git#ea81fb93":
+"openSenseMapAPI@git://github.com/sensebox/openSenseMap-API.git#development":
   version "0.0.1"
-  resolved "git://github.com/sensebox/openSenseMap-API.git#ea81fb93"
+  resolved "git://github.com/sensebox/openSenseMap-API.git#development"
   dependencies:
     "@turf/area" "^3.10.0"
     "@turf/bbox" "^3.10.5"

@@ -192,8 +192,7 @@ describe('decoder', () => {
         .to.be.an('array').with.lengthOf(3)
         .with.all.have.property('sensor_id')
         .with.all.have.property('value')
-        // actually -5.3, see https://github.com/thesolarnomad/lora-serialization/issues/9
-        .and.contains.one.with.property('value', '5.3')
+        .and.contains.one.with.property('value', '-5.3')
         .and.contains.one.with.property('value', '78.7')
         .and.contains.one.with.property('value', '666');
     });
