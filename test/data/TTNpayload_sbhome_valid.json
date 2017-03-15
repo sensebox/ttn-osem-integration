@@ -2,7 +2,7 @@
   "app_id": "sensebox-ifgi",
   "dev_id": "my-dev-id",
   "hardware_serial": "0102030405060708",
-  "port": 1,
+  "port": 3,
   "counter": 2,
   "is_retry": false,
   "payload_raw": "kzIrIYzlOycAMgEA",

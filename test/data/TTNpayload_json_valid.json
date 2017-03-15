@@ -4,5 +4,9 @@
   "hardware_serial": "0102030405060708",
   "payload_fields": {
     "588876b67dd004f79259bd8a": 55.5
+  },
+  "port": 1,
+  "metadata": {
+    "time": "2017-01-01T00:00:00Z"
   }
 }

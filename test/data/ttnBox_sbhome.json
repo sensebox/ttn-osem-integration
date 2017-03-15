@@ -6,6 +6,7 @@
     "ttn" : {
       "app_id": "sensebox-ifgi",
       "dev_id": "my-dev-id",
+      "port": 3,
       "profile" : "sensebox/home"
     }
   },

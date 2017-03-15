@@ -11,13 +11,13 @@ the database.
 There are multiple decoding options provided via `profiles`, which may be
 easily extended to support other sensor configurations or value transformations.
 
-## profiles
+## decoding profiles
 ### `sensebox/home`
 Decodes messages which contain 5 measurements of all sensors of the senseBox:home.
 The correct sensorIds are matched via their titles. Decoding matches the [dragino senseBox:home arduino sketch](https://github.com/sensebox/random-sketches/blob/master/lora/dragino/dragino.ino).
 
 ### `lora-serialization`
-Allows decoding of messages, which were encoded with the `lora-serialization` library.
+Allows decoding of messages, which were encoded with the [`lora-serialization` library](https://github.com/thesolarnomad/lora-serialization).
 The sub-profiles `temperature`, `humidity`, `uint8`, `uint16` are supported, and matched to a sensor via it's ID. The following config allows decoding of measurements of a sensor like DHT22:
 ```js
 ttn: {

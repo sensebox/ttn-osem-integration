@@ -31,7 +31,7 @@
       "type" : "feature"
     }
   ],
-  "name" : "testbox - ttn custom",
+  "name" : "testbox - ttn lora-serialization",
   "sensors" : [
     {
       "_id": "588876b67dd004f79259bd8a",

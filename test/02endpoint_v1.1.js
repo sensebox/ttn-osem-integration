@@ -98,6 +98,16 @@ describe('endpoint v1.1', () => {
       });
     });
 
+    it('should respond 404 for box filtered by port', () => {
+      TTNpayload_sbhome_valid.port = 1234;
+
+      return chakram.post(URL, TTNpayload_sbhome_valid).then(res => {
+        expect(res).to.have.status(404);
+
+        return chakram.wait();
+      });
+    });
+
     it('should respond 201 for valid request payload_fields', () => {
       return chakram.post(URL, TTNpayload_json_valid).then(res => {
         expect(res).to.have.status(201);
@@ -106,7 +116,7 @@ describe('endpoint v1.1', () => {
       });
     });
 
-    it('should respond 422 for invalid JSON payload', () => {
+    it('should respond 422 for invalid request payload_fields', () => {
       delete TTNpayload_json_valid.payload_fields;
 
       return chakram.post(URL, TTNpayload_json_valid).then(res => {

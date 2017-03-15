@@ -2,5 +2,9 @@
   "app_id": "sensebox-ifgi",
   "dev_id": "customttnbox",
   "hardware_serial": "0102030405060708",
-  "payload_raw": "AQIAAw=="
+  "payload_raw": "AQIAAw==",
+  "port": 1,
+  "metadata": {
+    "time": "2017-01-01T00:00:00Z"
+  }
 }
