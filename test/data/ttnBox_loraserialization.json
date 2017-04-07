@@ -11,10 +11,10 @@
         "sensor_id": "588876b67dd004f79259bd8e",
         "decoder": "temperature"
       }, {
-        "sensor_id": "588876b67dd004f79259bd8d",
+        "sensor_title": "rel. Luftfeuchte",
         "decoder": "humidity"
       }, {
-        "sensor_id": "588876b67dd004f79259bd8a",
+        "sensor_type": "VEML6070",
         "decoder": "uint16"
       }]
     }
