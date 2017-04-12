@@ -217,6 +217,16 @@ describe('decoder', () => {
         .to.be.rejectedWith('box does not contain sensors mentioned in byteMask');
     });
 
+    it('should reject a box with invalid decodeOptions', () => {
+      p.box.integrations.ttn.decodeOptions.map(el => {
+        delete el.sensor_id;
+        return el;
+      });
+
+      return expect(decoder.decodeBase64(p.payloads.base64, p.box))
+        .to.be.rejectedWith('invalid decodeOptions. requires at least one of [sensor_id, sensor_title, sensor_type]');
+    });
+
     it('should reject a box with missing byteMask', () => {
       delete p.box.integrations.ttn.decodeOptions;
 
