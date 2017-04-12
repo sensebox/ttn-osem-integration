@@ -6,8 +6,8 @@ const chakram = require('chakram'),
   expect = chakram.expect;
 
 const cfg = require('../config'),
-  { connectWithRetry } = require('openSenseMapAPI/lib/utils'),
-  { Box, Measurement } = require('openSenseMapAPI/lib/models');
+  { connectWithRetry } = require('openSenseMapAPI').utils,
+  { Box, Measurement } = require('openSenseMapAPI').models;
 
 // test data
 const BASE_URL = `http://localhost:${cfg.port}`,
