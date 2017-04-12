@@ -1,8 +1,7 @@
-# ttn-osem-application
+# ttn-osem-integration
 
-Application for [TheThingsNetwork](https://thethingsnetwork.org), which
-provides direct integration with [openSenseMap](https://opensensemap.org)
-for LoRa-WAN devices.
+Integration for [openSenseMap](https://opensensemap.org) with [TheThingsNetwork](https://thethingsnetwork.org),
+that provides simple measurement upload from LoRa-WAN devices.
 
 It decodes measurements from a uplink payload from the [TTN HTTP Integrations API](https://www.thethingsnetwork.org/docs/applications/http/)
 for a registered and configured senseBox, and adds the decoded measurements to
@@ -49,7 +48,7 @@ The property `payload_fields` has to contain JSON in the [format accepted by the
 This is the case, if the TTN application has a *Payload Function* defined.
 
 ## docs
-See `./docs/` or [sensebox.github.io/ttn-osem-application](https://sensebox.github.io/ttn-osem-application).
+See `./docs/` or [sensebox.github.io/ttn-osem-integration](https://sensebox.github.io/ttn-osem-integration).
 
 ## dependencies
 - `node.js >= 6.x`
