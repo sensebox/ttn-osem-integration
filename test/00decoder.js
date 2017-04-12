@@ -11,7 +11,7 @@ chai.use(require('chai-things'));
 chai.use(require('chai-as-promised'));
 
 const decoder = require('../lib/decoding'),
-  transformAndValidateArray = require('openSenseMapAPI/lib/decoding/transformAndValidateArray'),
+  { transformAndValidateArray } = require('openSenseMapAPI').decoding,
   referenceImpl = require('./data/decoderReferenceImplementation'),
 
   // test data

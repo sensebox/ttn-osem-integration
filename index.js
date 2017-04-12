@@ -3,7 +3,7 @@
 const express = require('express'),
   bodyParser = require('body-parser'),
   server = express(),
-  { connectWithRetry } = require('openSenseMapAPI/lib/utils'),
+  { connectWithRetry } = require('openSenseMapAPI').utils,
   cfg = require('./config'),
   v11Router = require('./lib/routes/v1.1');
 
