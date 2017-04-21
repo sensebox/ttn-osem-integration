@@ -1,0 +1,19 @@
+version: "2"
+services:
+  ttn-osem-integration:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - OSEM_dbconnectionstring=mongodb://db/OSeM-api
+    depends_on:
+      - db
+
+  db:
+    image: sensebox/opensensemap-api-mongo
+    ports:
+      - 27017:27017
+    environment:
+      - OSEM_dbconnectionstring=mongodb://db/OSeM-api
+    #command: --auth
+
