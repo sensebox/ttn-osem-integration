@@ -47,15 +47,21 @@ It's also possible to add measurements which already have been decoded by a [TTN
 The property `payload_fields` has to contain JSON in the [format accepted by the openSenseMap-API](https://docs.opensensemap.org/#api-Measurements-postNewMeasurements).
 This is the case, if the TTN application has a *Payload Function* defined.
 
-## docs
-See `./docs/` or [sensebox.github.io/ttn-osem-integration](https://sensebox.github.io/ttn-osem-integration).
+## deployment
+There is a `Dockerfile`, as well as an `docker-compose.yml` which includes a mongodb instance.
+If you want to run the application locally, you need to have the dependencies listed below installed.
+For configuration, see below. When done, run
+```bash
+yarn install
+npm start
+```
 
-## dependencies
+### dependencies
 - `node.js >= 6.x`
 - `yarn`
 - `mongodb >= 3.x`
 
-## configuration
+### configuration
 See [`config.js`](config.js). All options may be overridden by environment
 variables.
 Currently, the connection string to mongodb must be configured through the
@@ -67,6 +73,11 @@ OSEM_dbuserpass=pass
 # ...or just:
 OSEM_dbconnectionstring=mongodb://localhost/OSeM-api
 ```
+
+## development
+- JSDoc documentation can be found under `./docs/` or [sensebox.github.io/ttn-osem-integration](https://sensebox.github.io/ttn-osem-integration). To update it, run `npm run docs`.
+- To run the test suite, either run `export OSEM_dbconnectionstring=....; npm run test` while the application is running, or `./run_tests.sh` (requires bash & docker).
+- Please follow the existing code style. Double check by running `npm run lint`.
 
 ## license
 MIT, see [`LICENSE`](LICENSE)
