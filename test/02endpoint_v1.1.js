@@ -6,7 +6,7 @@ const chakram = require('chakram'),
   expect = chakram.expect;
 
 const cfg = require('../config'),
-  { connectWithRetry } = require('openSenseMapAPI').utils,
+  { connect } = require('openSenseMapAPI').db,
   { Box, Measurement } = require('openSenseMapAPI').models;
 
 // test data
@@ -27,7 +27,7 @@ describe('endpoint v1.1', () => {
       this.timeout(10000);
 
       // wait for DB connection
-      connectWithRetry(() => {})
+      connect()
         // ensure nonexistent box does not exist
         .then(() => Box.findOne({
           'integrations.ttn.app_id': TTNpayload_sbhome_nonexistent.app_id,
