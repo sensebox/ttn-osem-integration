@@ -45,46 +45,67 @@
     <section>
         <article><h1>ttn-osem-integration</h1><p>Integration for <a href="https://opensensemap.org">openSenseMap</a> with <a href="https://thethingsnetwork.org">TheThingsNetwork</a>,
 that provides simple measurement upload from LoRa-WAN devices.</p>
-<p>It decodes measurements from a uplink payload from the <a href="https://www.thethingsnetwork.org/docs/applications/http/">TTN HTTP Integrations API</a>
-for a registered and configured senseBox, and adds the decoded measurements to
-the database.</p>
+<p>It decodes measurements from an uplink payload from the <a href="https://www.thethingsnetwork.org/docs/applications/http/">TTN HTTP Integrations API</a>
+for a configured senseBox, and adds the decoded measurements to the database.</p>
 <p>There are multiple decoding options provided via <code>profiles</code>, which may be
 easily extended to support other sensor configurations or value transformations.</p>
-<h2>decoding profiles</h2><h3><code>sensebox/home</code></h3><p>Decodes messages which contain 5 measurements of all sensors of the senseBox:home.
-The correct sensorIds are matched via their titles. Decoding matches the <a href="https://github.com/sensebox/random-sketches/blob/master/lora/dragino/dragino.ino">dragino senseBox:home arduino sketch</a>.</p>
-<h3><code>lora-serialization</code></h3><p>Allows decoding of messages which were encoded with the <a href="https://github.com/thesolarnomad/lora-serialization"><code>lora-serialization</code> library</a>.
-The sub-profiles <code>temperature</code>, <code>humidity</code>, <code>uint8</code>, <code>uint16</code> are supported, and matched to a sensor via it's <code>_id</code>, <code>sensorType</code>, <code>unit</code>, or <code>title</code> properties.
-For each sensor one or more matchings may be defined as <code>sensor_id</code>, <code>sensor_title</code>, <code>sensor_type</code>, <code>sensor_unit</code>. If one property matches a sensor, the other properties are discarded.</p>
-<p>The following example config allows decoding of measurements of a 3 sensors:</p>
+<h2>configuring a box</h2><p>To associate a device on the TTN network with a box on the openSenseMap, there is some configuration required on the openSenseMap. The box has to contain a field <code>box.integrations.ttn</code> with the following structure:</p>
 <pre class="prettyprint source lang-js"><code>ttn: {
+  // the app_id & dev_id you recieved when registering on TTN
+  app_id: 'abcd',
+  dev_id: '1234',
+  // decode the messages according to this profile format, see below
   profile: 'lora-serialization',
-  decodeOptions: [
-    { sensor_unit: '°C', decoder: 'temperature' },
-    { sensor_id: '588876b67dd004f79259bd8b', decoder: 'humidity' },
-    { sensor_type: 'TSL45315', sensor_title: 'Beleuchtungsstärke', decoder: 'uint16' }
+  // optional. some profiles require additional configuration
+  decodeOptions: [],
+  // optional. if specified, only messages recieved on this LoRa-port are stored
+  port: 3,
+}</code></pre><h3>decoding profiles</h3><h4><code>sensebox/home</code></h4><p>Decodes messages which contain 5 measurements of all sensors of the senseBox:home.
+The correct sensorIds are matched via their titles. Decoding fits the <a href="https://github.com/sensebox/random-sketches/blob/master/lora/dragino/dragino.ino">dragino senseBox:home sketch</a>.</p>
+<h4><code>lora-serialization</code></h4><p>Allows decoding of messages that were encoded with the <a href="https://github.com/thesolarnomad/lora-serialization"><code>lora-serialization</code> library</a>.
+The sub-profiles <code>temperature</code>, <code>humidity</code>, <code>uint8</code>, <code>uint16</code> and <code>unixtime</code> are supported.
+Each encoded value is matched to a sensor via it's <code>_id</code>, <code>sensorType</code>, <code>unit</code>, or <code>title</code> properties.
+There may be one or more property defined for each value via <code>sensor_id</code>, <code>sensor_title</code>, <code>sensor_type</code>, <code>sensor_unit</code>.
+If one property matches a sensor, the other properties are discarded.</p>
+<p>The following example config allows decoding of measurements of 3 sensors:</p>
+<pre class="prettyprint source lang-js"><code>&quot;ttn&quot;: {
+  &quot;profile&quot;: &quot;lora-serialization&quot;,
+  &quot;decodeOptions&quot;: [
+    { &quot;sensor_unit&quot;: &quot;°C&quot;, &quot;decoder&quot;: &quot;temperature&quot; },
+    { &quot;sensor_id&quot;: &quot;588876b67dd004f79259bd8b&quot;, &quot;decoder&quot;: &quot;humidity&quot; },
+    { &quot;sensor_type&quot;: &quot;TSL45315&quot;, &quot;sensor_title&quot;: &quot;Beleuchtungsstärke&quot;, &quot;decoder&quot;: &quot;uint16&quot; }
   ]
-}</code></pre><h3><code>debug</code></h3><p>Simple decoder which decodes a given number of bytes to integer values. Requires a config like</p>
+}</code></pre><p>When <code>decodeOptions</code> contains an element <code>{ &quot;decoder&quot;: &quot;unixtime&quot; }</code>, the value will be used as timestamp for all other measurements.</p>
+<h4><code>debug</code></h4><p>Simple decoder, which decodes a given number of bytes to integer values.
+Requires a config like the following, where the measurements are applied to the sensors in the order of <code>box.sensors</code>.</p>
 <pre class="prettyprint source lang-js"><code>ttn: {
   profile: 'lora-serialization',
   decodeOptions: [3, 1, 2] // specifies the number of bytes to consume for each measurement
-}</code></pre><p>where the measurements are applied to the boxes sensors in the order of <code>box.sensors</code>.</p>
-<h3><code>json</code></h3><p>It's also possible to add measurements which already have been decoded by a <a href="https://www.thethingsnetwork.org/docs/devices/uno/quick-start.html#monitor--decode-messages">TTN payload function</a>.
+}</code></pre><h4><code>json</code></h4><p>It's also possible to add measurements which already have been decoded by a <a href="https://www.thethingsnetwork.org/docs/devices/uno/quick-start.html#monitor--decode-messages">TTN payload function</a>.
 The property <code>payload_fields</code> has to contain JSON in the <a href="https://docs.opensensemap.org/#api-Measurements-postNewMeasurements">format accepted by the openSenseMap-API</a>.
 This is the case, if the TTN application has a <em>Payload Function</em> defined.</p>
-<h2>docs</h2><p>See <code>./docs/</code> or <a href="https://sensebox.github.io/ttn-osem-integration">sensebox.github.io/ttn-osem-integration</a>.</p>
-<h2>dependencies</h2><ul>
+<h2>deployment</h2><p>There is a <code>Dockerfile</code>, as well as an <code>docker-compose.yml</code> which includes a mongodb instance.
+If you want to run the application directly, you need to have the dependencies listed below installed.
+For configuration, see below. Once configured, run</p>
+<pre class="prettyprint source lang-bash"><code>yarn install
+npm start</code></pre><h3>dependencies</h3><ul>
 <li><code>node.js &gt;= 6.x</code></li>
 <li><code>yarn</code></li>
 <li><code>mongodb &gt;= 3.x</code></li>
 </ul>
-<h2>configuration</h2><p>See <a href="config.js"><code>config.js</code></a>. All options may be overridden by environment
+<h3>configuration</h3><p>See <a href="config.js"><code>config.js</code></a>. All options may be overridden by environment
 variables.
 Currently, the connection string to mongodb must be configured through the
 environment variables of the <a href="https://github.com/sensebox/openSenseMap-API/blob/master/config/index.js">openSenseMap-API config</a>:</p>
 <pre class="prettyprint source lang-bash"><code>OSEM_dbuser=user
 OSEM_dbuserpass=pass
 # ...or just:
-OSEM_dbconnectionstring=mongodb://localhost/OSeM-api</code></pre><h2>license</h2><p>MIT, see <a href="LICENSE"><code>LICENSE</code></a></p></article>
+OSEM_dbconnectionstring=mongodb://localhost/OSeM-api</code></pre><h2>development</h2><ul>
+<li>JSDoc documentation can be found under <code>./docs/</code> or <a href="https://sensebox.github.io/ttn-osem-integration">sensebox.github.io/ttn-osem-integration</a>. To update it, run <code>npm run docs</code>.</li>
+<li>To run the test suite, either run <code>export OSEM_dbconnectionstring=....; npm run test</code> while the application is running, or <code>./run_tests.sh</code> (requires bash &amp; docker).</li>
+<li>Please follow the existing code style. Double check by running <code>npm run lint</code>.</li>
+</ul>
+<h2>license</h2><p>MIT, see <a href="LICENSE"><code>LICENSE</code></a></p></article>
     </section>
 
 
@@ -101,7 +122,7 @@ OSEM_dbconnectionstring=mongodb://localhost/OSeM-api</code></pre><h2>license</h2
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Apr 12 2017 14:42:32 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed May 03 2017 19:20:09 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
