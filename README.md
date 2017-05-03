@@ -4,8 +4,7 @@ Integration for [openSenseMap](https://opensensemap.org) with [TheThingsNetwork]
 that provides simple measurement upload from LoRa-WAN devices.
 
 It decodes measurements from an uplink payload from the [TTN HTTP Integrations API](https://www.thethingsnetwork.org/docs/applications/http/)
-for a registered and configured senseBox, and adds the decoded measurements to
-the database.
+for a configured senseBox, and adds the decoded measurements to the database.
 
 There are multiple decoding options provided via `profiles`, which may be
 easily extended to support other sensor configurations or value transformations.
@@ -29,34 +28,38 @@ ttn: {
 ### decoding profiles
 #### `sensebox/home`
 Decodes messages which contain 5 measurements of all sensors of the senseBox:home.
-The correct sensorIds are matched via their titles. Decoding matches the [dragino senseBox:home arduino sketch](https://github.com/sensebox/random-sketches/blob/master/lora/dragino/dragino.ino).
+The correct sensorIds are matched via their titles. Decoding fits the [dragino senseBox:home sketch](https://github.com/sensebox/random-sketches/blob/master/lora/dragino/dragino.ino).
 
 #### `lora-serialization`
-Allows decoding of messages which were encoded with the [`lora-serialization` library](https://github.com/thesolarnomad/lora-serialization).
-The sub-profiles `temperature`, `humidity`, `uint8`, `uint16` are supported, and matched to a sensor via it's `_id`, `sensorType`, `unit`, or `title` properties.
-For each sensor one or more matchings may be defined as `sensor_id`, `sensor_title`, `sensor_type`, `sensor_unit`. If one property matches a sensor, the other properties are discarded.
+Allows decoding of messages that were encoded with the [`lora-serialization` library](https://github.com/thesolarnomad/lora-serialization).
+The sub-profiles `temperature`, `humidity`, `uint8`, `uint16` and `unixtime` are supported.
+Each encoded value is matched to a sensor via it's `_id`, `sensorType`, `unit`, or `title` properties.
+There may be one or more property defined for each value via `sensor_id`, `sensor_title`, `sensor_type`, `sensor_unit`.
+If one property matches a sensor, the other properties are discarded.
 
-The following example config allows decoding of measurements of a 3 sensors:
+The following example config allows decoding of measurements of 3 sensors:
 ```js
-ttn: {
-  profile: 'lora-serialization',
-  decodeOptions: [
-    { sensor_unit: '°C', decoder: 'temperature' },
-    { sensor_id: '588876b67dd004f79259bd8b', decoder: 'humidity' },
-    { sensor_type: 'TSL45315', sensor_title: 'Beleuchtungsstärke', decoder: 'uint16' }
+"ttn": {
+  "profile": "lora-serialization",
+  "decodeOptions": [
+    { "sensor_unit": "°C", "decoder": "temperature" },
+    { "sensor_id": "588876b67dd004f79259bd8b", "decoder": "humidity" },
+    { "sensor_type": "TSL45315", "sensor_title": "Beleuchtungsstärke", "decoder": "uint16" }
   ]
 }
 ```
 
+When `decodeOptions` contains an element `{ "decoder": "unixtime" }`, the value will be used as timestamp for all other measurements.
+
 #### `debug`
-Simple decoder which decodes a given number of bytes to integer values. Requires a config like
+Simple decoder, which decodes a given number of bytes to integer values.
+Requires a config like the following, where the measurements are applied to the sensors in the order of `box.sensors`.
 ```js
 ttn: {
   profile: 'lora-serialization',
   decodeOptions: [3, 1, 2] // specifies the number of bytes to consume for each measurement
 }
 ```
-where the measurements are applied to the boxes sensors in the order of `box.sensors`.
 
 #### `json`
 It's also possible to add measurements which already have been decoded by a [TTN payload function](https://www.thethingsnetwork.org/docs/devices/uno/quick-start.html#monitor--decode-messages).

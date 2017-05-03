@@ -201,6 +201,18 @@ describe('decoder', () => {
       expect(p.results.base64).to.deep.equal(p.results.buffer);
     });
 
+    it('should use unixtime decoder for timestamps', () => {
+      p.box.integrations.ttn.decodeOptions.push({ decoder: 'unixtime' });
+
+      return decoder.decodeBase64('/e6+HpoCD4zuWA==', p.box).then(measurements => {
+        expect(measurements).to.be.an('array').with.lengthOf(3);
+        for (const m of measurements) {
+          expect(m.createdAt.getTime())
+            .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
+        }
+      });
+    });
+
     it('should reject a box with invalid transformers', () => {
       p.box.integrations.ttn.decodeOptions.push({
         sensor_id: p.box.sensors[2]._id.toString(), decoder: 'decode'
@@ -220,6 +232,7 @@ describe('decoder', () => {
     it('should reject a box with invalid decodeOptions', () => {
       p.box.integrations.ttn.decodeOptions.map(el => {
         delete el.sensor_id;
+
         return el;
       });
 
