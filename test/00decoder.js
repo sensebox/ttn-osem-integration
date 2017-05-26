@@ -213,6 +213,18 @@ describe('decoder', () => {
       });
     });
 
+    it('should use latLng decoder for locations', () => {
+      p.box.integrations.ttn.decodeOptions.push({ decoder: 'latLng' });
+
+      return decoder.decodeBase64('/e6+HpoCD4zuWKTlGAPkPHUA', p.box).then(measurements => {
+        expect(measurements).to.be.an('array').with.lengthOf(3);
+        for (const m of measurements) {
+          expect(m.location[0]).to.equal(7.6833);
+          expect(m.location[1]).to.equal(51.9633);
+        }
+      });
+    });
+
     it('should reject a box with invalid transformers', () => {
       p.box.integrations.ttn.decodeOptions.push({
         sensor_id: p.box.sensors[2]._id.toString(), decoder: 'decode'

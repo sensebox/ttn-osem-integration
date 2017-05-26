@@ -49,7 +49,9 @@ The following example config allows decoding of measurements of 3 sensors:
 }
 ```
 
-When `decodeOptions` contains an element `{ "decoder": "unixtime" }`, the value will be used as timestamp for all other measurements.
+There are two special decoders:
+If `decodeOptions` contains an element `{ "decoder": "unixtime" }`, the value will be used as **timestamp** for all measurements.
+When `decodeOptions` contains an element `{ "decoder": "latLng" }`, the value will be used as **location** for all measurements.
 
 #### `debug`
 Simple decoder, which decodes a given number of bytes to integer values.
