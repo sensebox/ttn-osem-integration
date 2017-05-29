@@ -32,7 +32,7 @@ The correct sensorIds are matched via their titles. Decoding fits the [dragino s
 
 #### `lora-serialization`
 Allows decoding of messages that were encoded with the [`lora-serialization` library](https://github.com/thesolarnomad/lora-serialization).
-The sub-profiles `temperature`, `humidity`, `uint8`, `uint16` and `unixtime` are supported.
+The sub-profiles `temperature`, `humidity`, `uint8`, `uint16`, `unixtime` and `latLng` are supported.
 Each encoded value is matched to a sensor via it's `_id`, `sensorType`, `unit`, or `title` properties.
 There may be one or more property defined for each value via `sensor_id`, `sensor_title`, `sensor_type`, `sensor_unit`.
 If one property matches a sensor, the other properties are discarded.
