@@ -35,7 +35,7 @@
     "console-control-strings": "^1.1.0",
     "express": "^4.15.3",
     "lora-serialization": "^3.0.0",
-    "openSenseMapAPI": "git://github.com/sensebox/openSenseMap-API.git#development"
+    "openSenseMapAPI": "git://github.com/sensebox/openSenseMap-API.git#dae2086"
   },
   "devDependencies": {
     "chai": "^4.0.0",

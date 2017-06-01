@@ -28,6 +28,14 @@
     "@turf/helpers" "^4.3.0"
     "@turf/meta" "^4.3.0"
 
+"@turf/convex@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@turf/convex/-/convex-4.3.0.tgz#e58efceaa665234d0e630051c1bb4f426bbb3484"
+  dependencies:
+    "@turf/helpers" "^4.3.0"
+    "@turf/meta" "^4.3.0"
+    convex-hull "^1.0.3"
+
 "@turf/distance@^4.3.0":
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/@turf/distance/-/distance-4.3.0.tgz#b533ba75936fea897ee1987824714b803df9061c"
@@ -53,6 +61,12 @@
 "@turf/meta@^4.3.0":
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/@turf/meta/-/meta-4.3.0.tgz#eb11dd2c2511524258123767fe0f5c3bd963e8d7"
+
+"@turf/simplify@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@turf/simplify/-/simplify-4.3.0.tgz#9632047ac4a0cba4b8b315c231634e6fb0fb8e5f"
+  dependencies:
+    simplify-js "^1.2.1"
 
 "@turf/square-grid@^4.3.0":
   version "4.3.0"
@@ -96,6 +110,12 @@ acorn@^3.0.4, acorn@^3.3.0:
 acorn@^5.0.1:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.0.3.tgz#c460df08491463f028ccb82eab3730bf01087b3d"
+
+affine-hull@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/affine-hull/-/affine-hull-1.0.0.tgz#763ff1d38d063ceb7e272f17ee4d7bbcaf905c5d"
+  dependencies:
+    robust-orientation "^1.1.3"
 
 after-all-results@^2.0.0:
   version "2.0.0"
@@ -361,6 +381,10 @@ bcrypt@^1.0.2:
 bindings@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
+
+bit-twiddle@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/bit-twiddle/-/bit-twiddle-1.0.2.tgz#0c6c1fabe2b23d17173d9a61b7b7093eb9e1769e"
 
 bl@^1.2.0:
   version "1.2.0"
@@ -709,6 +733,14 @@ convert-source-map@^1.3.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.5.0.tgz#9acd70851c6d5dfdd93d9282e5edf94a03ff46b5"
 
+convex-hull@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/convex-hull/-/convex-hull-1.0.3.tgz#20a3aa6ce87f4adea2ff7d17971c9fc1c67e1fff"
+  dependencies:
+    affine-hull "^1.0.0"
+    incremental-convex-hull "^1.0.1"
+    monotone-convex-hull-2d "^1.0.1"
+
 cookie-signature@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
@@ -808,13 +840,13 @@ debug@2.6.0:
   dependencies:
     ms "0.7.2"
 
-debug@2.6.7, debug@^2.1.1, debug@^2.6.3, debug@^2.6.6:
+debug@2.6.7, debug@^2.1.1, debug@^2.2.0, debug@^2.6.3, debug@^2.6.6:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.7.tgz#92bad1f6d05bbb6bba22cca88bcd0ec894c2861e"
   dependencies:
     ms "2.0.0"
 
-debug@2.6.8, debug@^2.2.0:
+debug@2.6.8:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
   dependencies:
@@ -1686,6 +1718,13 @@ in-publish@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/in-publish/-/in-publish-2.0.0.tgz#e20ff5e3a2afc2690320b6dc552682a9c7fadf51"
 
+incremental-convex-hull@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/incremental-convex-hull/-/incremental-convex-hull-1.0.1.tgz#51428c14cb9d9a6144bfe69b2851fb377334be1e"
+  dependencies:
+    robust-orientation "^1.1.2"
+    simplicial-complex "^1.0.0"
+
 indent-string@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-2.1.0.tgz#8e2d48348742121b4a8218b7a137e9a52049dc80"
@@ -2287,6 +2326,10 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+
 lodash.keys@^3.0.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/lodash.keys/-/lodash.keys-3.1.2.tgz#4dbc0472b156be50a0b286855d1bd0b0c656098a"
@@ -2513,6 +2556,12 @@ mongoose@^4.10.2:
     muri "1.2.1"
     regexp-clone "0.0.1"
     sliced "1.0.1"
+
+monotone-convex-hull-2d@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/monotone-convex-hull-2d/-/monotone-convex-hull-2d-1.0.1.tgz#47f5daeadf3c4afd37764baa1aa8787a40eee08c"
+  dependencies:
+    robust-orientation "^1.1.3"
 
 mpath@0.2.1:
   version "0.2.1"
@@ -2813,16 +2862,18 @@ opbeat@^4.14.0:
     unicode-byte-truncate "^1.0.0"
     uuid "^3.0.1"
 
-"openSenseMapAPI@git://github.com/sensebox/openSenseMap-API.git#development":
+"openSenseMapAPI@git://github.com/sensebox/openSenseMap-API.git#dae2086":
   version "0.0.1"
-  resolved "git://github.com/sensebox/openSenseMap-API.git#6f7cb8920d5e8366602017e025828eea857efb2e"
+  resolved "git://github.com/sensebox/openSenseMap-API.git#dae2086"
   dependencies:
     "@turf/area" "^4.3.0"
     "@turf/bbox" "^4.3.0"
     "@turf/centroid" "^4.3.0"
+    "@turf/convex" "^4.3.0"
     "@turf/distance" "^4.3.0"
     "@turf/helpers" "^4.3.0"
     "@turf/hex-grid" "^4.3.0"
+    "@turf/simplify" "^4.3.0"
     "@turf/square-grid" "^4.3.0"
     "@turf/triangle-grid" "^4.3.0"
     apicache "^0.8.4"
@@ -2832,6 +2883,7 @@ opbeat@^4.14.0:
     honeybadger "^1.2.1"
     jsonpath "^0.2.11"
     jsonwebtoken "^7.4.1"
+    lodash.isequal "^4.5.0"
     millify "^2.0.1"
     moment "^2.18.1"
     mongoose "^4.10.2"
@@ -3387,6 +3439,30 @@ rimraf@~2.4.0:
   dependencies:
     glob "^6.0.1"
 
+robust-orientation@^1.1.2, robust-orientation@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/robust-orientation/-/robust-orientation-1.1.3.tgz#daff5b00d3be4e60722f0e9c0156ef967f1c2049"
+  dependencies:
+    robust-scale "^1.0.2"
+    robust-subtract "^1.0.0"
+    robust-sum "^1.0.0"
+    two-product "^1.0.2"
+
+robust-scale@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/robust-scale/-/robust-scale-1.0.2.tgz#775132ed09542d028e58b2cc79c06290bcf78c32"
+  dependencies:
+    two-product "^1.0.2"
+    two-sum "^1.0.0"
+
+robust-subtract@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/robust-subtract/-/robust-subtract-1.0.0.tgz#e0b164e1ed8ba4e3a5dda45a12038348dbed3e9a"
+
+robust-sum@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/robust-sum/-/robust-sum-1.0.0.tgz#16646e525292b4d25d82757a286955e0bbfa53d9"
+
 run-async@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-0.1.0.tgz#c8ad4a5e110661e402a7d21b530e009f25f8e389"
@@ -3475,6 +3551,17 @@ signal-exit@^3.0.0, signal-exit@^3.0.1:
 simple-statistics@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/simple-statistics/-/simple-statistics-4.1.0.tgz#9a9d4af9727a949f42085124eda8aae252ea93f4"
+
+simplicial-complex@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/simplicial-complex/-/simplicial-complex-1.0.0.tgz#6c33a4ed69fcd4d91b7bcadd3b30b63683eae241"
+  dependencies:
+    bit-twiddle "^1.0.0"
+    union-find "^1.0.0"
+
+simplify-js@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/simplify-js/-/simplify-js-1.2.1.tgz#fa216b40454f48175450e0fea1bd1e6ab39fcbc0"
 
 slice-ansi@0.0.4:
   version "0.0.4"
@@ -3830,6 +3917,14 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
 
+two-product@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/two-product/-/two-product-1.0.2.tgz#67d95d4b257a921e2cb4bd7af9511f9088522eaa"
+
+two-sum@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/two-sum/-/two-sum-1.0.0.tgz#31d3f32239e4f731eca9df9155e2b297f008ab64"
+
 type-check@~0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.3.2.tgz#5884cab512cf1d355e3fb784f30804b2b520db72"
@@ -3920,6 +4015,10 @@ unicode-byte-truncate@^1.0.0:
 unicode-substring@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/unicode-substring/-/unicode-substring-0.1.0.tgz#6120ce3c390385dbcd0f60c32b9065c4181d4b36"
+
+union-find@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/union-find/-/union-find-1.0.2.tgz#292bac415e6ad3a89535d237010db4a536284e58"
 
 unique-stream@^2.0.2:
   version "2.2.1"
