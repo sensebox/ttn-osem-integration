@@ -21,6 +21,7 @@ const decoder = require('../lib/decoding'),
   boxDebug = require('./data/ttnBox_debug.json'),
   boxSbhome = require('./data/ttnBox_sbhome.json'),
   boxLoraserialization = require('./data/ttnBox_loraserialization.json'),
+  boxLoraserialization2 = require('./data/ttnBox_loraserialization2.json'),
 
   profiles = {
     debug: {
@@ -43,6 +44,7 @@ const decoder = require('../lib/decoding'),
 
     loraserialization: {
       box: JSON.parse(JSON.stringify(boxLoraserialization)),
+      box2: JSON.parse(JSON.stringify(boxLoraserialization2)),
       payloads: {
         buffer: Buffer.from(payloadLoraserialization.payload_raw, 'base64'),
         base64: payloadLoraserialization.payload_raw
@@ -192,8 +194,11 @@ describe('decoder', () => {
         .to.be.an('array').with.lengthOf(3)
         .with.all.have.property('sensor_id')
         .with.all.have.property('value')
+        .and.contains.one.with.property('sensor_id', '588876b67dd004f79259bd8e')
         .and.contains.one.with.property('value', '-5.3')
+        .and.contains.one.with.property('sensor_id', '588876b67dd004f79259bd8d')
         .and.contains.one.with.property('value', '78.7')
+        .and.contains.one.with.property('sensor_id', '588876b67dd004f79259bd8a')
         .and.contains.one.with.property('value', '666');
     });
 
@@ -219,6 +224,20 @@ describe('decoder', () => {
       return decoder.decodeBase64('/e6+HpoCD4zuWKTlGAPkPHUA', p.box).then(measurements => {
         expect(measurements).to.be.an('array').with.lengthOf(3);
         for (const m of measurements) {
+          expect(m.createdAt.getTime())
+            .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
+          expect(m.location[0]).to.equal(7.6833);
+          expect(m.location[1]).to.equal(51.9633);
+        }
+      });
+    });
+
+    it('should support special decoders (latLng, unixtime) in arbitrary order', () => {
+      return decoder.decodeBase64('/e4hpOUYA+Q8dQC+Hg+M7liaAg==', p.box2).then(measurements => {
+        expect(measurements).to.be.an('array').with.lengthOf(4);
+        for (const m of measurements) {
+          expect(m.createdAt.getTime())
+            .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
           expect(m.location[0]).to.equal(7.6833);
           expect(m.location[1]).to.equal(51.9633);
         }
