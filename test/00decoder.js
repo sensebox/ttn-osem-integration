@@ -18,10 +18,11 @@ const decoder = require('../lib/decoding'),
   payloadDebug = require('./data/TTNpayload_debug_valid.json'),
   payloadSbhome = require('./data/TTNpayload_sbhome_valid.json'),
   payloadLoraserialization = require('./data/TTNpayload_loraserialization_valid.json'),
+  payloadLoraserialization2 = require('./data/TTNpayload_loraserialization_advanced.json'),
   boxDebug = require('./data/ttnBox_debug.json'),
   boxSbhome = require('./data/ttnBox_sbhome.json'),
   boxLoraserialization = require('./data/ttnBox_loraserialization.json'),
-  boxLoraserialization2 = require('./data/ttnBox_loraserialization2.json'),
+  boxLoraserialization2 = require('./data/ttnBox_loraserialization_advanced.json'),
 
   profiles = {
     debug: {
@@ -50,6 +51,12 @@ const decoder = require('../lib/decoding'),
         base64: payloadLoraserialization.payload_raw
       },
       results: { buffer: null, base64: null }
+    },
+
+    loraserialization2: {
+      box: JSON.parse(JSON.stringify(boxLoraserialization2)),
+      payloads: { base64: payloadLoraserialization2.payload_raw },
+      results: { buffer: null, base64: null }
     }
   };
 
@@ -74,6 +81,7 @@ describe('decoder', () => {
       // profile loraserialization
       decoder.decodeBuffer(profiles.loraserialization.payloads.buffer, profiles.loraserialization.box),
       decoder.decodeBase64(profiles.loraserialization.payloads.base64, profiles.loraserialization.box),
+      decoder.decodeBase64(profiles.loraserialization2.payloads.base64, profiles.loraserialization2.box),
     ])
     .then(decodings => {
       // clean up result invariants
@@ -88,6 +96,7 @@ describe('decoder', () => {
       profiles.sbhome.results.reference = decodings[4];
       profiles.loraserialization.results.buffer = decodings[5];
       profiles.loraserialization.results.base64 = decodings[6];
+      profiles.loraserialization2.results.base64 = decodings[7];
     });
   });
 
@@ -171,8 +180,8 @@ describe('decoder', () => {
     });
 
     it('should return error for too few bytes', () => {
-      return expect(decoder.decodeBuffer(Buffer.from('asdf', 'hex'), p.box))
-        .to.be.rejectedWith('incorrect amount of bytes, should be 12');
+      return expect(decoder.decodeBuffer(Buffer.from('adfc', 'hex'), p.box))
+        .to.be.rejectedWith('incorrect amount of bytes: got 2, should be 12');
     });
 
     it('should return error for incomplete sensors', () => {
@@ -188,12 +197,12 @@ describe('decoder', () => {
   describe('profile: lora-serialization', () => {
 
     const p = profiles.loraserialization;
+    const p2 = profiles.loraserialization2;
 
     it('should return a valid measurement array', () => {
       expect(p.results.buffer)
         .to.be.an('array').with.lengthOf(3)
         .with.all.have.property('sensor_id')
-        .with.all.have.property('value')
         .and.contains.one.with.property('sensor_id', '588876b67dd004f79259bd8e')
         .and.contains.one.with.property('value', '-5.3')
         .and.contains.one.with.property('sensor_id', '588876b67dd004f79259bd8d')
@@ -232,16 +241,30 @@ describe('decoder', () => {
       });
     });
 
-    it('should support special decoders (latLng, unixtime) in arbitrary order', () => {
-      return decoder.decodeBase64('/e4hpOUYA+Q8dQC+Hg+M7liaAg==', p.box2).then(measurements => {
-        expect(measurements).to.be.an('array').with.lengthOf(4);
-        for (const m of measurements) {
-          expect(m.createdAt.getTime())
-            .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
-          expect(m.location[0]).to.equal(7.6833);
-          expect(m.location[1]).to.equal(51.9633);
-        }
-      });
+    it('should support multiple measurements per sensor in one payload', () => {
+      return expect(p2.results.base64)
+        .to.be.an('array').with.lengthOf(3)
+        .with.all.have.property('sensor_id', '588876b67dd004f79259bd8e')
+        .with.all.have.property('value')
+        .and.contains.one.with.property('value', '-11.3')
+        .and.contains.one.with.property('value', '23.45')
+        .and.contains.one.with.property('value', '34.5');
+    });
+
+    it('should apply special decoders only to measures following it', () => {
+      const timeDiff = new Date().getTime() - p2.results.base64[0].createdAt.getTime();
+      expect(timeDiff).to.be.lessThan(1000);
+      expect(p2.results.base64[0].location).not.to.have.property('location');
+
+      expect(p2.results.base64[1].createdAt.getTime())
+        .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
+      expect(p2.results.base64[1].location[0]).to.equal(7.6833);
+      expect(p2.results.base64[1].location[1]).to.equal(51.9633);
+
+      expect(p2.results.base64[2].createdAt.getTime())
+        .to.equal(new Date('2017-04-20T20:20:31.000Z').getTime());
+      expect(p2.results.base64[2].location[0]).to.equal(8);
+      expect(p2.results.base64[2].location[1]).to.equal(52);
     });
 
     it('should reject a box with invalid transformers', () => {

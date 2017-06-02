@@ -8,29 +8,13 @@
       "dev_id": "loraserializationbox",
       "profile" : "lora-serialization",
       "decodeOptions" : [
-        {
-          "sensor_title": "Temperatur",
-          "decoder": "temperature"
-        },
-        {
-          "sensor_title": "Beleuchtungsstärke",
-          "decoder": "uint8"
-        },
-        {
-          "decoder": "latLng"
-        },
-        {
-          "sensor_title": "rel. Luftfeuchte",
-          "decoder": "humidity"
-        },
-        {
-          "sensor_title": "rel. Luftfeuchte",
-          "decoder": "unixtime"
-        },
-        {
-          "sensor_title": "Luftdruck",
-          "decoder": "uint16"
-        }
+        { "sensor_title": "Temperatur", "decoder": "temperature" },
+        { "decoder": "latLng" },
+        { "sensor_title": "rel. Luftfeuchte", "decoder": "unixtime" },
+        { "sensor_title": "Temperatur", "decoder": "temperature" },
+        { "decoder": "latLng" },
+        { "sensor_title": "rel. Luftfeuchte", "decoder": "unixtime" },
+        { "sensor_title": "Temperatur", "decoder": "temperature" }
       ]
     }
   },
