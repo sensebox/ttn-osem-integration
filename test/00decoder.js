@@ -85,9 +85,10 @@ describe('decoder', () => {
     ])
     .then(decodings => {
       // clean up result invariants
-      decodings.map(result => result.map(m => {
-        delete m._id; delete m.createdAt;
-      }));
+      for (let i = 0; i < decodings.length; i++) {
+        if (i === 7) continue;
+        decodings[i].map(m => { delete m._id; delete m.createdAt; });
+      }
 
       profiles.debug.results.buffer = decodings[0];
       profiles.debug.results.base64 = decodings[1];
@@ -216,9 +217,9 @@ describe('decoder', () => {
     });
 
     it('should use unixtime decoder for timestamps', () => {
-      p.box.integrations.ttn.decodeOptions.push({ decoder: 'unixtime' });
+      p.box.integrations.ttn.decodeOptions.unshift({ decoder: 'unixtime' });
 
-      return decoder.decodeBase64('/e6+HpoCD4zuWA==', p.box).then(measurements => {
+      return decoder.decodeBase64('D4zuWP3uvh6aAg==', p.box).then(measurements => {
         expect(measurements).to.be.an('array').with.lengthOf(3);
         for (const m of measurements) {
           expect(m.createdAt.getTime())
@@ -228,9 +229,9 @@ describe('decoder', () => {
     });
 
     it('should use latLng decoder for locations', () => {
-      p.box.integrations.ttn.decodeOptions.push({ decoder: 'latLng' });
+      p.box.integrations.ttn.decodeOptions.unshift({ decoder: 'latLng' });
 
-      return decoder.decodeBase64('/e6+HpoCD4zuWKTlGAPkPHUA', p.box).then(measurements => {
+      return decoder.decodeBase64('pOUYA+Q8dQAPjO5Y/e6+HpoC', p.box).then(measurements => {
         expect(measurements).to.be.an('array').with.lengthOf(3);
         for (const m of measurements) {
           expect(m.createdAt.getTime())
@@ -254,7 +255,7 @@ describe('decoder', () => {
     it('should apply special decoders only to measures following it', () => {
       const timeDiff = new Date().getTime() - p2.results.base64[0].createdAt.getTime();
       expect(timeDiff).to.be.lessThan(1000);
-      expect(p2.results.base64[0].location).not.to.have.property('location');
+      expect(p2.results.base64[0].location).to.be.undefined;
 
       expect(p2.results.base64[1].createdAt.getTime())
         .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
