@@ -1,6 +1,7 @@
 node_modules
-.git
+.*
 docker-compose.yml
 Dockerfile
-.env
-.eslintrc.js
+run_tests.sh
+coverage
+docs
