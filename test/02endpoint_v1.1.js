@@ -5,8 +5,10 @@
 const chakram = require('chakram'),
   expect = chakram.expect;
 
+chakram.addRawPlugin('one', require('chai-things'))
+
 const cfg = require('../config'),
-  { connect } = require('openSenseMapAPI').db,
+  { connect, mongoose } = require('openSenseMapAPI').db,
   { Box, Measurement } = require('openSenseMapAPI').models;
 
 // test data
@@ -33,6 +35,7 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
       this.timeout(10000);
 
       // wait for DB connection
+      mongoose.set('debug', false);
       connect()
         // delete all testboxes
         .then(() => Promise.all([
@@ -43,10 +46,9 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
         // reinsert testboxes
         .then(() => Box.initNew({ params: box_sbhome }))
         .then(() => Box.initNew({ params: box_json }))
-        // get initial count of measurements and
-        // set payload dynamically, as we need the sensorId and a recent date!
+        // get initial count of measurements and set payload
+        // dynamically, as we need the sensorId and a recent date!
         .then(([location, jsonbox]) => {
-          TTNpayload_sbhome_valid.metadata.gateways[0].time = new Date().toISOString();
           TTNpayload_json_valid.payload_fields[jsonbox.sensors[0]._id] = 55.5;
 
           return Measurement.count({});
@@ -90,6 +92,45 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
       });
     });
 
+    it('set createdAt to local time if no metadata is provided', () => {
+      return Measurement.find({ sensor_id: box_sbhome.sensors[0]._id }).then(measurements => {
+        const timeDiff = Date.now() - measurements[0].createdAt.getTime();
+        expect(timeDiff).to.be.below(100);
+
+        return chakram.wait();
+      });
+    });
+
+    it('set createdAt to TTN time if available', () => {
+      const time = new Date(Date.now() + 20 * 1000);
+      TTNpayload_sbhome_valid.metadata = { time: time.toISOString() };
+
+      return chakram.post(URL, TTNpayload_sbhome_valid)
+        .then(() => Measurement.find({ sensor_id: box_sbhome.sensors[0]._id }))
+        .then(measurements => {
+          const timeSet = measurements.some(m => time.getTime() === m.createdAt.getTime());
+          expect(timeSet).to.equal(true);
+
+          return chakram.wait();
+      });
+    });
+
+    it('set createdAt to gateway time if available', () => {
+      const time = new Date(Date.now() + 40 * 1000);
+      TTNpayload_sbhome_valid.metadata.gateways = [{
+        time: time.toISOString()
+      }];
+
+      return chakram.post(URL, TTNpayload_sbhome_valid)
+        .then(() => Measurement.find({ sensor_id: box_sbhome.sensors[0]._id }))
+        .then(measurements => {
+          const timeSet = measurements.some(m => time.getTime() === m.createdAt.getTime());
+          expect(timeSet).to.equal(true);
+
+          return chakram.wait();
+      });
+    });
+
     it('should respond 422 for invalid request payload_raw', () => {
       TTNpayload_sbhome_valid.payload_raw = 'asdf';
 
@@ -118,6 +159,17 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
       });
     });
 
+    it('should only parse `payload_fields` when profile `json` is specified', () => {
+      TTNpayload_json_valid.dev_id = 'my-dev-id'; // change to box with sensebox/home profile
+
+      return chakram.post(URL, TTNpayload_json_valid).then(res => {
+        expect(res).to.have.status(422);
+        TTNpayload_json_valid.dev_id = 'jsonttnbox';
+
+        return chakram.wait();
+      });
+    });
+
     it('should respond 422 for invalid request payload_fields', () => {
       delete TTNpayload_json_valid.payload_fields;
 
@@ -130,7 +182,7 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
 
     it('should add measurements to the database', () => {
       return Measurement.count({}).then(countAfter => {
-        expect(countAfter).to.equal(measurementCountBefore + 6); // 5 sbhome + 1 json
+        expect(countAfter).to.equal(measurementCountBefore + 16); // 3*5 sbhome + 1 json
 
         return chakram.wait();
       });

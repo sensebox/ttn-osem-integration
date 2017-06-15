@@ -102,14 +102,24 @@ describe('decoder', () => {
   });
 
   it('should return error for missing TTN config', () => {
-    return expect(decoder.decodeBuffer(Buffer.from('asdf', 'hex'), {}))
+    return expect(decoder.decodeBuffer(Buffer.from('asdf', 'base64'), {}))
       .to.be.rejectedWith('box has no TTN configuration');
   });
 
   it('should reject unknown profiles', () => {
-    return expect(decoder.decodeBuffer(Buffer.from('asdf', 'hex'), {
+    return expect(decoder.decodeBuffer(Buffer.from('asdf', 'base64'), {
       integrations: { ttn: { profile: ':^)' } }
     })).to.be.rejectedWith('profile \':^)\' is not supported');
+  });
+
+  it('should return error for empty buffer payload', () => {
+    return expect(decoder.decodeBuffer(new Buffer([]), profiles.debug.box))
+      .to.be.rejectedWith('payload may not be empty');
+  });
+
+  it('should return error for empty base64 payload', () => {
+    return expect(decoder.decodeBase64('', profiles.debug.box))
+      .to.be.rejectedWith('payload may not be empty');
   });
 
   it('set createdAt if timestamp is provided', () => {
@@ -130,7 +140,7 @@ describe('decoder', () => {
     const p = profiles.debug;
 
     it('should return a valid measurement array', () => {
-      expect(p.results.buffer)
+      return expect(p.results.buffer)
         .to.be.an('array').with.lengthOf(3)
         .with.all.have.property('sensor_id')
         .with.all.have.property('value')
@@ -140,7 +150,7 @@ describe('decoder', () => {
     });
 
     it('should return the same for base64 input', () => {
-      expect(p.results.base64).to.deep.equal(p.results.buffer);
+      return expect(p.results.base64).to.deep.equal(p.results.buffer);
     });
 
     it('should reject a box too long byteMask', () => {
@@ -167,17 +177,17 @@ describe('decoder', () => {
     const p = profiles.sbhome;
 
     it('should return a valid measurement array', () => {
-      expect(p.results.buffer).to.be.an('array').with.lengthOf(5)
+      return expect(p.results.buffer).to.be.an('array').with.lengthOf(5)
         .with.all.have.property('sensor_id')
         .with.all.have.property('value');
     });
 
     it('should return same results as reference implementation', () => {
-      expect(p.results.buffer).to.deep.equal(p.results.reference);
+      return expect(p.results.buffer).to.deep.equal(p.results.reference);
     });
 
     it('should decode base64 to measurements with same result', () => {
-      expect(p.results.base64).to.deep.equal(p.results.buffer);
+      return expect(p.results.base64).to.deep.equal(p.results.buffer);
     });
 
     it('should return error for too few bytes', () => {
