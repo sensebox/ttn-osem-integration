@@ -9,18 +9,12 @@
       "profile": "json"
     }
   },
-  "loc" : [
-    {
-      "geometry" : {
-        "coordinates" : [
-          11.5315890312195,
-          48.0965407089428
-        ],
-        "type" : "Point"
-      },
-      "type" : "feature"
-    }
-  ],
+  "ttn" : {
+    "app_id": "sensebox-ifgi",
+    "dev_id": "jsonttnbox",
+    "profile": "json"
+  },
+  "location": [11.531, 48.096],
   "name" : "testbox - ttn json",
   "sensors" : [
     {
