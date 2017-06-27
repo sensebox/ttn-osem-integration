@@ -8,27 +8,27 @@
   dependencies:
     wgs84 "0.0.0"
 
-"@turf/area@^4.3.0":
+"@turf/area@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/area/-/area-4.4.0.tgz#b10ab02c7bf955abb30adefef6585b4f2f4d36d6"
   dependencies:
     "@mapbox/geojson-area" "^0.2.2"
     "@turf/meta" "^4.4.0"
 
-"@turf/bbox@^4.3.0", "@turf/bbox@^4.4.0":
+"@turf/bbox@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/bbox/-/bbox-4.4.0.tgz#3149458eb41404427cf786a90fb3680a0e8aab55"
   dependencies:
     "@turf/meta" "^4.4.0"
 
-"@turf/centroid@^4.3.0":
+"@turf/centroid@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/centroid/-/centroid-4.4.0.tgz#48c7affdfdf5e6f8ba5782b342d17dc2be57e698"
   dependencies:
     "@turf/helpers" "^4.4.0"
     "@turf/meta" "^4.4.0"
 
-"@turf/convex@^4.3.0":
+"@turf/convex@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/convex/-/convex-4.4.0.tgz#5417f7cfe825776b49b5f5b33dffe50c18370e87"
   dependencies:
@@ -36,23 +36,29 @@
     "@turf/meta" "^4.4.0"
     convex-hull "^1.0.3"
 
-"@turf/distance@^4.3.0", "@turf/distance@^4.4.0":
+"@turf/distance@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/distance/-/distance-4.4.0.tgz#6101f5951caf4e7ee5c006540900574af2f106bd"
   dependencies:
     "@turf/helpers" "^4.4.0"
     "@turf/invariant" "^4.4.0"
 
-"@turf/helpers@^4.3.0", "@turf/helpers@^4.4.0":
+"@turf/helpers@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-4.4.0.tgz#c83112f7fbe6ed183c7c0c2f776481b94d1cbd01"
 
-"@turf/hex-grid@^4.3.0":
+"@turf/hex-grid@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/hex-grid/-/hex-grid-4.4.0.tgz#589a4f95710a316fca3679a9ff5bc1caaf38d439"
   dependencies:
     "@turf/distance" "^4.4.0"
     "@turf/helpers" "^4.4.0"
+
+"@turf/inside@^4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@turf/inside/-/inside-4.4.0.tgz#5a78de2c0ed9a68b494508f53ae2f4b73dd770ef"
+  dependencies:
+    "@turf/invariant" "^4.4.0"
 
 "@turf/invariant@^4.4.0":
   version "4.4.0"
@@ -62,13 +68,13 @@
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/meta/-/meta-4.4.0.tgz#4fa25d4cc0525bd4cdbaf4ff68a6f8ae81f1975f"
 
-"@turf/simplify@^4.3.0":
+"@turf/simplify@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/simplify/-/simplify-4.4.0.tgz#1fe1448f11be223bc69d83c41956911f34f577ae"
   dependencies:
     simplify-js "^1.2.1"
 
-"@turf/square-grid@^4.3.0":
+"@turf/square-grid@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/square-grid/-/square-grid-4.4.0.tgz#9cab42ab53a4dcc264e19ae99746703b2bd1ab6a"
   dependencies:
@@ -76,7 +82,7 @@
     "@turf/distance" "^4.4.0"
     "@turf/helpers" "^4.4.0"
 
-"@turf/triangle-grid@^4.3.0":
+"@turf/triangle-grid@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@turf/triangle-grid/-/triangle-grid-4.4.0.tgz#4d7d49f419833f85f65bc47ce6e11181e65d0fe7"
   dependencies:
@@ -153,6 +159,10 @@ ansi-regex@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
 
+ansi-regex@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-3.0.0.tgz#ed0317c322064f79466c02966bddb605ab37d998"
+
 ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
@@ -161,7 +171,7 @@ ansicolors@~0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ansicolors/-/ansicolors-0.2.1.tgz#be089599097b74a5c9c4a84a0cdbcdb62bd87aef"
 
-apicache@^0.8.4:
+apicache@^0.8.7:
   version "0.8.7"
   resolved "https://registry.yarnpkg.com/apicache/-/apicache-0.8.7.tgz#c8e3dc7c5e9c4a9b8bcb5957c71c5716908f87eb"
 
@@ -347,9 +357,9 @@ babel-types@^6.18.0, babel-types@^6.25.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babylon@^6.13.0, babylon@^6.17.2:
-  version "6.17.3"
-  resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.17.3.tgz#1327d709950b558f204e5352587fd0290f8d8e48"
+babylon@^6.17.2, babylon@^6.17.4:
+  version "6.17.4"
+  resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.17.4.tgz#3e8b7402b88d22c3423e137a1577883b15ff869a"
 
 backoff@^2.4.0:
   version "2.5.0"
@@ -387,7 +397,7 @@ bit-twiddle@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/bit-twiddle/-/bit-twiddle-1.0.2.tgz#0c6c1fabe2b23d17173d9a61b7b7093eb9e1769e"
 
-bl@^1.2.0:
+bl@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/bl/-/bl-1.2.1.tgz#cac328f7bee45730d404b692203fcb590e172d5e"
   dependencies:
@@ -1190,13 +1200,13 @@ esquery@^1.0.0:
     estraverse "^4.0.0"
 
 esrecurse@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/esrecurse/-/esrecurse-4.1.0.tgz#4713b6536adf7f2ac4f327d559e7756bff648220"
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/esrecurse/-/esrecurse-4.2.0.tgz#fa9568d98d3823f9a41d91e902dcab9ea6e5b163"
   dependencies:
-    estraverse "~4.1.0"
+    estraverse "^4.1.0"
     object-assign "^4.0.1"
 
-estraverse@^4.0.0, estraverse@^4.1.1, estraverse@^4.2.0:
+estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
 
@@ -1207,10 +1217,6 @@ estraverse@~0.0.4:
 estraverse@~1.3.0:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-1.3.2.tgz#37c2b893ef13d723f276d878d60d8535152a6c42"
-
-estraverse@~4.1.0:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.1.1.tgz#f6caca728933a850ef90661d0e17982ba47111a2"
 
 esutils@^2.0.2:
   version "2.0.2"
@@ -1666,8 +1672,8 @@ hooks-fixed@2.0.0:
   resolved "https://registry.yarnpkg.com/hooks-fixed/-/hooks-fixed-2.0.0.tgz#a01d894d52ac7f6599bbb1f63dfc9c411df70cba"
 
 hosted-git-info@^2.1.4:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.4.2.tgz#0076b9f46a270506ddbaaea56496897460612a67"
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
 
 hpack.js@^2.1.6:
   version "2.1.6"
@@ -1747,7 +1753,7 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.0, inherits@~2.0.1:
+inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.0, inherits@~2.0.1, inherits@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
@@ -2007,14 +2013,14 @@ istanbul-lib-hook@^1.0.6:
     append-transform "^0.4.0"
 
 istanbul-lib-instrument@^1.7.1:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/istanbul-lib-instrument/-/istanbul-lib-instrument-1.7.2.tgz#6014b03d3470fb77638d5802508c255c06312e56"
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/istanbul-lib-instrument/-/istanbul-lib-instrument-1.7.3.tgz#925b239163eabdd68cc4048f52c2fa4f899ecfa7"
   dependencies:
     babel-generator "^6.18.0"
     babel-template "^6.16.0"
     babel-traverse "^6.18.0"
     babel-types "^6.18.0"
-    babylon "^6.13.0"
+    babylon "^6.17.4"
     istanbul-lib-coverage "^1.1.1"
     semver "^5.3.0"
 
@@ -2363,9 +2369,9 @@ loose-envify@^1.0.0:
   dependencies:
     js-tokens "^3.0.0"
 
-lora-serialization@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/lora-serialization/-/lora-serialization-3.0.0.tgz#6b64b22bd025ab9eb09f9346e4979b61b913cf76"
+lora-serialization@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/lora-serialization/-/lora-serialization-3.0.1.tgz#9a6d139f7e86b508340d7649be114577cf9f09a6"
 
 loud-rejection@^1.0.0:
   version "1.6.0"
@@ -2433,10 +2439,10 @@ merge-descriptors@1.0.1:
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
 
 merge-source-map@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/merge-source-map/-/merge-source-map-1.0.3.tgz#da1415f2722a5119db07b14c4f973410863a2abf"
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/merge-source-map/-/merge-source-map-1.0.4.tgz#a5de46538dae84d4114cc5ea02b4772a6346701f"
   dependencies:
-    source-map "^0.5.3"
+    source-map "^0.5.6"
 
 methods@~1.1.2:
   version "1.1.2"
@@ -2547,9 +2553,9 @@ mongoose-timestamp@^0.6:
   dependencies:
     defaults "^1.0.3"
 
-mongoose@^4.10.2:
-  version "4.10.6"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.10.6.tgz#cc57dad8c8b9145cbd2ca5696a5081a959e8fcd8"
+mongoose@^4.10.8:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.11.0.tgz#76edc51959520f46ab6f322156833bdfa35a2bc0"
   dependencies:
     async "2.1.4"
     bson "~1.0.4"
@@ -2579,17 +2585,17 @@ mpromise@0.5.5:
   resolved "https://registry.yarnpkg.com/mpromise/-/mpromise-0.5.5.tgz#f5b24259d763acc2257b0a0c8c6d866fd51732e6"
 
 mqtt-packet@^5.2.1:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/mqtt-packet/-/mqtt-packet-5.3.0.tgz#078ed59ae4c06febf3b3eaca90b50e97e269f206"
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/mqtt-packet/-/mqtt-packet-5.4.0.tgz#387104c06aa68fbb9f8159d0c722dd5c3e45df22"
   dependencies:
-    bl "^1.2.0"
+    bl "^1.2.1"
     inherits "^2.0.3"
     process-nextick-args "^1.0.7"
-    safe-buffer "^5.0.1"
+    safe-buffer "^5.1.0"
 
-mqtt@^2.7.2:
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/mqtt/-/mqtt-2.8.2.tgz#c5e95ad95784bbba19f2b6f0bb6dd9e5536dd7a8"
+mqtt@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/mqtt/-/mqtt-2.9.0.tgz#379ceb787a52fc15cb8fc96d558a32c123f12a9d"
   dependencies:
     commist "^1.0.0"
     concat-stream "^1.6.0"
@@ -2599,7 +2605,7 @@ mqtt@^2.7.2:
     minimist "^1.2.0"
     mqtt-packet "^5.2.1"
     pump "^1.0.2"
-    readable-stream "^2.2.9"
+    readable-stream "^2.2.11"
     reinterval "^1.1.0"
     split2 "^2.1.1"
     websocket-stream "^5.0.0"
@@ -2723,8 +2729,8 @@ normalize-bool@^1.0.0:
   resolved "https://registry.yarnpkg.com/normalize-bool/-/normalize-bool-1.0.0.tgz#46a571ed93ea5ab33721faccfc5a59b86890d858"
 
 normalize-package-data@^2.3.2, normalize-package-data@^2.3.4:
-  version "2.3.8"
-  resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.3.8.tgz#d819eda2a9dedbd1ffa563ea4071d936782295bb"
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.4.0.tgz#12f95a307d58352075a04907b84ac8be98ac012f"
   dependencies:
     hosted-git-info "^2.1.4"
     is-builtin-module "^1.0.0"
@@ -2738,8 +2744,8 @@ normalize-path@^2.0.1:
     remove-trailing-separator "^1.0.1"
 
 npmlog@^4.0.1:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.1.0.tgz#dc59bee85f64f00ed424efb2af0783df25d1c0b5"
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.1.2.tgz#08a7f2a8bf734604779a9efa4ad5cc717abb954b"
   dependencies:
     are-we-there-yet "~1.1.2"
     console-control-strings "~1.1.0"
@@ -2871,19 +2877,20 @@ opbeat@^4.14.0:
 
 "openSenseMapAPI@git://github.com/sensebox/openSenseMap-API.git#mobile":
   version "0.0.1"
-  resolved "git://github.com/sensebox/openSenseMap-API.git#79de3fdb1c77e507da89941ca9d2c41415a25337"
+  resolved "git://github.com/sensebox/openSenseMap-API.git#4a395a68064d382e80baa538ee66b1dbef7600b0"
   dependencies:
-    "@turf/area" "^4.3.0"
-    "@turf/bbox" "^4.3.0"
-    "@turf/centroid" "^4.3.0"
-    "@turf/convex" "^4.3.0"
-    "@turf/distance" "^4.3.0"
-    "@turf/helpers" "^4.3.0"
-    "@turf/hex-grid" "^4.3.0"
-    "@turf/simplify" "^4.3.0"
-    "@turf/square-grid" "^4.3.0"
-    "@turf/triangle-grid" "^4.3.0"
-    apicache "^0.8.4"
+    "@turf/area" "^4.4.0"
+    "@turf/bbox" "^4.4.0"
+    "@turf/centroid" "^4.4.0"
+    "@turf/convex" "^4.4.0"
+    "@turf/distance" "^4.4.0"
+    "@turf/helpers" "^4.4.0"
+    "@turf/hex-grid" "^4.4.0"
+    "@turf/inside" "^4.4.0"
+    "@turf/simplify" "^4.4.0"
+    "@turf/square-grid" "^4.4.0"
+    "@turf/triangle-grid" "^4.4.0"
+    apicache "^0.8.7"
     bcrypt "^1.0.2"
     bunyan "^1.8.10"
     csv-stringify "^1.0.4"
@@ -2893,9 +2900,9 @@ opbeat@^4.14.0:
     lodash.isequal "^4.5.0"
     millify "^2.0.1"
     moment "^2.18.1"
-    mongoose "^4.10.2"
+    mongoose "^4.10.8"
     mongoose-timestamp "^0.6"
-    mqtt "^2.7.2"
+    mqtt "^2.9.0"
     opbeat "^4.14.0"
     passport "^0.3.2"
     passport-jwt "^2.2.1"
@@ -2906,7 +2913,7 @@ opbeat@^4.14.0:
     simple-statistics "^4.1.0"
     stream-transform "^0.1.2"
     stringify-stream "^1.0.5"
-    uuid "^3.0.1"
+    uuid "^3.1.0"
 
 optimist@^0.6.1:
   version "0.6.1"
@@ -3172,15 +3179,15 @@ readable-stream@2.2.7:
     string_decoder "~1.0.0"
     util-deprecate "~1.0.1"
 
-"readable-stream@> 1.0.0 < 3.0.0", readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.0, readable-stream@^2.2.2, readable-stream@^2.2.9:
-  version "2.2.11"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.11.tgz#0796b31f8d7688007ff0b93a8088d34aa17c0f72"
+"readable-stream@> 1.0.0 < 3.0.0", readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.0, readable-stream@^2.2.11, readable-stream@^2.2.2, readable-stream@^2.2.9:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.2.tgz#5a04df05e4f57fe3f0dc68fdd11dc5c97c7e6f4d"
   dependencies:
     core-util-is "~1.0.0"
-    inherits "~2.0.1"
+    inherits "~2.0.3"
     isarray "~1.0.0"
     process-nextick-args "~1.0.6"
-    safe-buffer "~5.0.1"
+    safe-buffer "~5.1.0"
     string_decoder "~1.0.0"
     util-deprecate "~1.0.1"
 
@@ -3479,9 +3486,9 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
 
-safe-buffer@^5.0.1:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.0.tgz#fe4c8460397f9eaaaa58e73be46273408a45e223"
+safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@~5.1.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
 safe-buffer@~5.0.1:
   version "5.0.1"
@@ -3727,11 +3734,11 @@ string-width@^1.0.1, string-width@^1.0.2:
     strip-ansi "^3.0.0"
 
 string-width@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-2.0.0.tgz#635c5436cc72a6e0c387ceca278d4e2eec52687e"
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-2.1.0.tgz#030664561fc146c9423ec7d978fe2457437fe6d0"
   dependencies:
     is-fullwidth-code-point "^2.0.0"
-    strip-ansi "^3.0.0"
+    strip-ansi "^4.0.0"
 
 string.prototype.codepointat@^0.2.0:
   version "0.2.0"
@@ -3742,10 +3749,10 @@ string_decoder@~0.10.x:
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
 
 string_decoder@~1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.2.tgz#b29e1f4e1125fa97a10382b8a533737b7491e179"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.3.tgz#0fc67d7c141825de94282dd536bec6b9bce860ab"
   dependencies:
-    safe-buffer "~5.0.1"
+    safe-buffer "~5.1.0"
 
 stringify-clone@^1.0.0:
   version "1.1.1"
@@ -3766,6 +3773,12 @@ strip-ansi@^3.0.0, strip-ansi@^3.0.1:
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
   dependencies:
     ansi-regex "^2.0.0"
+
+strip-ansi@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-4.0.0.tgz#a8479022eb1ac368a871389b635262c505ee368f"
+  dependencies:
+    ansi-regex "^3.0.0"
 
 strip-bom@^2.0.0:
   version "2.0.0"
@@ -4057,9 +4070,9 @@ utils-merge@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
 
-uuid@^3.0.0, uuid@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
+uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.1"
