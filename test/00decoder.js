@@ -86,6 +86,7 @@ describe('decoder', () => {
     .then(decodings => {
       // clean up result invariants
       for (let i = 0; i < decodings.length; i++) {
+        console.log(decodings[i]);
         if (i === 7) continue;
         decodings[i].map(m => { delete m._id; delete m.createdAt; });
       }
@@ -144,9 +145,9 @@ describe('decoder', () => {
         .to.be.an('array').with.lengthOf(3)
         .with.all.have.property('sensor_id')
         .with.all.have.property('value')
-        .and.contains.one.with.property('value', '1')
-        .and.contains.one.with.property('value', '2')
-        .and.contains.one.with.property('value', '3');
+        .and.contains.one.with.property('value', 1)
+        .and.contains.one.with.property('value', 2)
+        .and.contains.one.with.property('value', 3);
     });
 
     it('should return the same for base64 input', () => {
@@ -215,11 +216,11 @@ describe('decoder', () => {
         .to.be.an('array').with.lengthOf(3)
         .with.all.have.property('sensor_id')
         .and.contains.one.with.property('sensor_id', '588876b67dd004f79259bd8e')
-        .and.contains.one.with.property('value', '-5.3')
+        .and.contains.one.with.property('value', -5.3)
         .and.contains.one.with.property('sensor_id', '588876b67dd004f79259bd8d')
-        .and.contains.one.with.property('value', '78.7')
+        .and.contains.one.with.property('value', 78.7)
         .and.contains.one.with.property('sensor_id', '588876b67dd004f79259bd8a')
-        .and.contains.one.with.property('value', '666');
+        .and.contains.one.with.property('value', 666);
     });
 
     it('should return the same for base64 input', () => {
@@ -257,9 +258,9 @@ describe('decoder', () => {
         .to.be.an('array').with.lengthOf(3)
         .with.all.have.property('sensor_id', '588876b67dd004f79259bd8e')
         .with.all.have.property('value')
-        .and.contains.one.with.property('value', '-11.3')
-        .and.contains.one.with.property('value', '23.45')
-        .and.contains.one.with.property('value', '34.5');
+        .and.contains.one.with.property('value', -11.3)
+        .and.contains.one.with.property('value', 23.45)
+        .and.contains.one.with.property('value', 34.5);
     });
 
     it('should apply special decoders only to measures following it', () => {

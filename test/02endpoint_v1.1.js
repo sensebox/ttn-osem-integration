@@ -44,11 +44,11 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
           removeBox(TTNpayload_json_valid.dev_id)
         ]))
         // reinsert testboxes
-        .then(() => Box.initNew({ params: box_sbhome }))
-        .then(() => Box.initNew({ params: box_json }))
+        .then(() => Box.initNew(box_sbhome))
+        .then(() => Box.initNew(box_json))
         // get initial count of measurements and set payload
         // dynamically, as we need the sensorId and a recent date!
-        .then(([location, jsonbox]) => {
+        .then((jsonbox) => {
           TTNpayload_json_valid.payload_fields[jsonbox.sensors[0]._id] = 55.5;
 
           return Measurement.count({});
