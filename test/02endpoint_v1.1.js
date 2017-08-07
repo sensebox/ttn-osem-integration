@@ -5,7 +5,7 @@
 const chakram = require('chakram'),
   expect = chakram.expect;
 
-chakram.addRawPlugin('one', require('chai-things'))
+chakram.addRawPlugin('one', require('chai-things'));
 
 const cfg = require('../config'),
   { connect, mongoose } = require('openSenseMapAPI').db,
@@ -28,7 +28,9 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
 
     const removeBox = function removeBox (dev_id) {
       return Box.findOne({ 'integrations.ttn.dev_id': dev_id })
-        .then(box => (box ? box.removeSelfAndMeasurements() : Promise.resolve()));
+        .then(function (box) {
+          return box ? box.removeSelfAndMeasurements() : Promise.resolve();
+        });
     };
 
     before(function (done) {
@@ -112,7 +114,7 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
           expect(timeSet).to.equal(true);
 
           return chakram.wait();
-      });
+        });
     });
 
     it('set createdAt to gateway time if available', () => {
@@ -128,7 +130,7 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
           expect(timeSet).to.equal(true);
 
           return chakram.wait();
-      });
+        });
     });
 
     it('should respond 422 for invalid request payload_raw', () => {

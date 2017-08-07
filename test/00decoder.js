@@ -83,23 +83,23 @@ describe('decoder', () => {
       decoder.decodeBase64(profiles.loraserialization.payloads.base64, profiles.loraserialization.box),
       decoder.decodeBase64(profiles.loraserialization2.payloads.base64, profiles.loraserialization2.box),
     ])
-    .then(decodings => {
+      .then(decodings => {
       // clean up result invariants
-      for (let i = 0; i < decodings.length; i++) {
-        console.log(decodings[i]);
-        if (i === 7) continue;
-        decodings[i].map(m => { delete m._id; delete m.createdAt; });
-      }
+        for (let i = 0; i < decodings.length; i++) {
+          console.log(decodings[i]);
+          if (i === 7) {continue;}
+          decodings[i].map(m => { delete m._id; delete m.createdAt; });
+        }
 
-      profiles.debug.results.buffer = decodings[0];
-      profiles.debug.results.base64 = decodings[1];
-      profiles.sbhome.results.buffer = decodings[2];
-      profiles.sbhome.results.base64 = decodings[3];
-      profiles.sbhome.results.reference = decodings[4];
-      profiles.loraserialization.results.buffer = decodings[5];
-      profiles.loraserialization.results.base64 = decodings[6];
-      profiles.loraserialization2.results.base64 = decodings[7];
-    });
+        profiles.debug.results.buffer = decodings[0];
+        profiles.debug.results.base64 = decodings[1];
+        profiles.sbhome.results.buffer = decodings[2];
+        profiles.sbhome.results.base64 = decodings[3];
+        profiles.sbhome.results.reference = decodings[4];
+        profiles.loraserialization.results.buffer = decodings[5];
+        profiles.loraserialization.results.base64 = decodings[6];
+        profiles.loraserialization2.results.base64 = decodings[7];
+      });
   });
 
   it('should return error for missing TTN config', () => {
