@@ -9,6 +9,7 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 COPY yarn.lock /usr/src/app/
 RUN yarn install --pure-lockfile
+RUN npm rebuild bcrypt --build-from-source
 COPY . /usr/src/app
 
 RUN apk del .build
