@@ -6,8 +6,11 @@ services:
       - 3000:3000
     environment:
       - OSEM_dbconnectionstring=mongodb://db/OSeM-api
+      - TTN_OSEM_loglevel=trace
     depends_on:
       - db
+    # to get raw json logs for filtering, use this:
+    # command: npm run start:rawlogs
 
   db:
     image: sensebox/opensensemap-api-mongo
