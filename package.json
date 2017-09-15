@@ -4,7 +4,8 @@
   "description": "adapter for thethingsnetwork.org measurements to opensensemap.org ",
   "main": "lib/index.js",
   "scripts": {
-    "start": "node lib/index.js",
+    "start": "node lib/index.js | bunyan -o short",
+    "start:rawlogs": "node lib/index.js",
     "watch": "node-dev --respawn lib/index.js",
     "test": "nyc --check coverage --lines 98 --functions 90 --branches 98 mocha test",
     "lint": "eslint *.js lib test",
@@ -32,6 +33,7 @@
   "homepage": "https://github.com/sensebox/ttn-osem-integration#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "bunyan": "^1.8.12",
     "console-control-strings": "^1.1.0",
     "express": "^4.15.4",
     "lora-serialization": "^3.0.1",
