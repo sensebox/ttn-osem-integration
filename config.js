@@ -13,4 +13,9 @@ module.exports = {
    * trace: show intermediate decoding results
    */
   loglevel: e['TTN_OSEM_loglevel'] || 'info',
+
+  ttn: {
+    appId: e['TTN_OSEM_ttn_app'],
+    key: e['TTN_OSEM_ttn_key'], // the key requires full rights (settings, devices, messages)
+  },
 };
