@@ -38,6 +38,7 @@
     "express": "^4.15.4",
     "lora-serialization": "^3.0.1",
     "openSenseMapAPI": "git://github.com/sensebox/openSenseMap-API.git#32e761d68f29404bad70c60bdc299206c1a10409",
+    "request-promise-native": "^1.0.5",
     "ttn": "^2.2.5"
   },
   "devDependencies": {
