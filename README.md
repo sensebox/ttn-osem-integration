@@ -1,7 +1,8 @@
 # ttn-osem-integration
 
-Integration for [openSenseMap](https://opensensemap.org) with [TheThingsNetwork](https://thethingsnetwork.org),
-that provides simple measurement upload from LoRa-WAN devices.
+Microservice for [openSenseMap](https://opensensemap.org) that provides a
+direct integration with [TheThingsNetwork](https://thethingsnetwork.org)
+to allow straightforward measurement upload from LoRa-WAN devices.
 
 It decodes measurements from an uplink payload from the [TTN HTTP Integrations API](https://www.thethingsnetwork.org/docs/applications/http/)
 for a configured senseBox, and adds the decoded measurements to the database.
@@ -10,7 +11,9 @@ There are multiple decoding options provided via `profiles`, which may be
 easily extended to support other sensor configurations or value transformations.
 
 ## configuring a box
-To associate a device on the TTN network with a box on the openSenseMap, there is some configuration required on the openSenseMap. The box has to contain a field `box.integrations.ttn` with the following structure:
+To associate a device on TTN with a box on the openSenseMap, there is some
+configuration required on the openSenseMap. The box has to contain a field
+`box.integrations.ttn` with the following structure:
 ```js
 ttn: {
   // the app_id & dev_id you recieved when registering on TTN
@@ -32,7 +35,7 @@ The correct sensorIds are matched via their titles. Decoding fits the [dragino s
 
 #### `lora-serialization`
 Allows decoding of messages that were encoded with the [`lora-serialization` library](https://github.com/thesolarnomad/lora-serialization).
-The sub-profiles `temperature`, `humidity`, `uint8`, `uint16` and `unixtime` are supported.
+The decoders `temperature`, `humidity`, `uint8`, `uint16`, `unixtime` and `latLng` are supported.
 Each encoded value is matched to a sensor via it's `_id`, `sensorType`, `unit`, or `title` properties.
 There may be one or more property defined for each value via `sensor_id`, `sensor_title`, `sensor_type`, `sensor_unit`.
 If one property matches a sensor, the other properties are discarded.
@@ -42,14 +45,35 @@ The following example config allows decoding of measurements of 3 sensors:
 "ttn": {
   "profile": "lora-serialization",
   "decodeOptions": [
-    { "sensor_unit": "°C", "decoder": "temperature" },
-    { "sensor_id": "588876b67dd004f79259bd8b", "decoder": "humidity" },
-    { "sensor_type": "TSL45315", "sensor_title": "Beleuchtungsstärke", "decoder": "uint16" }
+    { "decoder": "temperature", "sensor_unit": "°C" },
+    { "decoder": "humidity", "sensor_id": "588876b67dd004f79259bd8b" },
+    { "decoder": "uint16", "sensor_type": "TSL45315", "sensor_title": "Beleuchtungsstärke" }
   ]
 }
 ```
 
-When `decodeOptions` contains an element `{ "decoder": "unixtime" }`, the value will be used as timestamp for all other measurements.
+##### special decoders `unixtime` & `latLng`
+These decoders do not generate a measurement for a sensor of the box, but will
+be used as **timestamp** or **location** for the measurements.
+The `unixtime` and `latLng` decoders must be defined before the measurements,
+and are applied to all following measurements, until the next `latLng` or
+`unixtime` decoder is specified.
+This means that it is possible to send measurements of several timestamps at once:
+```js
+"ttn": {
+  "profile": "lora-serialization",
+  "decodeOptions": [
+    // first measurement, will have time of transmission as timestamp
+    { "decoder": "temperature", "sensor_unit": "°C" },
+    // 2nd measurement for same sensor, will have custom timestamp
+    { "decoder": "unixtime" }, // no sensor properties required for special decoders
+    { "decoder": "temperature", "sensor_unit": "°C" },
+    // 3rd measurement, another timestamp
+    { "decoder": "unixtime" },
+    { "decoder": "temperature", "sensor_unit": "°C" }
+  ]
+}
+```
 
 #### `debug`
 Simple decoder, which decodes a given number of bytes to integer values.

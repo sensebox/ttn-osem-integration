@@ -19,6 +19,21 @@
       }]
     }
   },
+  "ttn" : {
+    "app_id": "sensebox-ifgi",
+    "dev_id": "loraserializationbox",
+    "profile" : "lora-serialization",
+    "decodeOptions" : [{
+      "sensor_id": "588876b67dd004f79259bd8e",
+      "decoder": "temperature"
+    }, {
+      "sensor_title": "rel. Luftfeuchte",
+      "decoder": "humidity"
+    }, {
+      "sensor_type": "VEML6070",
+      "decoder": "uint16"
+    }]
+  },
   "loc" : [
     {
       "geometry" : {

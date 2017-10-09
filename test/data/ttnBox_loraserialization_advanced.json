@@ -5,19 +5,32 @@
   "integrations" : {
     "ttn" : {
       "app_id": "sensebox-ifgi",
-      "dev_id": "my-dev-id",
-      "port": 3,
-      "profile" : "sensebox/home"
+      "dev_id": "loraserializationbox",
+      "profile" : "lora-serialization",
+      "decodeOptions" : [
+        { "sensor_title": "Temperatur", "decoder": "temperature" },
+        { "decoder": "latLng" },
+        { "sensor_title": "rel. Luftfeuchte", "decoder": "unixtime" },
+        { "sensor_title": "Temperatur", "decoder": "temperature" },
+        { "decoder": "latLng" },
+        { "sensor_title": "rel. Luftfeuchte", "decoder": "unixtime" },
+        { "sensor_title": "Temperatur", "decoder": "temperature" }
+      ]
     }
   },
-  "ttn" : {
-    "app_id": "sensebox-ifgi",
-    "dev_id": "my-dev-id",
-    "port": 3,
-    "profile" : "sensebox/home"
-  },
-  "location": [11.531, 48.096],
-  "name" : "testbox - ttn sbhome",
+  "loc" : [
+    {
+      "geometry" : {
+        "coordinates" : [
+          11.5315890312195,
+          48.0965407089428
+        ],
+        "type" : "Point"
+      },
+      "type" : "feature"
+    }
+  ],
+  "name" : "testbox - ttn lora-serialization",
   "sensors" : [
     {
       "_id": "588876b67dd004f79259bd8a",
@@ -49,8 +62,5 @@
       "title" : "Temperatur",
       "unit" : "°C"
     }
-  ],
-  "description" : "Box ist an einem inaktiven Lüftungsschacht montiert, Licht- und UV-Werte daher eher niedriger, der Rest sollte aber ganz gut passen.",
-  "weblink" : "http://log.munichmakerlab.de/day/2016/03/12",
-  "image" : "56cb84812cb6e1e41061bc99.jpg?1469139871228"
+  ]
 }

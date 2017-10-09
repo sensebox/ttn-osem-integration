@@ -4,7 +4,8 @@
   "description": "adapter for thethingsnetwork.org measurements to opensensemap.org ",
   "main": "lib/index.js",
   "scripts": {
-    "start": "node lib/index.js",
+    "start": "node lib/index.js | bunyan -o short",
+    "start:rawlogs": "node lib/index.js",
     "watch": "node-dev --respawn lib/index.js",
     "test": "nyc --check coverage --lines 98 --functions 90 --branches 98 mocha test",
     "lint": "eslint *.js lib test",
@@ -31,21 +32,21 @@
   },
   "homepage": "https://github.com/sensebox/ttn-osem-integration#readme",
   "dependencies": {
-    "body-parser": "^1.17.1",
-    "console-control-strings": "^1.1.0",
-    "express": "^4.15.2",
-    "lora-serialization": "^3.0.0",
-    "openSenseMapAPI": "git://github.com/sensebox/openSenseMap-API.git#4a3d2471ea1265b84927e11abcd0aa41eb7e4bdf"
+    "body-parser": "^1.17.2",
+    "bunyan": "^1.8.12",
+    "express": "^4.15.4",
+    "lora-serialization": "^3.0.1",
+    "openSenseMapAPI": "git://github.com/sensebox/openSenseMap-API.git#4992da8"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
+    "chai": "^4.1.1",
+    "chai-as-promised": "^7.1.1",
     "chai-things": "^0.2.0",
     "chakram": "^1.5.0",
-    "eslint": "^3.19.0",
-    "jsdoc": "^3.4.3",
-    "mocha": "^3.3.0",
+    "eslint": "^4.4.0",
+    "jsdoc": "^3.5.4",
+    "mocha": "^3.5.0",
     "node-dev": "^3.1.3",
-    "nyc": "^10.2.0"
+    "nyc": "^11.1.0"
   }
 }
