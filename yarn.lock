@@ -2901,9 +2901,9 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-"openSenseMapAPI@git://github.com/sensebox/openSenseMap-API.git#4992da8":
+"openSenseMapAPI@git://github.com/sensebox/openSenseMap-API.git#7f786e1":
   version "0.0.1"
-  resolved "git://github.com/sensebox/openSenseMap-API.git#4992da87a1d7864688d311b6c19379788065243f"
+  resolved "git://github.com/sensebox/openSenseMap-API.git#7f786e1eb30a1c36d797d8ced144b6e23e742b87"
   dependencies:
     "@sensebox/sketch-templater" "^1.0.7"
     "@turf/area" "^4.6.0"
