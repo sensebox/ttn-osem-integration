@@ -97,7 +97,7 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
     it('set createdAt to local time if no metadata is provided', () => {
       return Measurement.find({ sensor_id: box_sbhome.sensors[0]._id }).then(measurements => {
         const timeDiff = Date.now() - measurements[0].createdAt.getTime();
-        expect(timeDiff).to.be.below(100);
+        expect(timeDiff).to.be.below(200);
 
         return chakram.wait();
       });

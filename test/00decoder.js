@@ -264,10 +264,6 @@ describe('decoder', () => {
     });
 
     it('should apply special decoders only to measures following it', () => {
-      // const timeDiff = new Date().getTime() - p2.results.base64[0].createdAt.valueOf();
-      // expect(timeDiff).to.be.lessThan(1000);
-      // expect(p2.results.base64[0].location).to.be.undefined;
-
       expect(p2.results.base64[0].createdAt.valueOf())
         .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
       expect(p2.results.base64[0].location[0]).to.equal(7.6833);
@@ -277,6 +273,12 @@ describe('decoder', () => {
         .to.equal(new Date('2017-04-20T20:20:31.000Z').getTime());
       expect(p2.results.base64[1].location[0]).to.equal(8);
       expect(p2.results.base64[1].location[1]).to.equal(52);
+      
+      // this is the first measurement in the payload, but returned
+      // measurements are ordered by date
+      const timeDiff = new Date().getTime() - p2.results.base64[2].createdAt.valueOf();
+      expect(timeDiff).to.be.lessThan(1000);
+      expect(p2.results.base64[2].location).to.be.undefined;
     });
 
     it('should reject a box with invalid transformers', () => {

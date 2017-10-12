@@ -13,10 +13,13 @@ const BASE_URL = `http://localhost:${cfg.port}`;
 
 describe('server runs', () => {
 
-  it('should respond 404 on baseurl', () => {
-    const res = chakram.head(BASE_URL);
-
-    return expect(res).to.have.status(404);
+  it('should send list of available routes with 404', () => {
+    return chakram.get(BASE_URL).then(res => {
+      expect(res).to.have.status(404);
+      expect(res.body).to.have.contain('Available routes:');
+      
+      return chakram.wait();
+    });
   });
 
   // TODO: check for existence of headers
