@@ -13,4 +13,18 @@ module.exports = {
    * trace: show intermediate decoding results
    */
   loglevel: e['TTN_OSEM_loglevel'] || 'info',
+
+  /**
+   * commaseparated list of IP6 adresses that are allowed to request authenticated routes
+   * eg GET /v1.1/ttndevices/:boxId
+   * subject to change!
+   */
+  ipWhitelist: ['::1'].concat(
+    e['TTN_OSEM_ipwhitelist'] ? e['TTN_OSEM_ipwhitelist'].split(',') : []
+  ),
+
+  ttn: {
+    appId: e['TTN_OSEM_ttn_app'],
+    key: e['TTN_OSEM_ttn_key'], // the key requires full rights (settings, devices, messages)
+  },
 };

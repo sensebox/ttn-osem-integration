@@ -167,7 +167,7 @@ describe('decoder', () => {
       delete p.box.integrations.ttn.decodeOptions;
 
       return expect(decoder.decodeBase64(p.payloads.base64, p.box))
-        .to.be.rejectedWith('profile \'debug\' requires a valid byteMask');
+        .to.be.rejectedWith('box requires a valid byteMask');
     });
 
   });
