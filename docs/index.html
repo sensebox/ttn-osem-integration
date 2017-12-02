@@ -43,13 +43,16 @@
 
 
     <section>
-        <article><h1>ttn-osem-integration</h1><p>Integration for <a href="https://opensensemap.org">openSenseMap</a> with <a href="https://thethingsnetwork.org">TheThingsNetwork</a>,
-that provides simple measurement upload from LoRa-WAN devices.</p>
+        <article><h1>ttn-osem-integration</h1><p>Microservice for <a href="https://opensensemap.org">openSenseMap</a> that provides a
+direct integration with <a href="https://thethingsnetwork.org">TheThingsNetwork</a>
+to allow straightforward measurement upload from LoRa-WAN devices.</p>
 <p>It decodes measurements from an uplink payload from the <a href="https://www.thethingsnetwork.org/docs/applications/http/">TTN HTTP Integrations API</a>
 for a configured senseBox, and adds the decoded measurements to the database.</p>
 <p>There are multiple decoding options provided via <code>profiles</code>, which may be
 easily extended to support other sensor configurations or value transformations.</p>
-<h2>configuring a box</h2><p>To associate a device on the TTN network with a box on the openSenseMap, there is some configuration required on the openSenseMap. The box has to contain a field <code>box.integrations.ttn</code> with the following structure:</p>
+<h2>configuring a box</h2><p>To associate a device on TTN with a box on the openSenseMap, there is some
+configuration required on the openSenseMap. The box has to contain a field
+<code>box.integrations.ttn</code> with the following structure:</p>
 <pre class="prettyprint source lang-js"><code>ttn: {
   // the app_id & dev_id you recieved when registering on TTN
   app_id: 'abcd',
@@ -63,7 +66,7 @@ easily extended to support other sensor configurations or value transformations.
 }</code></pre><h3>decoding profiles</h3><h4><code>sensebox/home</code></h4><p>Decodes messages which contain 5 measurements of all sensors of the senseBox:home.
 The correct sensorIds are matched via their titles. Decoding fits the <a href="https://github.com/sensebox/random-sketches/blob/master/lora/dragino/dragino.ino">dragino senseBox:home sketch</a>.</p>
 <h4><code>lora-serialization</code></h4><p>Allows decoding of messages that were encoded with the <a href="https://github.com/thesolarnomad/lora-serialization"><code>lora-serialization</code> library</a>.
-The sub-profiles <code>temperature</code>, <code>humidity</code>, <code>uint8</code>, <code>uint16</code> and <code>unixtime</code> are supported.
+The decoders <code>temperature</code>, <code>humidity</code>, <code>uint8</code>, <code>uint16</code>, <code>unixtime</code> and <code>latLng</code> are supported.
 Each encoded value is matched to a sensor via it's <code>_id</code>, <code>sensorType</code>, <code>unit</code>, or <code>title</code> properties.
 There may be one or more property defined for each value via <code>sensor_id</code>, <code>sensor_title</code>, <code>sensor_type</code>, <code>sensor_unit</code>.
 If one property matches a sensor, the other properties are discarded.</p>
@@ -71,12 +74,29 @@ If one property matches a sensor, the other properties are discarded.</p>
 <pre class="prettyprint source lang-js"><code>&quot;ttn&quot;: {
   &quot;profile&quot;: &quot;lora-serialization&quot;,
   &quot;decodeOptions&quot;: [
-    { &quot;sensor_unit&quot;: &quot;°C&quot;, &quot;decoder&quot;: &quot;temperature&quot; },
-    { &quot;sensor_id&quot;: &quot;588876b67dd004f79259bd8b&quot;, &quot;decoder&quot;: &quot;humidity&quot; },
-    { &quot;sensor_type&quot;: &quot;TSL45315&quot;, &quot;sensor_title&quot;: &quot;Beleuchtungsstärke&quot;, &quot;decoder&quot;: &quot;uint16&quot; }
+    { &quot;decoder&quot;: &quot;temperature&quot;, &quot;sensor_unit&quot;: &quot;°C&quot; },
+    { &quot;decoder&quot;: &quot;humidity&quot;, &quot;sensor_id&quot;: &quot;588876b67dd004f79259bd8b&quot; },
+    { &quot;decoder&quot;: &quot;uint16&quot;, &quot;sensor_type&quot;: &quot;TSL45315&quot;, &quot;sensor_title&quot;: &quot;Beleuchtungsstärke&quot; }
   ]
-}</code></pre><p>When <code>decodeOptions</code> contains an element <code>{ &quot;decoder&quot;: &quot;unixtime&quot; }</code>, the value will be used as timestamp for all other measurements.</p>
-<h4><code>debug</code></h4><p>Simple decoder, which decodes a given number of bytes to integer values.
+}</code></pre><h5>special decoders <code>unixtime</code> &amp; <code>latLng</code></h5><p>These decoders do not generate a measurement for a sensor of the box, but will
+be used as <strong>timestamp</strong> or <strong>location</strong> for the measurements.
+The <code>unixtime</code> and <code>latLng</code> decoders must be defined before the measurements,
+and are applied to all following measurements, until the next <code>latLng</code> or
+<code>unixtime</code> decoder is specified.
+This means that it is possible to send measurements of several timestamps at once:</p>
+<pre class="prettyprint source lang-js"><code>&quot;ttn&quot;: {
+  &quot;profile&quot;: &quot;lora-serialization&quot;,
+  &quot;decodeOptions&quot;: [
+    // first measurement, will have time of transmission as timestamp
+    { &quot;decoder&quot;: &quot;temperature&quot;, &quot;sensor_unit&quot;: &quot;°C&quot; },
+    // 2nd measurement for same sensor, will have custom timestamp
+    { &quot;decoder&quot;: &quot;unixtime&quot; }, // no sensor properties required for special decoders
+    { &quot;decoder&quot;: &quot;temperature&quot;, &quot;sensor_unit&quot;: &quot;°C&quot; },
+    // 3rd measurement, another timestamp
+    { &quot;decoder&quot;: &quot;unixtime&quot; },
+    { &quot;decoder&quot;: &quot;temperature&quot;, &quot;sensor_unit&quot;: &quot;°C&quot; }
+  ]
+}</code></pre><h4><code>debug</code></h4><p>Simple decoder, which decodes a given number of bytes to integer values.
 Requires a config like the following, where the measurements are applied to the sensors in the order of <code>box.sensors</code>.</p>
 <pre class="prettyprint source lang-js"><code>ttn: {
   profile: 'lora-serialization',
@@ -116,13 +136,13 @@ OSEM_dbconnectionstring=mongodb://localhost/OSeM-api</code></pre><h2>development
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-decoding.html">decoding</a></li><li><a href="module-decoding_debug.html">decoding/debug</a></li><li><a href="module-decoding_helpers.html">decoding/helpers</a></li><li><a href="module-decoding_lora-serialization.html">decoding/lora-serialization</a></li><li><a href="module-decoding_sensebox_home.html">decoding/sensebox_home</a></li><li><a href="module-routes_v1_1.html">routes/v1_1</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-database.html">database</a></li><li><a href="module-decoding.html">decoding</a></li><li><a href="module-decoding_debug.html">decoding/debug</a></li><li><a href="module-decoding_helpers.html">decoding/helpers</a></li><li><a href="module-decoding_lora-serialization.html">decoding/lora-serialization</a></li><li><a href="module-decoding_sensebox_home.html">decoding/sensebox_home</a></li><li><a href="module-errors.html">errors</a></li><li><a href="module-logging.html">logging</a></li><li><a href="module-routes_v1_1.html">routes/v1_1</a></li><li><a href="module-ttn.html">ttn</a></li></ul><h3>Classes</h3><ul><li><a href="module-errors-AuthorizationError.html">AuthorizationError</a></li><li><a href="module-errors-BoxNotFoundError.html">BoxNotFoundError</a></li><li><a href="module-errors-DecodingError.html">DecodingError</a></li><li><a href="module-errors-LoraError.html">LoraError</a></li><li><a href="module-errors-PayloadError.html">PayloadError</a></li><li><a href="module-errors-TTNError.html">TTNError</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed May 03 2017 19:20:09 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 06 2017 15:19:29 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

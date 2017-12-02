@@ -94,7 +94,7 @@ may be hooked. Implemented profiles are
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="decoding_index.js.html">decoding/index.js</a>, <a href="decoding_index.js.html#line3">line 3</a>
+        <a href="lib_decoding_index.js.html">lib/decoding/index.js</a>, <a href="lib_decoding_index.js.html#line3">line 3</a>
     </li></ul></dd>
     
 
@@ -104,6 +104,8 @@ may be hooked. Implemented profiles are
 
     
 </dl>
+
+
 
 
 
@@ -130,10 +132,82 @@ may be hooked. Implemented profiles are
 
     
 
-     
+    
 
     
 
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~decodeJSON"><span class="type-signature">(inner, constant) </span>decodeJSON<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Decodes multiple json encoded measurements and validates them.
+Accepts either an measurement array, or an object like
+    {"sensorId": [value, time, location]}
+refer to <a href="https://docs.opensensemap.org/#api-Measurements-postNewMeasurements">oSeM docs</a>
+for specific input formats.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_decoding_index.js.html">lib/decoding/index.js</a>, <a href="lib_decoding_index.js.html#line147">line 147</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
     
 
     
@@ -144,7 +218,9 @@ may be hooked. Implemented profiles are
 
     
 
+    
     <h4 class="name" id="~bufferToMeasurements"><span class="type-signature">(private, inner) </span>bufferToMeasurements<span class="signature">(buffer, bufferTransformer)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
 
     
 
@@ -268,7 +344,7 @@ may be hooked. Implemented profiles are
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="decoding_index.js.html">decoding/index.js</a>, <a href="decoding_index.js.html#line42">line 42</a>
+        <a href="lib_decoding_index.js.html">lib/decoding/index.js</a>, <a href="lib_decoding_index.js.html#line44">line 44</a>
     </li></ul></dd>
     
 
@@ -315,6 +391,8 @@ may be hooked. Implemented profiles are
     
 
 
+
+
     <h5>Example</h5>
     
         <p class="code-caption">Interface of bufferTransformer elements</p>
@@ -324,7 +402,7 @@ may be hooked. Implemented profiles are
   sensorId: String,     // corresponding sensor_id for this measurement
   transformer: Function // function that accepts an Array of bytes and
                         // returns the measurement value
-  onResult: Function    // hook that recieves the all decoded measurements
+  onResult: Function    // hook that recieves all decoded measurements
                         // once decoding has finished. may modify the
                         // measurement array.
 }</code></pre>
@@ -336,7 +414,9 @@ may be hooked. Implemented profiles are
 
     
 
+    
     <h4 class="name" id="~decodeBase64"><span class="type-signature">(inner) </span>decodeBase64<span class="signature">(base64String, box, timestamp<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    
 
     
 
@@ -526,7 +606,7 @@ may be hooked. Implemented profiles are
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="decoding_index.js.html">decoding/index.js</a>, <a href="decoding_index.js.html#line128">line 128</a>
+        <a href="lib_decoding_index.js.html">lib/decoding/index.js</a>, <a href="lib_decoding_index.js.html#line132">line 132</a>
     </li></ul></dd>
     
 
@@ -582,12 +662,16 @@ may be hooked. Implemented profiles are
 
 
 
+
+
         
             
 
     
 
+    
     <h4 class="name" id="~decodeBuffer"><span class="type-signature">(inner) </span>decodeBuffer<span class="signature">(buffer, box, timestamp<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    
 
     
 
@@ -778,7 +862,7 @@ TTN configuration.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="decoding_index.js.html">decoding/index.js</a>, <a href="decoding_index.js.html#line86">line 86</a>
+        <a href="lib_decoding_index.js.html">lib/decoding/index.js</a>, <a href="lib_decoding_index.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -827,6 +911,248 @@ TTN configuration.
 
 
 
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~decodeRequest"><span class="type-signature">(inner) </span>decodeRequest<span class="signature">(payload, box, time<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Decodes the a payload to validated measurements for a given box.
+selects the decoder and sensors from `box`, applies `time` if it was not
+provided in the payload
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">TTNUplink</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">A valid uplink payload object as received from TTN</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>box</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Box</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The senseBox to match the measurements against</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>time</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">An ISODate as fallback for measurement timestamps</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_decoding_index.js.html">lib/decoding/index.js</a>, <a href="lib_decoding_index.js.html#line159">line 159</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="module-decoding.html#~decodeBuffer">module:decoding~decodeBuffer</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Once fulfilled returns a validated array of measurements
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
         
     
 
@@ -843,13 +1169,13 @@ TTN configuration.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-decoding.html">decoding</a></li><li><a href="module-decoding_debug.html">decoding/debug</a></li><li><a href="module-decoding_helpers.html">decoding/helpers</a></li><li><a href="module-decoding_lora-serialization.html">decoding/lora-serialization</a></li><li><a href="module-decoding_sensebox_home.html">decoding/sensebox_home</a></li><li><a href="module-routes_v1_1.html">routes/v1_1</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-database.html">database</a></li><li><a href="module-decoding.html">decoding</a></li><li><a href="module-decoding_debug.html">decoding/debug</a></li><li><a href="module-decoding_helpers.html">decoding/helpers</a></li><li><a href="module-decoding_lora-serialization.html">decoding/lora-serialization</a></li><li><a href="module-decoding_sensebox_home.html">decoding/sensebox_home</a></li><li><a href="module-errors.html">errors</a></li><li><a href="module-logging.html">logging</a></li><li><a href="module-routes_v1_1.html">routes/v1_1</a></li><li><a href="module-ttn.html">ttn</a></li></ul><h3>Classes</h3><ul><li><a href="module-errors-AuthorizationError.html">AuthorizationError</a></li><li><a href="module-errors-BoxNotFoundError.html">BoxNotFoundError</a></li><li><a href="module-errors-DecodingError.html">DecodingError</a></li><li><a href="module-errors-LoraError.html">LoraError</a></li><li><a href="module-errors-PayloadError.html">PayloadError</a></li><li><a href="module-errors-TTNError.html">TTNError</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed May 03 2017 19:20:09 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 06 2017 15:19:29 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

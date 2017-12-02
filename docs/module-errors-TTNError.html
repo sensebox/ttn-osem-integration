@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: decoding/debug</title>
+    <title>JSDoc: Class: TTNError</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: decoding/debug</h1>
+    <h1 class="page-title">Class: TTNError</h1>
 
     
 
@@ -28,8 +28,11 @@
 
 <header>
     
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-errors.html">errors</a>~</span>TTNError<span class="signature">(message)</span><span class="type-signature"></span></h2>
         
-            
+            <div class="class-description">All errors handled by the app must inherit from TTNError
+and should be defined here for easier discovery.</div>
         
     
 </header>
@@ -38,127 +41,18 @@
     <div class="container-overview">
     
         
-            <div class="description">This decoding profile is meant as a general starting point for profiles.
-It decodes the buffer according to a custom byteMask, and transforms the
-data to integer values.
-The byteMask defines the amount of bytes to consume for each measurement.
-It is applied to the sensors in the order they are defined.</div>
-        
 
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
+    
+    <h2>Constructor</h2>
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-license">License:</dt>
-    <dd class="tag-license"><ul class="dummy"><li>MIT</li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_decoding_debug.js.html">lib/decoding/debug.js</a>, <a href="lib_decoding_debug.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~createBufferTransformer"><span class="type-signature">(inner) </span>createBufferTransformer<span class="signature">(box)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="TTNError"><span class="type-signature"></span>new TTNError<span class="signature">(message)</span><span class="type-signature"></span></h4>
     
 
     
 
 
-
-<div class="description">
-    returns a bufferTransfomer for transformation of a buffer to measurements.
-</div>
 
 
 
@@ -193,13 +87,13 @@ It is applied to the sensors in the order they are defined.</div>
 
         <tr>
             
-                <td class="name"><code>box</code></td>
+                <td class="name"><code>message</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Box</span>
+<span class="param-type">any</span>
 
 
             
@@ -209,7 +103,7 @@ It is applied to the sensors in the order they are defined.</div>
 
             
 
-            <td class="description last">The box to retrieve byteMask and sensorIds from</td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -250,20 +144,13 @@ It is applied to the sensors in the order they are defined.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_decoding_debug.js.html">lib/decoding/debug.js</a>, <a href="lib_decoding_debug.js.html#line28">line 28</a>
+        <a href="lib_errors.js.html">lib/errors.js</a>, <a href="lib_errors.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
     
 
     
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="module-decoding.html#~bufferToMeasurements">module:decoding~bufferToMeasurements</a></li>
-        </ul>
-    </dd>
-    
 
     
 </dl>
@@ -280,45 +167,28 @@ It is applied to the sensors in the order they are defined.</div>
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A bufferTransformer for the box
-</div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
 
 
-    </dd>
-</dl>
+    
+    </div>
 
     
 
-
-
-
-    <h5>Example</h5>
     
-        <p class="code-caption">decodeOptions format</p>
+
     
-    <pre class="prettyprint"><code>ttn: {
-  profile: 'debug',
-  // use first 3 bytes for first sensor, 4th byte for second, next two bytes for third sensor
-  decodeOptions: [3, 1, 2]
-}</code></pre>
 
+    
 
+    
 
-        
+    
+
+    
+
     
 
     

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: decoding/debug</title>
+    <title>JSDoc: Module: logging</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: decoding/debug</h1>
+    <h1 class="page-title">Module: logging</h1>
 
     
 
@@ -38,11 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">This decoding profile is meant as a general starting point for profiles.
-It decodes the buffer according to a custom byteMask, and transforms the
-data to integer values.
-The byteMask defines the amount of bytes to consume for each measurement.
-It is applied to the sensors in the order they are defined.</div>
+            <div class="description">Configuration for a bunyan logger to be used in the application.</div>
         
 
         
@@ -94,7 +90,7 @@ It is applied to the sensors in the order they are defined.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_decoding_debug.js.html">lib/decoding/debug.js</a>, <a href="lib_decoding_debug.js.html#line3">line 3</a>
+        <a href="lib_logging.js.html">lib/logging.js</a>, <a href="lib_logging.js.html#line3">line 3</a>
     </li></ul></dd>
     
 
@@ -149,7 +145,7 @@ It is applied to the sensors in the order they are defined.</div>
     
 
     
-    <h4 class="name" id="~createBufferTransformer"><span class="type-signature">(inner) </span>createBufferTransformer<span class="signature">(box)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="~createLogger"><span class="type-signature">(private, inner) </span>createLogger<span class="signature">(component, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -157,7 +153,7 @@ It is applied to the sensors in the order they are defined.</div>
 
 
 <div class="description">
-    returns a bufferTransfomer for transformation of a buffer to measurements.
+    Creates a bunyan logger that inherits some global settings
 </div>
 
 
@@ -181,6 +177,8 @@ It is applied to the sensors in the order they are defined.</div>
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
         
 
@@ -193,23 +191,64 @@ It is applied to the sensors in the order they are defined.</div>
 
         <tr>
             
-                <td class="name"><code>box</code></td>
+                <td class="name"><code>component</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Box</span>
+<span class="param-type">string</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last">The box to retrieve byteMask and sensorIds from</td>
+            <td class="description last">name for the logger, stored in the logfield `component`</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">bunyan options to be passed to the logger</td>
         </tr>
 
     
@@ -250,19 +289,12 @@ It is applied to the sensors in the order they are defined.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_decoding_debug.js.html">lib/decoding/debug.js</a>, <a href="lib_decoding_debug.js.html#line28">line 28</a>
+        <a href="lib_logging.js.html">lib/logging.js</a>, <a href="lib_logging.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
     
 
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="module-decoding.html#~bufferToMeasurements">module:decoding~bufferToMeasurements</a></li>
-        </ul>
-    </dd>
     
 
     
@@ -284,37 +316,14 @@ It is applied to the sensors in the order they are defined.</div>
 
         
 <div class="param-desc">
-    A bufferTransformer for the box
+    a bunyan logger
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
-
-
-    </dd>
-</dl>
-
     
 
 
-
-
-    <h5>Example</h5>
-    
-        <p class="code-caption">decodeOptions format</p>
-    
-    <pre class="prettyprint"><code>ttn: {
-  profile: 'debug',
-  // use first 3 bytes for first sensor, 4th byte for second, next two bytes for third sensor
-  decodeOptions: [3, 1, 2]
-}</code></pre>
 
 
 

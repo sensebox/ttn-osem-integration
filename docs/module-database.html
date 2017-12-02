@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: decoding/helpers</title>
+    <title>JSDoc: Module: database</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: decoding/helpers</h1>
+    <h1 class="page-title">Module: database</h1>
 
     
 
@@ -29,6 +29,8 @@
 <header>
     
         
+            
+        
     
 </header>
 
@@ -36,6 +38,85 @@
     <div class="container-overview">
     
         
+            <div class="description">Handles operations on the opensensemap-api database using mongoose.</div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-license">License:</dt>
+    <dd class="tag-license"><ul class="dummy"><li>MIT</li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_database.js.html">lib/database.js</a>, <a href="lib_database.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
     
@@ -64,7 +145,7 @@
     
 
     
-    <h4 class="name" id="~applyValueFromMeasurement"><span class="type-signature">(inner) </span>applyValueFromMeasurement<span class="signature">(args)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~boxFromBoxId"><span class="type-signature">(inner) </span>boxFromBoxId<span class="signature">(id, opts<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Box>}</span></h4>
     
 
     
@@ -72,11 +153,7 @@
 
 
 <div class="description">
-    Factory that returns a bufferTransformer `onResult`-hook, which applies the
-value of the measurement from `sensorId` to the `property` of the following
-measurements, until the measurement with this `sensorId` is found.
-The used measurement is removed from the result.
-If a transformer function is passed, the value will be passed trough the function.
+    look up a Box in the database for a given boxID.
 </div>
 
 
@@ -100,7 +177,11 @@ If a transformer function is passed, the value will be passed trough the functio
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -112,7 +193,42 @@ If a transformer function is passed, the value will be passed trough the functio
 
         <tr>
             
-                <td class="name"><code>args</code></td>
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The ID of the box to retrieve.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
             
 
             <td class="type">
@@ -125,155 +241,26 @@ If a transformer function is passed, the value will be passed trough the functio
             </td>
 
             
-
-            
-
-            <td class="description last">Parameters as mentioned in description.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_decoding_helpers.js.html">lib/decoding/helpers.js</a>, <a href="lib_decoding_helpers.js.html#line98">line 98</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>{
-  sensorId: String,     // sensorId to match measurement against
-  property: String,     // property to assign the value of the matched measure
-  transformer: Function // optional value transformation function
-}</code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~bytesToInt"><span class="type-signature">(inner) </span>bytesToInt<span class="signature">(bytes)</span><span class="type-signature"> &rarr; {Number}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Transforms an array of bytes into an integer value.
-NOTE: uses little endian; LSB comes first!
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>bytes</code></td>
-            
-
-            <td class="type">
-            
+                <td class="attributes">
                 
-<span class="param-type">Array</span>
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
+            
 
             
-            </td>
-
+                <td class="default">
+                
+                    { populate: false, lean: true }
+                
+                </td>
             
 
-            
-
-            <td class="description last">data to transform</td>
+            <td class="description last">Query options</td>
         </tr>
 
     
@@ -314,7 +301,7 @@ NOTE: uses little endian; LSB comes first!
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_decoding_helpers.js.html">lib/decoding/helpers.js</a>, <a href="lib_decoding_helpers.js.html#line14">line 14</a>
+        <a href="lib_database.js.html">lib/database.js</a>, <a href="lib_database.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -348,7 +335,7 @@ NOTE: uses little endian; LSB comes first!
     </dt>
     <dd>
         
-<span class="param-type">Number</span>
+<span class="param-type">Promise.&lt;Box></span>
 
 
     </dd>
@@ -366,7 +353,7 @@ NOTE: uses little endian; LSB comes first!
     
 
     
-    <h4 class="name" id="~findSensorIds"><span class="type-signature">(inner) </span>findSensorIds<span class="signature">(sensors, sensorMatchings)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="~boxFromDevId"><span class="type-signature">(inner) </span>boxFromDevId<span class="signature">(app_id, dev_id, port<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Box>}</span></h4>
     
 
     
@@ -374,7 +361,7 @@ NOTE: uses little endian; LSB comes first!
 
 
 <div class="description">
-    Matches the _ids of a set of sensors to a given set of properties.
+    look up a Box in the database for a given ttn configuration
 </div>
 
 
@@ -398,6 +385,8 @@ NOTE: uses little endian; LSB comes first!
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
         
 
@@ -410,47 +399,95 @@ NOTE: uses little endian; LSB comes first!
 
         <tr>
             
-                <td class="name"><code>sensors</code></td>
+                <td class="name"><code>app_id</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array</span>
+<span class="param-type">string</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last">Set of sensors as specified in Box.sensors</td>
+            <td class="description last"></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>sensorMatchings</code></td>
+                <td class="name"><code>dev_id</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last">defines a set of allowed values for one
-       or more properties. Once a property matches, the others are ignored.</td>
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>port</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"></td>
         </tr>
 
     
@@ -491,7 +528,7 @@ NOTE: uses little endian; LSB comes first!
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_decoding_helpers.js.html">lib/decoding/helpers.js</a>, <a href="lib_decoding_helpers.js.html#line47">line 47</a>
+        <a href="lib_database.js.html">lib/database.js</a>, <a href="lib_database.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -517,11 +554,6 @@ NOTE: uses little endian; LSB comes first!
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    Key-value pairs for each property of sensorMatchings and
-        the matched sensorIds. If a match was not found, the key is not included.
-</div>
-
 
 
 <dl>
@@ -530,7 +562,7 @@ NOTE: uses little endian; LSB comes first!
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Promise.&lt;Box></span>
 
 
     </dd>
@@ -539,29 +571,6 @@ NOTE: uses little endian; LSB comes first!
     
 
 
-
-
-    <h5>Examples</h5>
-    
-        <p class="code-caption">sensorMatchings</p>
-    
-    <pre class="prettyprint"><code>{
-  humidity: {
-    title: ['rel. luftfeuchte', 'luftfeuchtigkeit', 'humidity'],
-    type: ['HDC1008']
-  },
-  pressure: {
-    title: ['luftdruck', 'druck', 'pressure', 'air pressure'],
-    unit: ['°C', '°F']
-  }
-}</code></pre>
-
-        <p class="code-caption">result</p>
-    
-    <pre class="prettyprint"><code>{
-  humidity: '588876b67dd004f79259bd8a',
-  pressure: '588876b67dd004f79259bd8b'
-}</code></pre>
 
 
 
