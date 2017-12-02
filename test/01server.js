@@ -17,7 +17,7 @@ describe('server runs', () => {
     return chakram.get(BASE_URL).then(res => {
       expect(res).to.have.status(404);
       expect(res.body).to.have.contain('Available routes:');
-      
+
       return chakram.wait();
     });
   });

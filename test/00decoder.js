@@ -273,7 +273,7 @@ describe('decoder', () => {
         .to.equal(new Date('2017-04-20T20:20:31.000Z').getTime());
       expect(p2.results.base64[1].location[0]).to.equal(8);
       expect(p2.results.base64[1].location[1]).to.equal(52);
-      
+
       // this is the first measurement in the payload, but returned
       // measurements are ordered by date
       const timeDiff = new Date().getTime() - p2.results.base64[2].createdAt.valueOf();
