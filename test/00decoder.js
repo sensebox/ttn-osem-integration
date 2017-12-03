@@ -86,7 +86,7 @@ describe('decoder', () => {
       .then(decodings => {
       // clean up result invariants
         for (let i = 0; i < decodings.length; i++) {
-          console.log(decodings[i]);
+          //console.log(decodings[i]);
           if (i === 7) {continue;}
           decodings[i].map(m => { delete m._id; delete m.createdAt; });
         }
@@ -134,6 +134,8 @@ describe('decoder', () => {
         }
       });
   });
+
+  // TODO: test decodeRequest()
 
 
   describe('profile: debug', () => {
