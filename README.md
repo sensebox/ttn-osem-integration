@@ -80,7 +80,7 @@ Simple decoder, which decodes a given number of bytes to integer values.
 Requires a config like the following, where the measurements are applied to the sensors in the order of `box.sensors`.
 ```js
 ttn: {
-  profile: 'lora-serialization',
+  profile: 'debug',
   decodeOptions: [3, 1, 2] // specifies the number of bytes to consume for each measurement
 }
 ```
