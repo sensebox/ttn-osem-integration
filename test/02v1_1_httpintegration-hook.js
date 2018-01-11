@@ -71,9 +71,9 @@ describe('POST /v1.1 -- TTN HTTP Integration webhook', () => {
     });
   });
 
-  it('should respond 422 for empty request payloads', () => {
+  it('should respond 400 for empty request payloads', () => {
     return chakram.post(URL, {}).then(res => {
-      expect(res).to.have.status(422);
+      expect(res).to.have.status(400);
 
       return chakram.wait();
     });
@@ -135,11 +135,11 @@ describe('POST /v1.1 -- TTN HTTP Integration webhook', () => {
       });
   });
 
-  it('should respond 422 for invalid request payload_raw', () => {
+  it('should respond 400 for invalid request payload_raw', () => {
     TTNpayload_sbhome_valid.payload_raw = 'asdf';
 
     return chakram.post(URL, TTNpayload_sbhome_valid).then(res => {
-      expect(res).to.have.status(422);
+      expect(res).to.have.status(400);
 
       return chakram.wait();
     });
@@ -167,18 +167,18 @@ describe('POST /v1.1 -- TTN HTTP Integration webhook', () => {
     TTNpayload_json_valid.dev_id = 'my-dev-id'; // change to box with sensebox/home profile
 
     return chakram.post(URL, TTNpayload_json_valid).then(res => {
-      expect(res).to.have.status(422);
+      expect(res).to.have.status(400);
       TTNpayload_json_valid.dev_id = 'jsonttnbox';
 
       return chakram.wait();
     });
   });
 
-  it('should respond 422 for invalid request payload_fields', () => {
+  it('should respond 400 for invalid request payload_fields', () => {
     delete TTNpayload_json_valid.payload_fields;
 
     return chakram.post(URL, TTNpayload_json_valid).then(res => {
-      expect(res).to.have.status(422);
+      expect(res).to.have.status(400);
 
       return chakram.wait();
     });
