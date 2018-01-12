@@ -8,7 +8,7 @@
     "start:rawlogs": "node lib/index.js",
     "watch": "node-dev --respawn lib/index.js",
     "test": "nyc --check coverage --lines 98 --functions 90 --branches 98 mocha test",
-    "lint": "eslint *.js lib test",
+    "lint": "eslint config.js lib test",
     "docs": "jsdoc -p README.md *.js lib/** -d docs"
   },
   "repository": {
@@ -36,7 +36,8 @@
     "bunyan": "^1.8.12",
     "express": "^4.15.4",
     "lora-serialization": "^3.0.1",
-    "openSenseMapAPI": "git://github.com/sensebox/openSenseMap-API.git#7f786e1"
+    "openSenseMapAPI": "git://github.com/sensebox/openSenseMap-API.git#7f786e1",
+    "ttn": "^2.3.1"
   },
   "devDependencies": {
     "chai": "^4.1.1",

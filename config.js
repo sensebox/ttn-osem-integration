@@ -13,4 +13,16 @@ module.exports = {
    * trace: show intermediate decoding results
    */
   loglevel: e['TTN_OSEM_loglevel'] || 'info',
+
+  /**
+   * commaseparated list of auth keys that are allowed to request
+   * authenticated routes when sent in the 'authorization' header
+   * eg GET /v1.1/ttndevices/:boxId
+   */
+  authTokens: e['TTN_OSEM_authtoken'] ? e['TTN_OSEM_authtoken'].split(',') : [],
+
+  ttn: {
+    appId: e['TTN_OSEM_ttn_app'],
+    key: e['TTN_OSEM_ttn_key'], // the key requires full rights (settings, devices, messages)
+  },
 };

@@ -38,7 +38,8 @@
     <div class="container-overview">
     
         
-            <div class="description">Router for TTN HTTP integrations API v1 and this API v1</div>
+            <div class="description">Router for the `/v1.1` prefixed routes, meaning TTN HTTP integrations API v1
+and this API v1.</div>
         
 
         
@@ -90,7 +91,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_v1.1.js.html">routes/v1.1.js</a>, <a href="routes_v1.1.js.html#line3">line 3</a>
+        <a href="lib_routes_v1.1.js.html">lib/routes/v1.1.js</a>, <a href="lib_routes_v1.1.js.html#line3">line 3</a>
     </li></ul></dd>
     
 
@@ -100,6 +101,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -126,12 +129,91 @@
 
     
 
-     
+    
+
+    
 
     
 
     
         <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~'GET/v1.1/ttndevice/:boxID'"><span class="type-signature">(inner) </span>'GET /v1.1/ttndevice/:boxID'<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Returns the TTN device options for a senseBox. If no TTN device for this box
+exists, a new device is registered first.
+Requires authentication via a bearer token in the `Authorization` header.
+
+box <-> device matching:
+
+app_id = cfg.ttn.appId,
+dev_id = box._id,
+dev_eui = random,
+app_skey/ nwskey = random
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_routes_v1.1.js.html">lib/routes/v1.1.js</a>, <a href="lib_routes_v1.1.js.html#line184">line 184</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>curl -H "authorization: Bearer secretkey" \
+     http://localhost:3000/v1.1/ttndevice/59c585b44fe8d35c5787586e</code></pre>
+
+
 
         
             
@@ -143,8 +225,8 @@
 <div class="description">
     Accepts a POST request from the TTN HTTP integrations uplink API, version 1
 as specified <a href="https://www.thethingsnetwork.org/docs/applications/http/">here</a>,
-and decodes it's payload to store a set of measurements for a box.
-The box is identified by it's registered values app_id and dev_id.
+and decodes its payload to store a set of measurements for a box.
+The box is identified by `app_id`, `dev_id` and `port in `box.integrations.ttn`.
 If a box specifies a port, it will only recieve measurements sent on that port.
 </div>
 
@@ -183,7 +265,7 @@ If a box specifies a port, it will only recieve measurements sent on that port.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_v1.1.js.html">routes/v1.1.js</a>, <a href="routes_v1.1.js.html#line51">line 51</a>
+        <a href="lib_routes_v1.1.js.html">lib/routes/v1.1.js</a>, <a href="lib_routes_v1.1.js.html#line167">line 167</a>
     </li></ul></dd>
     
 
@@ -217,14 +299,18 @@ If a box specifies a port, it will only recieve measurements sent on that port.
 
     
 
-    <h4 class="name" id="~handleResponse"><span class="type-signature">(private, inner) </span>handleResponse<span class="signature">(req, res, data)</span><span class="type-signature"></span></h4>
+    
+    <h4 class="name" id="~authOpensensemap"><span class="type-signature">(private, inner) </span>authOpensensemap<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
     
 
 
 
 <div class="description">
-    send responses & do logging
+    Express middleware that checks the `Authorization` header against
+`cfg.authTokens`. Expects a token as defined in `cfg.authTokens`, prefixed
+with `"Bearer "`. Rejects a request with status 403 if not authorized.
 </div>
 
 
@@ -260,13 +346,13 @@ If a box specifies a port, it will only recieve measurements sent on that port.
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>req.header.authorization</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Request</span>
+<span class="param-type">string</span>
 
 
             
@@ -277,52 +363,6 @@ If a box specifies a port, it will only recieve measurements sent on that port.
             
 
             <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Response</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Format: either String or { code: Number, msg: Any }</td>
         </tr>
 
     
@@ -363,7 +403,7 @@ If a box specifies a port, it will only recieve measurements sent on that port.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_v1.1.js.html">routes/v1.1.js</a>, <a href="routes_v1.1.js.html#line23">line 23</a>
+        <a href="lib_routes_v1.1.js.html">lib/routes/v1.1.js</a>, <a href="lib_routes_v1.1.js.html#line130">line 130</a>
     </li></ul></dd>
     
 
@@ -373,6 +413,473 @@ If a box specifies a port, it will only recieve measurements sent on that port.
 
     
 </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>curl -H "authorization: Bearer secret" localhost:3000/v1.1/ttndevice/boxID</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~httpIntegrationHandler"><span class="type-signature">(private, inner) </span>httpIntegrationHandler<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Express middleware which matches a box against the payload, decodes the
+message, and stores the measurements for the matched sensors.
+Stores the matched box in `req.box`.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req.body</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The payload in TTN HTTP Integration v1 format.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_routes_v1.1.js.html">lib/routes/v1.1.js</a>, <a href="lib_routes_v1.1.js.html#line76">line 76</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~registerDeviceHandler"><span class="type-signature">(private, inner) </span>registerDeviceHandler<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Express middleware that tries to match a TTN device to the box given in
+`req.params.boxId`. If no device was found, a new one is registered.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req.params.boxId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The box to match a device `dev_id` against.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_routes_v1.1.js.html">lib/routes/v1.1.js</a>, <a href="lib_routes_v1.1.js.html#line146">line 146</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~sendResponse"><span class="type-signature">(private, inner) </span>sendResponse<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Express middleware which finishes a request by sending an API response
+contained in `res.locals.result`.
+Also performs response logging while setting req.locals.responseTime.
+Determines status code by checking the error type.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req.locals.result</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">Error</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">`{ code, message }`</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>req.time</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The timestamp when we received the request.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>req.box</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Box</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The matched box</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_routes_v1.1.js.html">lib/routes/v1.1.js</a>, <a href="lib_routes_v1.1.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
 
 
 
@@ -405,13 +912,13 @@ If a box specifies a port, it will only recieve measurements sent on that port.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-decoding.html">decoding</a></li><li><a href="module-decoding_debug.html">decoding/debug</a></li><li><a href="module-decoding_helpers.html">decoding/helpers</a></li><li><a href="module-decoding_lora-serialization.html">decoding/lora-serialization</a></li><li><a href="module-decoding_sensebox_home.html">decoding/sensebox_home</a></li><li><a href="module-routes_v1_1.html">routes/v1_1</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-database.html">database</a></li><li><a href="module-decoding.html">decoding</a></li><li><a href="module-decoding_debug.html">decoding/debug</a></li><li><a href="module-decoding_helpers.html">decoding/helpers</a></li><li><a href="module-decoding_lora-serialization.html">decoding/lora-serialization</a></li><li><a href="module-decoding_sensebox_home.html">decoding/sensebox_home</a></li><li><a href="module-errors.html">errors</a></li><li><a href="module-logging.html">logging</a></li><li><a href="module-routes_v1_1.html">routes/v1_1</a></li><li><a href="module-ttn.html">ttn</a></li></ul><h3>Classes</h3><ul><li><a href="module-errors-AuthorizationError.html">AuthorizationError</a></li><li><a href="module-errors-BoxNotFoundError.html">BoxNotFoundError</a></li><li><a href="module-errors-DecodingError.html">DecodingError</a></li><li><a href="module-errors-LoraError.html">LoraError</a></li><li><a href="module-errors-PayloadError.html">PayloadError</a></li><li><a href="module-errors-TTNError.html">TTNError</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed May 03 2017 19:20:09 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 06 2017 15:19:29 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: decoding/sensebox_home</title>
+    <title>JSDoc: Module: errors</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: decoding/sensebox_home</h1>
+    <h1 class="page-title">Module: errors</h1>
 
     
 
@@ -38,9 +38,10 @@
     <div class="container-overview">
     
         
-            <div class="description">This decoding profile decodes the measurements for the sensors of the
-senseBox:home (temperature, humidity, pressure, lightintensity, uvlight).
-It applies value transformation fitting for <a href="https://github.com/sensebox/random-sketches/blob/master/lora/dragino/dragino.ino">this arduino sketch</a>.</div>
+            <div class="description">All errors handled by the app must inherit from TTNError
+and should be defined here for easier discovery.
+Where applicable, the error subclass should set an HTTP status code
+on `this.code`.</div>
         
 
         
@@ -92,7 +93,7 @@ It applies value transformation fitting for <a href="https://github.com/sensebox
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_decoding_sensebox_home.js.html">lib/decoding/sensebox_home.js</a>, <a href="lib_decoding_sensebox_home.js.html#line3">line 3</a>
+        <a href="lib_errors.js.html">lib/errors.js</a>, <a href="lib_errors.js.html#line3">line 3</a>
     </li></ul></dd>
     
 
@@ -129,98 +130,27 @@ It applies value transformation fitting for <a href="https://github.com/sensebox
     
 
     
+        <h3 class="subsection-title">Classes</h3>
 
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
+        <dl>
+            <dt><a href="module-errors-AuthorizationError.html">AuthorizationError</a></dt>
+            <dd></dd>
         
-            
-
-    
-
-    
-    <h4 class="name" id="~createBufferTransformer"><span class="type-signature">(inner) </span>createBufferTransformer<span class="signature">(box)</span><span class="type-signature"> &rarr; {Array}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    returns a bufferTransfomer for transformation of a buffer to measurements.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
+            <dt><a href="module-errors-BoxNotFoundError.html">BoxNotFoundError</a></dt>
+            <dd></dd>
         
-        <th>Name</th>
+            <dt><a href="module-errors-DecodingError.html">DecodingError</a></dt>
+            <dd></dd>
         
-
-        <th>Type</th>
-
+            <dt><a href="module-errors-LoraError.html">LoraError</a></dt>
+            <dd></dd>
         
-
+            <dt><a href="module-errors-PayloadError.html">PayloadError</a></dt>
+            <dd></dd>
         
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>box</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Box</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The box to retrieve sensorIds from</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
+            <dt><a href="module-errors-TTNError.html">TTNError</a></dt>
+            <dd></dd>
+        </dl>
     
 
     
@@ -231,81 +161,6 @@ It applies value transformation fitting for <a href="https://github.com/sensebox
 
     
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_decoding_sensebox_home.js.html">lib/decoding/sensebox_home.js</a>, <a href="lib_decoding_sensebox_home.js.html#line39">line 39</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="module-decoding.html#~bufferToMeasurements">module:decoding~bufferToMeasurements</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A bufferTransformer for the box
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
     
 
     

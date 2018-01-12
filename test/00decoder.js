@@ -86,7 +86,7 @@ describe('decoder', () => {
       .then(decodings => {
       // clean up result invariants
         for (let i = 0; i < decodings.length; i++) {
-          console.log(decodings[i]);
+          //console.log(decodings[i]);
           if (i === 7) {continue;}
           decodings[i].map(m => { delete m._id; delete m.createdAt; });
         }
@@ -135,6 +135,8 @@ describe('decoder', () => {
       });
   });
 
+  // TODO: test decodeRequest()
+
 
   describe('profile: debug', () => {
 
@@ -167,7 +169,7 @@ describe('decoder', () => {
       delete p.box.integrations.ttn.decodeOptions;
 
       return expect(decoder.decodeBase64(p.payloads.base64, p.box))
-        .to.be.rejectedWith('profile \'debug\' requires a valid byteMask');
+        .to.be.rejectedWith('box requires a valid byteMask');
     });
 
   });
@@ -273,7 +275,7 @@ describe('decoder', () => {
         .to.equal(new Date('2017-04-20T20:20:31.000Z').getTime());
       expect(p2.results.base64[1].location[0]).to.equal(8);
       expect(p2.results.base64[1].location[1]).to.equal(52);
-      
+
       // this is the first measurement in the payload, but returned
       // measurements are ordered by date
       const timeDiff = new Date().getTime() - p2.results.base64[2].createdAt.valueOf();

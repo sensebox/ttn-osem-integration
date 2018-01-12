@@ -4,8 +4,13 @@ services:
     build: .
     ports:
       - 3000:3000
+    env_file:
+      - ./.env
     environment:
       - OSEM_dbconnectionstring=mongodb://db/OSeM-api
+      - TTN_OSEM_ttn_app=opensensemap-test
+      - TTN_OSEM_ttn_key=ttn-account-v2._DQww1EJ7............................
+      - TTN_OSEM_authtoken=secret
       - TTN_OSEM_loglevel=trace
     depends_on:
       - db
