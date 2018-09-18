@@ -133,11 +133,13 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
         });
     });
 
-    it('should respond 422 for invalid request payload_raw', () => {
+    it('should respond 201 for request payload_raw with less amount of bytes and should have a warning', () => {
       TTNpayload_sbhome_valid.payload_raw = 'asdf';
 
       return chakram.post(URL, TTNpayload_sbhome_valid).then(res => {
-        expect(res).to.have.status(422);
+        expect(res).to.have.status(201);
+        expect(res.body).to.include.keys('warnings');
+        expect(res.body.warnings[0]).to.eql('incorrect amount of bytes: got 3, should be 12');
 
         return chakram.wait();
       });
@@ -165,7 +167,9 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
       TTNpayload_json_valid.dev_id = 'my-dev-id'; // change to box with sensebox/home profile
 
       return chakram.post(URL, TTNpayload_json_valid).then(res => {
-        expect(res).to.have.status(422);
+        expect(res).to.have.status(201);
+        expect(res.body).to.include.keys('warnings');
+        expect(res.body.warnings[0]).to.eql('incorrect amount of bytes: got 3, should be 12');
         TTNpayload_json_valid.dev_id = 'jsonttnbox';
 
         return chakram.wait();
@@ -184,7 +188,7 @@ describe('TTN HTTP Integration v1.1 webhook', () => {
 
     it('should add measurements to the database', () => {
       return Measurement.count({}).then(countAfter => {
-        expect(countAfter).to.equal(measurementCountBefore + 16); // 3*5 sbhome + 1 json
+        expect(countAfter).to.equal(measurementCountBefore + 20); // 3*5 sbhome + 5 json
 
         return chakram.wait();
       });

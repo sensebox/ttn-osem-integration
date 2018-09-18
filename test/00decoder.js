@@ -84,21 +84,25 @@ describe('decoder', () => {
       decoder.decodeBase64(profiles.loraserialization2.payloads.base64, profiles.loraserialization2.box),
     ])
       .then(decodings => {
-      // clean up result invariants
+        // clean up result invariants
         for (let i = 0; i < decodings.length; i++) {
-          console.log(decodings[i]);
           if (i === 7) {continue;}
-          decodings[i].map(m => { delete m._id; delete m.createdAt; });
+          if (i === 4) {
+            decodings[4].map(m => { delete m._id; delete m.createdAt; });
+            continue;
+          }
+          decodings[i][0].map(m => { delete m._id; delete m.createdAt; });
         }
 
-        profiles.debug.results.buffer = decodings[0];
-        profiles.debug.results.base64 = decodings[1];
-        profiles.sbhome.results.buffer = decodings[2];
-        profiles.sbhome.results.base64 = decodings[3];
+        //TODO check promise results and adapt according to new return [measurements, warnings]
+        profiles.debug.results.buffer = decodings[0][0];
+        profiles.debug.results.base64 = decodings[1][0];
+        profiles.sbhome.results.buffer = decodings[2][0];
+        profiles.sbhome.results.base64 = decodings[3][0];
         profiles.sbhome.results.reference = decodings[4];
-        profiles.loraserialization.results.buffer = decodings[5];
-        profiles.loraserialization.results.base64 = decodings[6];
-        profiles.loraserialization2.results.base64 = decodings[7];
+        profiles.loraserialization.results.buffer = decodings[5][0];
+        profiles.loraserialization.results.base64 = decodings[6][0];
+        profiles.loraserialization2.results.base64 = decodings[7][0];
       });
   });
 
@@ -128,13 +132,12 @@ describe('decoder', () => {
       time = new Date('2017-01-01T02:03:04').toISOString();
 
     return decoder.decodeBase64(p.payloads.base64, p.box, time)
-      .then(measurements => {
+      .then(([measurements]) => {
         for (const m of measurements) {
           expect(m.createdAt.valueOf()).to.equal(new Date(time).getTime());
         }
       });
   });
-
 
   describe('profile: debug', () => {
 
@@ -169,7 +172,6 @@ describe('decoder', () => {
       return expect(decoder.decodeBase64(p.payloads.base64, p.box))
         .to.be.rejectedWith('profile \'debug\' requires a valid byteMask');
     });
-
   });
 
 
@@ -191,18 +193,13 @@ describe('decoder', () => {
       return expect(p.results.base64).to.deep.equal(p.results.buffer);
     });
 
-    it('should return error for too few bytes', () => {
-      return expect(decoder.decodeBuffer(Buffer.from('adfc', 'hex'), p.box))
-        .to.be.rejectedWith('incorrect amount of bytes: got 2, should be 12');
+    it('should return a response include a warning with incorrect amout of bytes', () => {
+      return decoder.decodeBuffer(Buffer.from('adfc', 'hex'), p.box)
+        .then(function (data) {
+          expect(data[1]).to.be.an('array')
+            .contains('incorrect amount of bytes: got 2, should be 12');
+        });
     });
-
-    it('should return error for incomplete sensors', () => {
-      p.box.sensors.pop();
-
-      return expect(decoder.decodeBuffer(p.payloads.buffer, p.box))
-        .to.be.rejectedWith('box does not contain valid sensors for this profile');
-    });
-
   });
 
 
@@ -231,8 +228,8 @@ describe('decoder', () => {
       p.box.integrations.ttn.decodeOptions.unshift({ decoder: 'unixtime' });
 
       return decoder.decodeBase64('D4zuWP3uvh6aAg==', p.box).then(measurements => {
-        expect(measurements).to.be.an('array').with.lengthOf(3);
-        for (const m of measurements) {
+        expect(measurements[0]).to.be.an('array').with.lengthOf(3);
+        for (const m of measurements[0]) {
           expect(m.createdAt.valueOf())
             .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
         }
@@ -243,8 +240,8 @@ describe('decoder', () => {
       p.box.integrations.ttn.decodeOptions.unshift({ decoder: 'latLng' });
 
       return decoder.decodeBase64('pOUYA+Q8dQAPjO5Y/e6+HpoC', p.box).then(measurements => {
-        expect(measurements).to.be.an('array').with.lengthOf(3);
-        for (const m of measurements) {
+        expect(measurements[0]).to.be.an('array').with.lengthOf(3);
+        for (const m of measurements[0]) {
           expect(m.createdAt.valueOf())
             .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
           expect(m.location[0]).to.equal(7.6833);
@@ -273,7 +270,7 @@ describe('decoder', () => {
         .to.equal(new Date('2017-04-20T20:20:31.000Z').getTime());
       expect(p2.results.base64[1].location[0]).to.equal(8);
       expect(p2.results.base64[1].location[1]).to.equal(52);
-      
+
       // this is the first measurement in the payload, but returned
       // measurements are ordered by date
       const timeDiff = new Date().getTime() - p2.results.base64[2].createdAt.valueOf();
