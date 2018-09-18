@@ -1,0 +1,27 @@
+version: "2"
+services:
+  ttn-osem-integration:
+    build: 
+      context: ..
+      dockerfile: ./test/Dockerfile
+    volumes:
+      - ./:/usr/src/app/tests
+      - ../package.json:/usr/src/app/package.json
+    ports:
+      - 3000:3000
+    environment:
+      - OSEM_dbconnectionstring=mongodb://db/ttn-osem-tests
+      - TTN_OSEM_loglevel=trace
+    depends_on:
+      - db
+    # to get raw json logs for filtering, use this:
+    # command: npm run start:rawlogs
+
+  db:
+    image: sensebox/opensensemap-api-mongo
+    ports:
+      - 27017:27017
+    environment:
+      - OSEM_dbconnectionstring=mongodb://db/ttn-osem-tests
+    #command: --auth
+
