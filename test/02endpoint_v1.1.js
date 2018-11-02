@@ -7,9 +7,8 @@ const chakram = require('chakram'),
 
 chakram.addRawPlugin('one', require('chai-things'));
 
-const cfg = require('../config'),
-  { connect, mongoose } = require('openSenseMapAPI').db,
-  { Box, Measurement } = require('openSenseMapAPI').models;
+const cfg = require('config'),
+  { db: { connect, mongoose }, Box, Measurement } = require('@sensebox/opensensemap-api-models');
 
 // test data
 const BASE_URL = `http://localhost:${cfg.port}`,

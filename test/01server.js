@@ -6,7 +6,7 @@ const chakram = require('chakram'),
   expect = chakram.expect;
 
 //const app = require('../index'); // running server does not handle `mocha -w` well
-const cfg = require('../config');
+const cfg = require('config');
 
 // test data
 const BASE_URL = `http://localhost:${cfg.port}`;
