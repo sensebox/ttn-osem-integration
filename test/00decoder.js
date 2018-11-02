@@ -71,7 +71,7 @@ describe('decoder', () => {
       // profile sbhome
       decoder.decodeBuffer(profiles.sbhome.payloads.buffer, profiles.sbhome.box),
       decoder.decodeBase64(profiles.sbhome.payloads.base64, profiles.sbhome.box),
-      transformAndValidateArray(referenceImpl(profiles.sbhome.payloads.buffer, {
+      transformAndValidateMeasurements(referenceImpl(profiles.sbhome.payloads.buffer, {
         temperature: profiles.sbhome.box.sensors[4]._id,
         humidity: profiles.sbhome.box.sensors[3]._id,
         pressure: profiles.sbhome.box.sensors[2]._id,
@@ -91,18 +91,17 @@ describe('decoder', () => {
             decodings[4].map(m => { delete m._id; delete m.createdAt; });
             continue;
           }
-          decodings[i][0].map(m => { delete m._id; delete m.createdAt; });
+          decodings[i].data.map(m => { delete m._id; delete m.createdAt; });
         }
 
-        //TODO check promise results and adapt according to new return [measurements, warnings]
-        profiles.debug.results.buffer = decodings[0][0];
-        profiles.debug.results.base64 = decodings[1][0];
-        profiles.sbhome.results.buffer = decodings[2][0];
-        profiles.sbhome.results.base64 = decodings[3][0];
+        profiles.debug.results.buffer = decodings[0].data;
+        profiles.debug.results.base64 = decodings[1].data;
+        profiles.sbhome.results.buffer = decodings[2].data;
+        profiles.sbhome.results.base64 = decodings[3].data;
         profiles.sbhome.results.reference = decodings[4];
-        profiles.loraserialization.results.buffer = decodings[5][0];
-        profiles.loraserialization.results.base64 = decodings[6][0];
-        profiles.loraserialization2.results.base64 = decodings[7][0];
+        profiles.loraserialization.results.buffer = decodings[5].data;
+        profiles.loraserialization.results.base64 = decodings[6].data;
+        profiles.loraserialization2.results.base64 = decodings[7].data;
       });
   });
 
@@ -132,8 +131,8 @@ describe('decoder', () => {
       time = new Date('2017-01-01T02:03:04').toISOString();
 
     return decoder.decodeBase64(p.payloads.base64, p.box, time)
-      .then(([measurements]) => {
-        for (const m of measurements) {
+      .then(({ data }) => {
+        for (const m of data) {
           expect(m.createdAt.valueOf()).to.equal(new Date(time).getTime());
         }
       });
@@ -196,7 +195,7 @@ describe('decoder', () => {
     it('should return a response include a warning with incorrect amout of bytes', () => {
       return decoder.decodeBuffer(Buffer.from('adfc', 'hex'), p.box)
         .then(function (data) {
-          expect(data[1]).to.be.an('array')
+          expect(data.warnings).to.be.an('array')
             .contains('incorrect amount of bytes: got 2, should be 12');
         });
     });
@@ -227,9 +226,9 @@ describe('decoder', () => {
     it('should use unixtime decoder for timestamps', () => {
       p.box.integrations.ttn.decodeOptions.unshift({ decoder: 'unixtime' });
 
-      return decoder.decodeBase64('D4zuWP3uvh6aAg==', p.box).then(measurements => {
-        expect(measurements[0]).to.be.an('array').with.lengthOf(3);
-        for (const m of measurements[0]) {
+      return decoder.decodeBase64('D4zuWP3uvh6aAg==', p.box).then(data => {
+        expect(data.data).to.be.an('array').with.lengthOf(3);
+        for (const m of data.data) {
           expect(m.createdAt.valueOf())
             .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
         }
@@ -239,9 +238,9 @@ describe('decoder', () => {
     it('should use latLng decoder for locations', () => {
       p.box.integrations.ttn.decodeOptions.unshift({ decoder: 'latLng' });
 
-      return decoder.decodeBase64('pOUYA+Q8dQAPjO5Y/e6+HpoC', p.box).then(measurements => {
-        expect(measurements[0]).to.be.an('array').with.lengthOf(3);
-        for (const m of measurements[0]) {
+      return decoder.decodeBase64('pOUYA+Q8dQAPjO5Y/e6+HpoC', p.box).then(data => {
+        expect(data.data).to.be.an('array').with.lengthOf(3);
+        for (const m of data.data) {
           expect(m.createdAt.valueOf())
             .to.equal(new Date('2017-04-12T20:20:31.000Z').getTime());
           expect(m.location[0]).to.equal(7.6833);

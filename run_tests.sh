@@ -4,7 +4,7 @@ function runComposeCommand() {
   docker-compose -p ttnosemtest -f ./test/docker-compose.yml "$@"
 }
 
-runComposeCommand up -d ttn-osem-integration
+runComposeCommand up --build -d ttn-osem-integration
 
 # Allow the dust to settle
 sleep 5
