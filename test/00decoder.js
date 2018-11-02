@@ -11,7 +11,7 @@ chai.use(require('chai-things'));
 chai.use(require('chai-as-promised'));
 
 const decoder = require('../lib/decoding'),
-  { transformAndValidateArray } = require('openSenseMapAPI').decoding,
+  { validators: { transformAndValidateMeasurements } } = require('@sensebox/opensensemap-api-models').decoding,
   referenceImpl = require('./data/decoderReferenceImplementation'),
 
   // test data

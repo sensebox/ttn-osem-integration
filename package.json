@@ -33,12 +33,12 @@
   },
   "homepage": "https://github.com/sensebox/ttn-osem-integration#readme",
   "dependencies": {
+    "@sensebox/opensensemap-api-models": "^0.0.10",
     "body-parser": "^1.17.2",
     "bunyan": "^1.8.12",
     "config": "^2.0.1",
     "express": "^4.15.4",
-    "lora-serialization": "^3.0.1",
-    "openSenseMapAPI": "git://github.com/sensebox/openSenseMap-API.git#7f786e1"
+    "lora-serialization": "^3.0.1"
   },
   "devDependencies": {
     "chai": "^4.1.1",

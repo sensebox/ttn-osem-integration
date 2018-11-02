@@ -10,8 +10,16 @@ services:
     ports:
       - 3000:3000
     environment:
-      - OSEM_dbconnectionstring=mongodb://db/ttn-osem-tests
-      - TTN_OSEM_loglevel=trace
+      NODE_CONFIG: |-
+        {
+          "port": 3000,
+          "loglevel":"trace",
+          "openSenseMap-API-models": {
+            "db": {
+              "mongo_uri":"mongodb://db/ttn-osem-tests"
+            }
+          }
+        }
     depends_on:
       - db
     # to get raw json logs for filtering, use this:
