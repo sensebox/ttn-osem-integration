@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@sensebox/opensensemap-api-models@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.10.tgz#482101f93a29895a4098e8959b3c5fb239133df1"
-  integrity sha512-O+p0EBKisZNZwevxkQ4lwaJ6hkz9JLwmibDG0Eh3XqZj3XxwcsWQWObob/2h3y3NbsAjN37H6SK9WDldoHRorA==
+"@sensebox/opensensemap-api-models@^0.0.11-beta.0":
+  version "0.0.11-beta.0"
+  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.11-beta.0.tgz#33109796a9de37bbe046a7e26f614589d54e447a"
+  integrity sha512-pzV/nHZLHf+gkP51fDt+mtS4bba9UdxO+ZOxDB4reUP/G8htv0MtfcwxKLdQxqAMIi7EQg8Nn80e3xYi6xq3uw==
   dependencies:
     "@sensebox/osem-protos" "^1.1.0"
-    "@sensebox/sketch-templater" "^1.2.0"
+    "@sensebox/sketch-templater" "^1.3.0"
     bcrypt "^1.0.2"
     bunyan "^1.8.12"
     config "^1.29.2"
@@ -27,7 +27,7 @@
   resolved "https://registry.yarnpkg.com/@sensebox/osem-protos/-/osem-protos-1.1.0.tgz#a7de8bc6be867953f1309181a012063c23299e79"
   integrity sha512-H+nUVcWlT0dvIqfJnYHuX9JBcCkP1ZKGE5YTRNWPbAEdZ11h+srpQsmeI58wK5hJcdukaZAjc4Dy96IeGM77aA==
 
-"@sensebox/sketch-templater@^1.2.0":
+"@sensebox/sketch-templater@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@sensebox/sketch-templater/-/sketch-templater-1.3.0.tgz#ed17005eead6ab746d1439ee20133af938c34175"
   integrity sha512-F+d5CLO/F8ptogX9u/DIB5Y3V+3Ag82aw/Doj5BCzURGEv4b0fHuUThBTFG4ewDPAQhud8KcjwbucM05aV2bSg==
