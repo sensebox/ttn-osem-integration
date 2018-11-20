@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@sensebox/opensensemap-api-models@^0.0.11-beta.0":
-  version "0.0.11-beta.0"
-  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.11-beta.0.tgz#33109796a9de37bbe046a7e26f614589d54e447a"
-  integrity sha512-pzV/nHZLHf+gkP51fDt+mtS4bba9UdxO+ZOxDB4reUP/G8htv0MtfcwxKLdQxqAMIi7EQg8Nn80e3xYi6xq3uw==
+"@sensebox/opensensemap-api-models@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.11.tgz#53fdd5272e7056828e459df84355c88258eaeee4"
+  integrity sha512-XVgD1HvY24QasM+MGA5UAqwAStVb3Ell/jdogCaIh2YN38f3bArNrpvW2GEAay3i+75BYsH24ryQV/hlieqDyQ==
   dependencies:
     "@sensebox/osem-protos" "^1.1.0"
     "@sensebox/sketch-templater" "^1.3.0"
