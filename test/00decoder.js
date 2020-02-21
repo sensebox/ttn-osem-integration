@@ -112,11 +112,11 @@ describe('decoder', () => {
         profiles.sbhome.results.buffer = decodings[2].data;
         profiles.sbhome.results.base64 = decodings[3].data;
         profiles.sbhome.results.reference = decodings[4];
-        profiles.loraserialization.results.buffer = decodings[5];
-        profiles.loraserialization.results.base64 = decodings[6];
-        profiles.loraserialization2.results.base64 = decodings[7];
-        profiles.custom.results.buffer = decodings[8];
-        profiles.custom.results.base64 = decodings[9];
+        profiles.loraserialization.results.buffer = decodings[5].data;
+        profiles.loraserialization.results.base64 = decodings[6].data;
+        profiles.loraserialization2.results.base64 = decodings[7].data;
+        profiles.custom.results.buffer = decodings[8].data;
+        profiles.custom.results.base64 = decodings[9].data;
       });
   });
 
@@ -228,27 +228,12 @@ describe('decoder', () => {
         .with.all.have.property('value');
     });
 
-    it('should return error for too few bytes', () => {
-      return expect(decoder.decodeBuffer(Buffer.from('adfc', 'hex'), p.box))
-        .to.be.rejectedWith('incorrect amount of bytes: got 2, should be 8');
-    });
-  });
-
-
-
-  describe('profile: sensebox/custom', () => {
-
-    const p = profiles.custom;
-
-    it('should return a valid measurement array', () => {
-      return expect(p.results.buffer).to.be.an('array').with.lengthOf(4)
-        .with.all.have.property('sensor_id')
-        .with.all.have.property('value');
-    });
-
-    it('should return error for too few bytes', () => {
-      return expect(decoder.decodeBuffer(Buffer.from('adfc', 'hex'), p.box))
-        .to.be.rejectedWith('incorrect amount of bytes: got 2, should be 8');
+    it('should return a response include a warning with incorrect amout of bytes', () => {
+      return decoder.decodeBuffer(Buffer.from('adfc', 'hex'), p.box)
+        .then(function (data) {
+          expect(data.warnings).to.be.an('array')
+            .contains('incorrect amount of bytes: got 2, should be 8');
+        });
     });
   });
 
