@@ -1,0 +1,10 @@
+{
+  "app_id": "sensebox-ifgi",
+  "dev_id": "my-dev-id",
+  "hardware_serial": "0102030405060708",
+  "port": 3,
+  "counter": 2,
+  "is_retry": false,
+  "payload_raw": "EjQSNBI0EjQ=",
+  "downlink_url": "https://integrations.thethingsnetwork.org/ttn/api/v2/down/my-app-id/my-process-id?key=ttn-account-v2.secret"
+}

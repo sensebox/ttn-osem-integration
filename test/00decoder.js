@@ -19,10 +19,12 @@ const decoder = require('../lib/decoding'),
   payloadSbhome = require('./data/TTNpayload_sbhome_valid.json'),
   payloadLoraserialization = require('./data/TTNpayload_loraserialization_valid.json'),
   payloadLoraserialization2 = require('./data/TTNpayload_loraserialization_advanced.json'),
+  payloadCustom = require('./data/TTNpayload_custom.json'),
   boxDebug = require('./data/ttnBox_debug.json'),
   boxSbhome = require('./data/ttnBox_sbhome.json'),
   boxLoraserialization = require('./data/ttnBox_loraserialization.json'),
   boxLoraserialization2 = require('./data/ttnBox_loraserialization_advanced.json'),
+  boxCustom = require('./data/ttnBox_custom.json'),
 
   profiles = {
     debug: {
@@ -57,6 +59,15 @@ const decoder = require('../lib/decoding'),
       box: JSON.parse(JSON.stringify(boxLoraserialization2)),
       payloads: { base64: payloadLoraserialization2.payload_raw },
       results: { buffer: null, base64: null }
+    },
+
+    custom: {
+      box: JSON.parse(JSON.stringify(boxCustom)),
+      payloads: {
+        buffer: Buffer.from(payloadCustom.payload_raw, 'base64'),
+        base64: payloadCustom.payload_raw
+      },
+      results: { buffer: null, base64: null }
     }
   };
 
@@ -82,6 +93,8 @@ describe('decoder', () => {
       decoder.decodeBuffer(profiles.loraserialization.payloads.buffer, profiles.loraserialization.box),
       decoder.decodeBase64(profiles.loraserialization.payloads.base64, profiles.loraserialization.box),
       decoder.decodeBase64(profiles.loraserialization2.payloads.base64, profiles.loraserialization2.box),
+      decoder.decodeBuffer(profiles.custom.payloads.buffer, profiles.custom.box),
+      decoder.decodeBase64(profiles.custom.payloads.base64, profiles.custom.box),
     ])
       .then(decodings => {
       // clean up result invariants
@@ -99,6 +112,8 @@ describe('decoder', () => {
         profiles.loraserialization.results.buffer = decodings[5];
         profiles.loraserialization.results.base64 = decodings[6];
         profiles.loraserialization2.results.base64 = decodings[7];
+        profiles.custom.results.buffer = decodings[8];
+        profiles.custom.results.base64 = decodings[9];
       });
   });
 
@@ -206,6 +221,24 @@ describe('decoder', () => {
   });
 
 
+
+  describe('profile: sensebox/custom', () => {
+
+    const p = profiles.custom;
+
+    it('should return a valid measurement array', () => {
+      return expect(p.results.buffer).to.be.an('array').with.lengthOf(4)
+        .with.all.have.property('sensor_id')
+        .with.all.have.property('value');
+    });
+
+    it('should return error for too few bytes', () => {
+      return expect(decoder.decodeBuffer(Buffer.from('adfc', 'hex'), p.box))
+        .to.be.rejectedWith('incorrect amount of bytes: got 2, should be 8');
+    });
+  });
+
+
   describe('profile: lora-serialization', () => {
 
     const p = profiles.loraserialization;
@@ -273,7 +306,7 @@ describe('decoder', () => {
         .to.equal(new Date('2017-04-20T20:20:31.000Z').getTime());
       expect(p2.results.base64[1].location[0]).to.equal(8);
       expect(p2.results.base64[1].location[1]).to.equal(52);
-      
+
       // this is the first measurement in the payload, but returned
       // measurements are ordered by date
       const timeDiff = new Date().getTime() - p2.results.base64[2].createdAt.valueOf();
