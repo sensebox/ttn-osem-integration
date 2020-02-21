@@ -235,6 +235,24 @@ describe('decoder', () => {
   });
 
 
+
+  describe('profile: sensebox/custom', () => {
+
+    const p = profiles.custom;
+
+    it('should return a valid measurement array', () => {
+      return expect(p.results.buffer).to.be.an('array').with.lengthOf(4)
+        .with.all.have.property('sensor_id')
+        .with.all.have.property('value');
+    });
+
+    it('should return error for too few bytes', () => {
+      return expect(decoder.decodeBuffer(Buffer.from('adfc', 'hex'), p.box))
+        .to.be.rejectedWith('incorrect amount of bytes: got 2, should be 8');
+    });
+  });
+
+
   describe('profile: lora-serialization', () => {
 
     const p = profiles.loraserialization;
