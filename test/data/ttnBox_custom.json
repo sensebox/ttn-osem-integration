@@ -1,0 +1,53 @@
+{
+  "boxType": "fixed",
+  "exposure": "outdoor",
+  "grouptag": "test",
+  "integrations": {
+    "ttn": {
+      "app_id": "custom-app-id",
+      "dev_id": "custom-dev-id",
+      "port": 1,
+      "profile": "sensebox/custom"
+    }
+  },
+  "ttn": {
+    "app_id": "custom-app-id",
+    "dev_id": "custom-dev-id",
+    "port": 1,
+    "profile": "sensebox/custom"
+  },
+  "location": [
+    11.531,
+    48.096
+  ],
+  "name": "testbox - ttn custom",
+  "sensors": [
+    {
+      "_id": "123476b67dd004f79259bd8a",
+      "sensorType": "HDC1008",
+      "title": "rel. Luftfeuchte",
+      "unit": "%"
+    },
+    {
+      "_id": "123476b67dd004f79259bd8b",
+      "sensorType": "HDC1008",
+      "title": "Temperatur",
+      "unit": "°C"
+    },
+    {
+      "_id": "123476b67dd004f79259bd8c",
+      "sensorType": "SMT50",
+      "title": "Bodentemperatur",
+      "unit": "°C"
+    },
+    {
+      "_id": "123476b67dd004f79259bd8d",
+      "sensorType": "SMT50",
+      "title": "Bodenfeuchte",
+      "unit": "%"
+    }
+  ],
+  "description": "Custom senseBox",
+  "weblink": "",
+  "image": ""
+}

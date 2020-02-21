@@ -19,10 +19,12 @@ const decoder = require('../lib/decoding'),
   payloadSbhome = require('./data/TTNpayload_sbhome_valid.json'),
   payloadLoraserialization = require('./data/TTNpayload_loraserialization_valid.json'),
   payloadLoraserialization2 = require('./data/TTNpayload_loraserialization_advanced.json'),
+  payloadCustom = require('./data/TTNpayload_custom.json'),
   boxDebug = require('./data/ttnBox_debug.json'),
   boxSbhome = require('./data/ttnBox_sbhome.json'),
   boxLoraserialization = require('./data/ttnBox_loraserialization.json'),
   boxLoraserialization2 = require('./data/ttnBox_loraserialization_advanced.json'),
+  boxCustom = require('./data/ttnBox_custom.json'),
 
   profiles = {
     debug: {
@@ -57,6 +59,15 @@ const decoder = require('../lib/decoding'),
       box: JSON.parse(JSON.stringify(boxLoraserialization2)),
       payloads: { base64: payloadLoraserialization2.payload_raw },
       results: { buffer: null, base64: null }
+    },
+
+    custom: {
+      box: JSON.parse(JSON.stringify(boxCustom)),
+      payloads: {
+        buffer: Buffer.from(payloadCustom.payload_raw, 'base64'),
+        base64: payloadCustom.payload_raw
+      },
+      results: { buffer: null, base64: null }
     }
   };
 
@@ -82,6 +93,8 @@ describe('decoder', () => {
       decoder.decodeBuffer(profiles.loraserialization.payloads.buffer, profiles.loraserialization.box),
       decoder.decodeBase64(profiles.loraserialization.payloads.base64, profiles.loraserialization.box),
       decoder.decodeBase64(profiles.loraserialization2.payloads.base64, profiles.loraserialization2.box),
+      decoder.decodeBuffer(profiles.custom.payloads.buffer, profiles.custom.box),
+      decoder.decodeBase64(profiles.custom.payloads.base64, profiles.custom.box),
     ])
       .then(decodings => {
         // clean up result invariants
@@ -99,9 +112,11 @@ describe('decoder', () => {
         profiles.sbhome.results.buffer = decodings[2].data;
         profiles.sbhome.results.base64 = decodings[3].data;
         profiles.sbhome.results.reference = decodings[4];
-        profiles.loraserialization.results.buffer = decodings[5].data;
-        profiles.loraserialization.results.base64 = decodings[6].data;
-        profiles.loraserialization2.results.base64 = decodings[7].data;
+        profiles.loraserialization.results.buffer = decodings[5];
+        profiles.loraserialization.results.base64 = decodings[6];
+        profiles.loraserialization2.results.base64 = decodings[7];
+        profiles.custom.results.buffer = decodings[8];
+        profiles.custom.results.base64 = decodings[9];
       });
   });
 
@@ -198,6 +213,24 @@ describe('decoder', () => {
           expect(data.warnings).to.be.an('array')
             .contains('incorrect amount of bytes: got 2, should be 12');
         });
+    });
+  });
+
+
+
+  describe('profile: sensebox/custom', () => {
+
+    const p = profiles.custom;
+
+    it('should return a valid measurement array', () => {
+      return expect(p.results.buffer).to.be.an('array').with.lengthOf(4)
+        .with.all.have.property('sensor_id')
+        .with.all.have.property('value');
+    });
+
+    it('should return error for too few bytes', () => {
+      return expect(decoder.decodeBuffer(Buffer.from('adfc', 'hex'), p.box))
+        .to.be.rejectedWith('incorrect amount of bytes: got 2, should be 8');
     });
   });
 
