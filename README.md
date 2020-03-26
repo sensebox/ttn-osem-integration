@@ -30,8 +30,8 @@ ttn: {
 
 ### decoding profiles
 #### `sensebox/home`
-Decodes messages which contain 5 measurements of all sensors of the senseBox:home.
-The correct sensorIds are matched via their titles. Decoding fits the [dragino senseBox:home sketch](https://github.com/sensebox/random-sketches/blob/master/lora/dragino/dragino.ino).
+Decodes messages of all sensors of the senseBox:home. Takes registered sensors into account and decodes payload accordingly. Therefore, the senseBox:home lora sketch should not be changed except TTN IDs.
+The correct sensorIds are matched via their titles. Decoding fits the [senseBox:home lora sketch](https://github.com/sensebox/node-sketch-templater/blob/master/templates/homev2_lora.tpl).
 
 #### `lora-serialization`
 Allows decoding of messages that were encoded with the [`lora-serialization` library](https://github.com/thesolarnomad/lora-serialization).
