@@ -1,0 +1,62 @@
+{
+  "boxType" : "fixed",
+  "exposure" : "outdoor",
+  "grouptag" : "MakeLight",
+  "integrations" : {
+    "ttn" : {
+      "app_id": "sensebox-ifgi",
+      "dev_id": "loraserializationbox",
+      "profile" : "cayenne-lpp",
+      "decodeOptions" : [{
+        "sensor_id": "588876b67dd004f79259bd8f",
+        "decoder": "barometric_pressure",
+        "channel": 1
+      }, {
+        "sensor_title": "Temperatur",
+        "decoder": "temperature",
+        "channel": 1
+      }]
+    }
+  },
+  "ttn" : {
+    "app_id": "sensebox-ifgi",
+    "dev_id": "loraserializationbox",
+    "profile" : "cayenne-lpp",
+    "decodeOptions" : [ {
+      "sensor_id": "588876b67dd004f79259bd8f",
+      "decoder": "barometric_pressure",
+      "channel": 1
+    }, {
+      "sensor_title": "Temperatur",
+      "decoder": "temperature",
+      "channel": 1
+    }]
+  },
+  "loc" : [
+    {
+      "geometry" : {
+        "coordinates" : [
+          11.5315890312195,
+          48.0965407089428
+        ],
+        "type" : "Point"
+      },
+      "type" : "feature"
+    }
+  ],
+  "name" : "testbox - ttn lora-serialization",
+  "sensors" : [
+    {
+      "_id": "588876b67dd004f79259bd8e",
+      "sensorType" : "HDC1008",
+      "title" : "Temperatur",
+      "unit" : "°C"
+    },
+    {
+      "_id": "588876b67dd004f79259bd8f",
+      "sensorType" : "BME280",
+      "title" : "Luftdruck",
+      "unit" : "hPa"
+    }
+  ]
+}

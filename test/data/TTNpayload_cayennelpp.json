@@ -1,0 +1,44 @@
+{
+    "app_id": "sensebox-cayenne",
+    "dev_id": "cayenne-1",
+    "hardware_serial": "00AC1C7C7CB78972",
+    "port": 1,
+    "counter": 8,
+    "payload_raw": "AWcAAAFoAAFzAAABZQWrAQIAAAFxAAAAAAAAAYgAAAAAAAAAAAA=",
+    "payload_fields": {
+        "accelerometer_1": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "analog_in_1": 0,
+        "barometric_pressure_1": 1023,
+        "gps_1": {
+            "altitude": 0,
+            "latitude": 0,
+            "longitude": 0
+        },
+        "luminosity_1": 1451,
+        "relative_humidity_1": 0,
+        "temperature_1": 23
+    },
+    "metadata": {
+        "time": "2020-07-27T09:38:18.955644173Z",
+        "frequency": 867.5,
+        "modulation": "LORA",
+        "data_rate": "SF7BW125",
+        "coding_rate": "4/5",
+        "gateways": [
+            {
+                "gtw_id": "eui-58a0cbfffe800eae",
+                "timestamp": 465791084,
+                "time": "2020-07-27T09:38:18.52011609Z",
+                "channel": 0,
+                "rssi": -53,
+                "snr": 6.75,
+                "rf_chain": 0
+            }
+        ]
+    },
+    "downlink_url": "https://integrations.thethingsnetwork.org/ttn-eu/api/v2/down/sensebox-cayenne/http?key=ttn-account-v2.gSi0jKfNbHcMPv6TYgzO_0WUwI859GaB9FNJpzdRbiA"
+}
