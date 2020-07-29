@@ -90,6 +90,24 @@ It's also possible to add measurements which already have been decoded by a [TTN
 The property `payload_fields` has to contain JSON in the [format accepted by the openSenseMap-API](https://docs.opensensemap.org/#api-Measurements-postNewMeasurements).
 This is the case, if the TTN application has a *Payload Function* defined.
 
+#### `cayenne-lpp`
+Allows decoding of messages that were encoded with the [`Cayene LPP` format](https://community.mydevices.com/t/cayenne-lpp-2-0/7510).
+The decoders `temperature`, `relative_humidity`, `barometric_pressure_1`, `luminosity`, and `analog_in_1` are supported.
+Each encoded value is matched to a sensor via it's `_id`, `sensorType`, `unit`, or `title` properties.
+There may be one or more property defined for each value via `sensor_id`, `sensor_title`, `sensor_type`, `sensor_unit`.
+If one property matches a sensor, the other properties are discarded.
+
+The following example config allows decoding of measurements of 3 sensors:
+```js
+"ttn": {
+  "profile": "cayenne-lpp",
+  "decodeOptions": [
+    { "decoder": "temperature", "channel": 1, "sensor_unit": "°C" },
+    { "decoder": "relative_humidity", "channel": 1, "sensor_id": "588876b67dd004f79259bd8b" },
+    { "decoder": "illuminance", "channel": 1, "sensor_type": "TSL45315", "sensor_title": "Beleuchtungsstärke" }
+  ]
+}
+
 ## deployment
 There is a `Dockerfile`, as well as an `docker-compose.yml` which includes a mongodb instance.
 If you want to run the application directly, you need to have the dependencies listed below installed.
