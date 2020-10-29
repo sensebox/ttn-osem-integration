@@ -7,13 +7,13 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.12.3.tgz#a305415ebe7a6c7023b40b5122a0662d928334cd"
   integrity sha512-kFsOS0IbsuhO5ojF8Hc8z/8vEIOkylVBrjiZUbLTE3XFe0Qi+uu6HjzQixkFaqr0ZPAMZcBVxEwmsnsLPZ2Xsw==
 
-"@sensebox/opensensemap-api-models@^0.0.26-beta.0":
-  version "0.0.26-beta.1"
-  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.26-beta.1.tgz#7824e77eff4e79020c2945ed305f925a2fdc1d06"
-  integrity sha512-iJEqZkAc8QVNyWhPd4lNA3kW8uQuCL7WFVFczDE/Eq1mJrJtfsa/MwwMyAsMEuNz/hNhu5TFt01MIeqPivaB9Q==
+"@sensebox/opensensemap-api-models@^0.0.26":
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@sensebox/opensensemap-api-models/-/opensensemap-api-models-0.0.26.tgz#0542c2c846e947e9939a323046b554c773140ad5"
+  integrity sha512-sfeyZFMQRBBcjqz6tpjdbbJEydJqz02U3+rGKHkuDxVgxGdHgIU/pwB8sT1QubBgVBC2/Ge2we9V+FYM+NggqQ==
   dependencies:
     "@sensebox/osem-protos" "^1.1.0"
-    "@sensebox/sketch-templater" "^1.8.3-beta.3"
+    "@sensebox/sketch-templater" "^1.8.3"
     bcrypt "^5.0.0"
     bunyan "^1.8.14"
     config "^3.3.2"
@@ -32,10 +32,10 @@
   resolved "https://registry.yarnpkg.com/@sensebox/osem-protos/-/osem-protos-1.1.0.tgz#a7de8bc6be867953f1309181a012063c23299e79"
   integrity sha512-H+nUVcWlT0dvIqfJnYHuX9JBcCkP1ZKGE5YTRNWPbAEdZ11h+srpQsmeI58wK5hJcdukaZAjc4Dy96IeGM77aA==
 
-"@sensebox/sketch-templater@^1.8.3-beta.3":
-  version "1.8.3-beta.3"
-  resolved "https://registry.yarnpkg.com/@sensebox/sketch-templater/-/sketch-templater-1.8.3-beta.3.tgz#6d64b49e4e5301454ce0b0235ee20aacda06a8c5"
-  integrity sha512-j4UqcLIQBRa0J6v07UkDiZvOMmvzVTbn8m+xKWHOX3idKchdtdAO0ZXJNq92dOwkp/NzvcBkIKHj+h/WwfZh5w==
+"@sensebox/sketch-templater@^1.8.3":
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/@sensebox/sketch-templater/-/sketch-templater-1.8.3.tgz#16fe48afdd2e472ab443e5d21890b59ec8701cd9"
+  integrity sha512-oKKgv6foFzoiTcyCeZEnycOshyE5owh8Xsjk3a0YuhfG+pLwd9EN4maV7jW6IPcmtSXtaTEICoB+H9K7DiAyLQ==
   dependencies:
     config "^1.29.2"
     dedent "^0.7.0"
