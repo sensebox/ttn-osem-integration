@@ -1,0 +1,128 @@
+{
+  "end_device_ids": {
+    "device_id": "cayenne-1",
+    "application_ids": { "application_id": "sensebox-cayenne" },
+    "dev_eui": "1F2B8ACE35B91823",
+    "join_eui": "0000000000000000",
+    "dev_addr": "260B3CE4"
+  },
+  "correlation_ids": [
+    "as:up:01EYTC1FM9DWDF16ME9FC80C9K",
+    "ns:uplink:01EYTC1FDXE90MHFC94WMBEDKR",
+    "pba:conn:up:01EYNENKG76NXTK97FKTCKQRQH",
+    "pba:uplink:01EYTC1FB8N2PK22HFFPG5X7CH",
+    "rpc:/ttn.lorawan.v3.GsNs/HandleUplink:01EYTC1FDWKACZA30G7QC5T1WV",
+    "rpc:/ttn.lorawan.v3.NsAs/HandleUplink:01EYTC1FM9X7AJD26Y54D5R8RD"
+  ],
+  "received_at": "2021-02-18T10:47:46.570559141Z",
+  "uplink_message": {
+    "session_key_id": "AXe0wKmx8y5cX49R/rEPyA==",
+    "f_port": 1,
+    "frm_payload": "AWcAAAFoAAFzAAABZQWrAQIAAAFxAAAAAAAAAYgAAAAAAAAAAAA=",
+    "decoded_payload": {
+      "accelerometer_1": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "analog_in_1": 0,
+      "barometric_pressure_1": 1023,
+      "gps_1": {
+        "altitude": 0,
+        "latitude": 0,
+        "longitude": 0
+      },
+      "luminosity_1": 1451,
+      "relative_humidity_1": 0,
+      "temperature_1": 23
+    },
+    "rx_metadata": [
+      {
+        "gateway_ids": { "gateway_id": "packetbroker" },
+        "packet_broker": {
+          "message_id": "01EYTC1FB8N2PK22HFFPG5X7CH",
+          "forwarder_net_id": "000013",
+          "forwarder_tenant_id": "ttn",
+          "forwarder_cluster_id": "ttn-v2-eu-4",
+          "home_network_net_id": "000013",
+          "home_network_tenant_id": "ttn",
+          "home_network_cluster_id": "ttn-eu1",
+          "hops": [
+            {
+              "received_at": "2021-02-18T10:47:46.280913759Z",
+              "sender_address": "52.169.150.138",
+              "receiver_name": "router-dataplane-696b87d68f-2nrhh",
+              "receiver_agent": "pbdataplane/1.2.0 go/1.15.8 linux/amd64"
+            },
+            {
+              "received_at": "2021-02-18T10:47:46.282841942Z",
+              "sender_name": "router-dataplane-696b87d68f-2nrhh",
+              "sender_address": "kafkapb://router?topic=forwarder_uplink",
+              "receiver_name": "router-56fd774c8b-t99w7",
+              "receiver_agent": "pbrouter/1.2.0 go/1.15.8 linux/amd64"
+            },
+            {
+              "received_at": "2021-02-18T10:47:46.312754937Z",
+              "sender_name": "router-56fd774c8b-t99w7",
+              "sender_address": "kafkapb://ttn-eu1?topic=deliver_000013.ttn.ttn-eu1_uplink",
+              "receiver_name": "router-dataplane-696b87d68f-tcdrs",
+              "receiver_agent": "pbdataplane/1.2.0 go/1.15.8 linux/amd64"
+            }
+          ]
+        },
+        "time": "2021-02-18T10:47:46.261206Z",
+        "rssi": -106,
+        "channel_rssi": -106,
+        "snr": 7.8,
+        "uplink_token": "eyJnIjoiWlhsS2FHSkhZMmxQYVVwQ1RWUkpORkl3VGs1VE1XTnBURU5LYkdKdFRXbFBhVXBDVFZSSk5GSXdUazVKYVhkcFlWaFphVTlwU20xT01sa3pVekF4TWxkWE9WSlRNVTVFVTNwbk0wbHBkMmxrUjBadVNXcHZhV0ZGT1hOWmJYTjNZa2hTUzAxcmVHWlphMDUwVEZWd1UxTkZiRzlWVTBvNUxqVnpXR2t5YzBFeFJsQnVkMDFtUlhweVRXdHpVbmN1ZEhJNWQwVnhielJsYmtReE5GWTFkeTVuVGpGTWIwbzJaR0pyVkdaNmJETnVVbE53YUU1RVRGTlZhM0ZqWjJKcU5XNHRXV1pFVURGc0xYQk5YMFV0WWxsa2VsUkhUVWRhT0V4M2J6aFViVUkzYVhsNGRGRTFlRVZDWjNaemRucFZaMEZTUlVOWWRrMW1PVFJRVUZoWFRHbGxYekUzUW1FM1dHUkpkblJNYUhobFNXMVJOMm94T1dsTmQzSkpXbnBCTjJwTE9EZDZka2xZUTNWVFMzZEtXbEJYTFhkbWEwRlFObGxsUm5ZMFExRklVRlp5UjBsNldtbGZaa3R3TG10VVVqWkVRV2t5WDNaNGNXbEpaV1ZQZFZsSVFXYz0iLCJhIjp7ImZuaWQiOiIwMDAwMTMiLCJmdGlkIjoidHRuIiwiZmNpZCI6InR0bi12Mi1ldS00In19"
+      },
+      {
+        "gateway_ids": { "gateway_id": "packetbroker" },
+        "packet_broker": {
+          "message_id": "01EYTC1FBTN8QVMZGQZMR353H9",
+          "forwarder_net_id": "000013",
+          "forwarder_tenant_id": "ttn",
+          "forwarder_cluster_id": "ttn-v2-eu-4",
+          "home_network_net_id": "000013",
+          "home_network_tenant_id": "ttn",
+          "home_network_cluster_id": "ttn-eu1",
+          "hops": [
+            {
+              "received_at": "2021-02-18T10:47:46.298691051Z",
+              "sender_address": "52.169.150.138",
+              "receiver_name": "router-dataplane-696b87d68f-bprld",
+              "receiver_agent": "pbdataplane/1.2.0 go/1.15.8 linux/amd64"
+            },
+            {
+              "received_at": "2021-02-18T10:47:46.466928261Z",
+              "sender_name": "router-dataplane-696b87d68f-bprld",
+              "sender_address": "kafkapb://router?topic=forwarder_uplink",
+              "receiver_name": "router-56fd774c8b-knwqr",
+              "receiver_agent": "pbrouter/1.2.0 go/1.15.8 linux/amd64"
+            },
+            {
+              "received_at": "2021-02-18T10:47:46.515980869Z",
+              "sender_name": "router-56fd774c8b-knwqr",
+              "sender_address": "kafkapb://ttn-eu1?topic=deliver_000013.ttn.ttn-eu1_uplink",
+              "receiver_name": "router-dataplane-696b87d68f-tcdrs",
+              "receiver_agent": "pbdataplane/1.2.0 go/1.15.8 linux/amd64"
+            }
+          ]
+        },
+        "time": "2021-02-18T10:47:46.265825Z",
+        "rssi": -119,
+        "channel_rssi": -119,
+        "snr": -6.2,
+        "uplink_token": "eyJnIjoiWlhsS2FHSkhZMmxQYVVwQ1RWUkpORkl3VGs1VE1XTnBURU5LYkdKdFRXbFBhVXBDVFZSSk5GSXdUazVKYVhkcFlWaFphVTlwU25GT1ZURnZWVEU1UldKWVRtbGlhMDVhV2xkYVVVbHBkMmxrUjBadVNXcHZhV0p0TkRKTVZVVjZZa1JLTW1NeWIzcGhNRVp3VFZoV1ZtRXdjSGRrZVVvNUxrWmhjRFpUUkdwV1JGVmtUVlU0Y0dGUE4yWnJkbWN1UXpoTmRFdEtjekJIVVVGS2FtRlFSaTU1VDFNMlZGVkxaVk4yUlZkR1VqTk1XSFJYUmxreUxVSk5kMTltZWkxRVkxbHplVzFEVmxkS2EzSnBjVzFtZFdsTU1VWm5TMWg2Y0RsWWNIQXlVMUkyU25acWFXVk5jV050YTJsYVJXazBZWG81WkRaVWFGTldUUzF2WmkxV2IyYzFNM2hwWDBZNVdHdHNkVWg1VjFaMWR6YzRYemwyWkVSYU9YWm1ZWGxYZVdzdE1EZElhR3MwUW5KdFpFeFpiazB0ZEV0VWNHMUlkSG8zYzJ0MmJuUnpTMmt5WVhKck1UUlRNMDV6TG05d1JXSnhaMUIyYW1KVWRuTndPVEV5VWxKS04wRT0iLCJhIjp7ImZuaWQiOiIwMDAwMTMiLCJmdGlkIjoidHRuIiwiZmNpZCI6InR0bi12Mi1ldS00In19"
+      }
+    ],
+    "settings": {
+      "data_rate": { "lora": { "bandwidth": 125000, "spreading_factor": 7 } },
+      "data_rate_index": 5,
+      "coding_rate": "4/5",
+      "frequency": "867100000"
+    },
+    "received_at": "2021-02-18T10:47:46.365072191Z",
+    "consumed_airtime": "0.051456s"
+  }
+}

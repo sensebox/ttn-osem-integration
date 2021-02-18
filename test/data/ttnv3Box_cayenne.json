@@ -1,0 +1,59 @@
+{
+  "boxType": "fixed",
+  "exposure": "outdoor",
+  "grouptag": "MakeLight",
+  "integrations": {
+    "ttn": {
+      "app_id": "sensebox-cayenne",
+      "dev_id": "cayenne-1",
+      "profile": "cayenne-lpp",
+      "port": 1,
+      "decodeOptions": [
+        {
+          "sensor_id": "588876b67dd004f79259bd8f",
+          "decoder": "barometric_pressure",
+          "channel": 1
+        },
+        {
+          "sensor_title": "Temperatur",
+          "decoder": "temperature",
+          "channel": 1
+        }
+      ]
+    }
+  },
+  "ttn": {
+    "app_id": "sensebox-cayenne",
+    "dev_id": "cayenne-1",
+    "profile": "cayenne-lpp",
+    "port": 1,
+    "decodeOptions": [
+      {
+        "sensor_id": "588876b67dd004f79259bd8f",
+        "decoder": "barometric_pressure",
+        "channel": 1
+      },
+      {
+        "sensor_title": "Temperatur",
+        "decoder": "temperature",
+        "channel": 1
+      }
+    ]
+  },
+  "location": [11.5315890312195, 48.0965407089428],
+  "name": "testbox - ttn cayenne",
+  "sensors": [
+    {
+      "_id": "588876b67dd004f79259bd8e",
+      "sensorType": "HDC1008",
+      "title": "Temperatur",
+      "unit": "°C"
+    },
+    {
+      "_id": "588876b67dd004f79259bd8f",
+      "sensorType": "BME280",
+      "title": "Luftdruck",
+      "unit": "hPa"
+    }
+  ]
+}
