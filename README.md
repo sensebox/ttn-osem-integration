@@ -92,10 +92,12 @@ This is the case, if the TTN application has a *Payload Function* defined.
 
 #### `cayenne-lpp`
 Allows decoding of messages that were encoded with the [`Cayene LPP` format](https://community.mydevices.com/t/cayenne-lpp-2-0/7510).
-The decoders `temperature`, `relative_humidity`, `barometric_pressure_1`, `luminosity`, and `analog_in_1` are supported.
+The decoders `temperature`, `relative_humidity`, `barometric_pressure`, `luminosity`, and `analog_in` are supported.
 Each encoded value is matched to a sensor via it's `_id`, `sensorType`, `unit`, or `title` properties.
 There may be one or more property defined for each value via `sensor_id`, `sensor_title`, `sensor_type`, `sensor_unit`.
 If one property matches a sensor, the other properties are discarded.
+
+If GPS measurements are provided, they will automatically be attached to the measurement in the API. No need to add GPS to the `decodeOptions`. Mobile boxes will then update their location on the openSenseMap accordingly. 
 
 The following example config allows decoding of measurements of 3 sensors:
 ```js
@@ -107,6 +109,7 @@ The following example config allows decoding of measurements of 3 sensors:
     { "decoder": "illuminance", "channel": 1, "sensor_type": "TSL45315", "sensor_title": "Beleuchtungsstärke" }
   ]
 }
+```
 
 ## deployment
 There is a `Dockerfile`, as well as an `docker-compose.yml` which includes a mongodb instance.
