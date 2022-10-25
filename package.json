@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/sensebox/ttn-osem-integration#readme",
   "dependencies": {
-    "@sensebox/opensensemap-api-models": "^0.0.26",
+    "@sensebox/opensensemap-api-models": "^1.2.0",
     "body-parser": "^1.17.2",
     "bunyan": "^1.8.12",
     "config": "^2.0.1",

@@ -1,7 +1,7 @@
-version: "2"
+version: "3"
 services:
   ttn-osem-integration:
-    build: 
+    build:
       context: ..
       dockerfile: ./test/Dockerfile
     volumes:
@@ -26,10 +26,9 @@ services:
     # command: npm run start:rawlogs
 
   db:
-    image: sensebox/opensensemap-api-mongo
+    image: mongo:5
     ports:
       - 27017:27017
     environment:
       - OSEM_dbconnectionstring=mongodb://db/ttn-osem-tests
     #command: --auth
-
