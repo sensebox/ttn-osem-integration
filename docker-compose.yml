@@ -1,11 +1,11 @@
-version: "2"
+version: "3"
 services:
   ttn-osem-integration:
     build: .
     ports:
       - 3000:3000
     environment:
-      - NODE_CONFIG: |-
+      NODE_CONFIG: |-
         {
           "port": 3000,
           "loglevel":"trace",
@@ -21,10 +21,9 @@ services:
     # command: npm run start:rawlogs
 
   db:
-    image: sensebox/opensensemap-api-mongo
+    image: mongo:5
     ports:
       - 27017:27017
     environment:
       - OSEM_dbconnectionstring=mongodb://db/ttn-integration
     #command: --auth
-
