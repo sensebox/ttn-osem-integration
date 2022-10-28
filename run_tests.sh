@@ -13,6 +13,6 @@ function cleanup {
   runComposeCommand down -v
 }
 
-trap cleanup EXIT 
+trap cleanup EXIT
 
-runComposeCommand exec ttn-osem-integration npm test
+runComposeCommand exec -T ttn-osem-integration npm test
