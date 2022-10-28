@@ -2,11 +2,11 @@ name: Build and publish to Github Container Registry
 
 on:
   push:
-    branches: [ v3 ]
+    branches: [ main ]
     tags: [ 'v*.*.*' ]
   pull_request:
     branches:
-      - v3
+      - main
 
 env:
   REGISTRY: ghcr.io
