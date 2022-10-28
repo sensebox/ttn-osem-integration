@@ -9,7 +9,8 @@
     "watch": "node-dev --respawn lib/index.js",
     "tests": "./run_tests.sh",
     "test": "nyc --check coverage --lines 98 --functions 90 --branches 98 mocha test",
-    "lint": "eslint *.js lib test",
+    "lint:ci": "eslint --ignore-pattern node_modules \"{test,lib}/**/*.js\"",
+    "lint": "eslint --ignore-pattern node_modules --fix \"{test,lib}/**/*.js\"",
     "docs": "jsdoc -p README.md *.js lib/** -d docs"
   },
   "repository": {
@@ -33,7 +34,7 @@
   },
   "homepage": "https://github.com/sensebox/ttn-osem-integration#readme",
   "dependencies": {
-    "@sensebox/opensensemap-api-models": "^0.0.26",
+    "@sensebox/opensensemap-api-models": "^1.2.0",
     "body-parser": "^1.17.2",
     "bunyan": "^1.8.12",
     "config": "^2.0.1",
