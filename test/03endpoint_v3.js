@@ -36,12 +36,12 @@ describe('TTN HTTP Integration v3 webhook', () => {
       mongoose.set('debug', false);
       connect()
         // delete all testboxes
-        .then(() => 
+        .then(() =>
           removeBox(TTNv3payload_cayennelpp_valid.end_device_ids.device_id)
         )
         // reinsert testboxes
         .then(() => Box.initNew(box_cayenne))
-        .then(() => done())
+        .then(() => done());
     });
 
     it('should exist', () => {
