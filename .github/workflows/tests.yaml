@@ -40,7 +40,7 @@ jobs:
 
       - name: Run eslint
         run: |
-          yarn run lint:ci
+          yarn run lint
 
   test:
     name: Run tests
