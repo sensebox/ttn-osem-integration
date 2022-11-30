@@ -1,5 +1,5 @@
 # --------------> The build image
-FROM node:14.18-alpine as build
+FROM node:19.0-alpine as build
 
 RUN apk --no-cache --virtual .build add build-base python2 git
 
@@ -14,7 +14,7 @@ RUN yarn install --pure-lockfile --production
 COPY . /usr/src/app
 
 # --------------> The production image
-FROM node:14.18-alpine
+FROM node:19.0-alpine
 
 WORKDIR /usr/src/app
 COPY --from=build /usr/src/app /usr/src/app
